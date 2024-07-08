@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/*MENU*/
+#menu a {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/*CARRUSEL*/
+.carousel-inner {
+    max-height: 39rem;
+}
+
+/*MEDIA QUERIES*/
+@media (max-width:768px) {
+    #principal {
+        width: 90% !important;
+    }
+
+    .fila-servicios {
+        width: 100% !important;
+        text-align: center;
+    }
+}
+
+/*pet_header*/
+#pet_header {
+    text-decoration: none;
+}
+
+/*SECCION ABAJO DE SLIDER*/
+#servicio {
+    width: 90%;
+    height: 20rem;
+}
+
+/*SACAR PELOTA DE UL*/
+.sacarPelota {
+    list-style-type: none;
+    padding: 0;
+}
+
+/*FORMULARIO*/
+#formulario {
+    text-align: center;
+    width: 30%;
+    height: 30rem;
+}
+
+#sinotienes {
+    text-decoration: none;
+}
+
+#formulario_E_Municipal {
+    width: 70%;
+}
+
+/*NOMBRE*/
+#nom_for {
+    width: 100%;
+}
+
+/*HOME VETERINARIO*/
+
+#img_home_vete {
+    width: 100%;
+    height: 10rem;
+}
+
+.bg-login-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
