@@ -77,7 +77,7 @@ require_once 'partes_Pagina/head.php';
                 <div class="row">
                   <div class="col-lg-3 col-md-6 col-sm-12 mb-4" >
                     <div class="card">
-                      <img src="../imagenes/veterinario.jpeg" class="card-img-top mx-auto mt-4 rounded" alt="Veterinario" id="servicio">
+                      <img src="imagenes/veterinario.jpeg" class="card-img-top mx-auto mt-4 rounded" alt="Veterinario" id="servicio">
                       <div class="card-body">
                         <h5 class="card-title">Veterinario</h5>
                         <p class="card-text">Consulta informacion.</p>
@@ -87,7 +87,7 @@ require_once 'partes_Pagina/head.php';
                   </div>
                   <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                     <div class="card">
-                      <img src="../imagenes/refugioAnimales.jpeg" class="card-img-top mx-auto mt-4 rounded" alt="Refugio de Animales" id="servicio">
+                      <img src="imagenes/refugioAnimales.jpeg" class="card-img-top mx-auto mt-4 rounded" alt="Refugio de Animales" id="servicio">
                       <div class="card-body">
                         <h5 class="card-title">Refugio de Animales</h5>
                         <p class="card-text">Consulta informacion.</p>
@@ -97,7 +97,7 @@ require_once 'partes_Pagina/head.php';
                   </div>
                   <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                     <div class="card">
-                      <img src="../imagenes/peluqueroCanino.jpg" class="card-img-top mx-auto mt-4 rounded" alt="Peluquero Canino" id="servicio">
+                      <img src="imagenes/peluqueroCanino.jpg" class="card-img-top mx-auto mt-4 rounded" alt="Peluquero Canino" id="servicio">
                       <div class="card-body">
                         <h5 class="card-title">Peluquero Canino</h5>
                         <p class="card-text">Consulta informacion.</p>
@@ -107,7 +107,7 @@ require_once 'partes_Pagina/head.php';
                   </div>
                   <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                     <div class="card">
-                      <img src="../imagenes/historialMedicoAnimal.jpg" class="card-img-top mx-auto mt-4 rounded" alt="Historial Médico Animal" id="servicio">
+                      <img src="imagenes/historialMedicoAnimal.jpg" class="card-img-top mx-auto mt-4 rounded" alt="Historial Médico Animal" id="servicio">
                       <div class="card-body">
                         <h5 class="card-title">Historial Médico Animal</h5>
                         <p class="card-text">Consulta informacion.</p>

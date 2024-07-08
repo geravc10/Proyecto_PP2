@@ -69,7 +69,7 @@ require_once 'partes_Pagina/head.php';
             <div class="col d-flex justify-content-center">
                 <figure class="figure text-center">
                     <a href="#">
-                        <img src="../imagenes/Home de Veterinario - Paseador de Animales.jpg" class="figure-img img-fluid rounded" alt="..." id="img_home_vete">
+                        <img src="imagenes/Home de Veterinario - Paseador de Animales.jpg" class="figure-img img-fluid rounded" alt="..." id="img_home_vete">
                     </a>
                     <figcaption class="figure-caption">PASEADOR DE ANIMALES</figcaption>
                 </figure>
@@ -77,7 +77,7 @@ require_once 'partes_Pagina/head.php';
             <div class="col d-flex justify-content-center">
                 <figure class="figure text-center">
                     <a href="#">
-                        <img src="../imagenes/Home de Veterinario - Profesional.jpg" class="figure-img img-fluid rounded" alt="..." id="img_home_vete">
+                        <img src="imagenes/Home de Veterinario - Profesional.jpg" class="figure-img img-fluid rounded" alt="..." id="img_home_vete">
                     </a>
                     <figcaption class="figure-caption">CORTE DE PELO</figcaption>
                 </figure>
@@ -85,7 +85,7 @@ require_once 'partes_Pagina/head.php';
             <div class="col d-flex justify-content-center">
                 <figure class="figure text-center">
                     <a href="#">
-                        <img src="../imagenes/Home de Veterinario - Juguetes para Animales.jpg" class="figure-img img-fluid rounded" alt="..." id="img_home_vete">
+                        <img src="imagenes/Home de Veterinario - Juguetes para Animales.jpg" class="figure-img img-fluid rounded" alt="..." id="img_home_vete">
                     </a>
                     <figcaption class="figure-caption">Juguetes para Animales</figcaption>
                 </figure>

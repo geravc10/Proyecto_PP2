@@ -41,10 +41,10 @@ require_once 'partes_Pagina/head.php';
     <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="../imagenes/slider1.jpeg" class="d-block w-100" alt="...">
+            <img src="imagenes/slider1.jpeg" class="d-block w-100" alt="...">
           </div>
           <div class="carousel-item">
-            <img src="../imagenes/slider4.jpeg" class="d-block w-100" alt="...">
+            <img src="imagenes/slider4.jpeg" class="d-block w-100" alt="...">
           </div>
         </div>
     </div>
@@ -70,7 +70,7 @@ require_once 'partes_Pagina/head.php';
         <div class="col d-flex justify-content-center">
             <figure class="figure text-center">
                 <a href="formulario_Dueño_Animal.html">
-                    <img src="../imagenes/Home de Veterinario - DueñoDeAnimal.jpg" class="figure-img img-fluid rounded" alt="..." id="img_home_vete">
+                    <img src="imagenes/Home de Veterinario - DueñoDeAnimal.jpg" class="figure-img img-fluid rounded" alt="..." id="img_home_vete">
                 </a>
                 <figcaption class="figure-caption">CARGAR DUEÑO DE ANIMAL</figcaption>
             </figure>
@@ -78,7 +78,7 @@ require_once 'partes_Pagina/head.php';
         <div class="col d-flex justify-content-center">
             <figure class="figure text-center">
                 <a href="#">
-                    <img src="../imagenes/Home de Veterinario - Historial Medico.jpg" class="figure-img img-fluid rounded" alt="..." id="img_home_vete">
+                    <img src="imagenes/Home de Veterinario - Historial Medico.jpg" class="figure-img img-fluid rounded" alt="..." id="img_home_vete">
                 </a>
                 <figcaption class="figure-caption">CARGAR HISTORIAL MEDICO</figcaption>
             </figure>
@@ -86,7 +86,7 @@ require_once 'partes_Pagina/head.php';
         <div class="col d-flex justify-content-center">
             <figure class="figure text-center">
                 <a href="formulario_Animal.html">
-                    <img src="../imagenes/Home de Veterinario - Animal de la Calle.jpg" class="figure-img img-fluid rounded" alt="..." id="img_home_vete">
+                    <img src="imagenes/Home de Veterinario - Animal de la Calle.jpg" class="figure-img img-fluid rounded" alt="..." id="img_home_vete">
                 </a>
                 <figcaption class="figure-caption">Animal de la Calle</figcaption>
             </figure>
