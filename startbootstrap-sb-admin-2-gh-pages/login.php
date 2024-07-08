@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ES">
 
 <?php
     require_once "partes_Pagina/head.php";
