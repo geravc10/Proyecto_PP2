@@ -2,6 +2,29 @@
 <html lang="ES">
 
 <?php
+
+require_once 'funciones/conexion.php';
+$MiConexion=ConexionBD();
+
+require_once 'funciones/validaciones.php';
+$Mensaje="";
+
+//si se presiona el BontonLogin
+if(!empty($_POST['BotonLogin'])){
+
+    //aca vamos a poner la conexion a BD 
+$Mensaje=ValidarUsuarioPass();
+    if(empty($Mensaje)){
+    $UsuarioLogueado=DatosLogin($_POST[email], $_POST[pass], $MiConexion);
+        header('Location: index.php');  
+         exit;
+    }
+              
+}
+
+
+
+
     require_once "partes_Pagina/head.php";
 ?>
 
@@ -23,28 +46,39 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
+                                <?php
+                                 if(!empty($Mensaje)){ ?>
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <i class="bi bi-exclamation-triangle me-1"></i>
+                                    <?php echo $Mensaje; ?>
+                                    </div>
+                                    <?php }
+                                    ?>
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Bienvenido!</h1>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" method= 'post'>
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Email">
+                                                placeholder="Email" name="email">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Contraseña">
+                                                id="exampleInputPassword" placeholder="Contraseña"
+                                                name="pass">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck"
+                                                name="recuerdame">
                                                 <label class="custom-control-label" for="customCheck">Recuerdame</label>
                                             </div>
                                         </div>
-                                        <a href="index.php" class="btn btn-primary btn-user btn-block">
+                                        <button class="btn btn-primary btn-user btn-block"
+                                                type="submit" value="Login" name="BotonLogin">
                                             Ingresar
-                                        </a>
+                                        </button>
                                         <hr>
                                     </form>
                                     <hr>
