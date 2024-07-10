@@ -3,8 +3,8 @@ function DatosLogin($vUsuario, $vClave, $vConexion){
     $Usuario=array();
 
     $SQL="SELECT * 
-    FROM persona p, datos_de_contacto d 
-    WHERE d.correo_electronico= '$vUsuario' AND p.contraseña='$vClave'";
+    FROM persona p 
+    ";
 
     $rs=mysqli_query($vConexion, $SQL);
 
@@ -12,8 +12,8 @@ function DatosLogin($vUsuario, $vClave, $vConexion){
 
     if(!empty($data)){
         
-        $Usuario['NOMBRE']=$data['Nombre'];
-        $Usuario['APELLIDO']=$data['Apellido'];
+        $Usuario['Nombre']=$data['NOMBRE'];
+        $Usuario['Apellido']=$data['APELLIDO'];
         
         
         /*if(empty($data['Imagen'])){
