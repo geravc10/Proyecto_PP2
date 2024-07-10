@@ -54,19 +54,7 @@ require_once 'partes_Pagina/head.php';
               Please provide a valid city.
             </div>
         </div>
-        </div>
-         <div class="col-12 text-center">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="invalidCheck3" aria-describedby="invalidCheck3Feedback" required>
-            <label class="form-check-label" for="invalidCheck3">
-              Acepto los Terminos y Condiciones
-            </label>
-            <div id="invalidCheck3Feedback" class="invalid-feedback">
-              Enviar.
-            </div>
-          </div>
-        </div>
-        <div class="col-12 text-center">
+        <div class="col-12 text-center mt-4">
           <button class="btn btn-primary" type="submit">Consultar</button>
         </div>
       </form>

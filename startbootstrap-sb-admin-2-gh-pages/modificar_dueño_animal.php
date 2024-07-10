@@ -37,22 +37,61 @@ require_once 'partes_Pagina/head.php';
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
                     <!--FORMULARIO-->
-<h1 class="my-5 text-center fw-bold">Consultar Empleado Municipal</h1>
-      <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal">
-        <div class="col-md-12">
+    <h1 class="my-5 text-center fw-bold">Modificar Dueño de Animal</h1>
+    <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal">
+        <div class="col-md-4">
+          <label for="validationServer01" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="nom_for" placeholder="Nombre" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="validationServer02" class="form-label">Apellido</label>
+          <input type="text" class="form-control" id="validationServer02" placeholder="Apellido" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+        <div class="col-md-4">
             <label for="validationServer03" class="form-label">DNI</label>
-            <input type="number" class="form-control" aria-describedby="validationServer03Feedback" placeholder="DNI">
+            <input type="text" class="form-control" aria-describedby="validationServer03Feedback" placeholder="DNI">
             <div id="validationServer03Feedback" class="invalid-feedback">
               Please provide a valid city.
             </div>
         </div>
+        <div class="col-md-4">
+            <label for="validationServer01" class="form-label">Direccion</label>
+            <input type="text" class="form-control" id="nom_for" placeholder="Nombre" required>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+          </div>
+        <div class="col-md-4">
+          <label for="validationServerUsername" class="form-label">Usuario</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text required" id="inputGroupPrepend3">@</span>
+            <input type="text" class="form-control required" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" placeholder="Usuario" required>
+            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+              Please choose a username.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+            <label for="validationServer05" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="validationServer05" aria-describedby="validationServer05Feedback" placeholder="Contraseña">
+            <div id="validationServer05Feedback" class="invalid-feedback">
+              Please provide a valid zip.
+            </div>
+        </div>
         <div class="col-12 text-center mt-4">
-          <button class="btn btn-primary" type="submit">Consultar</button>
+          <button class="btn btn-primary" type="submit">Acepta la modificacion</button>
+          <button class="btn btn-primary" type="submit">Cancelo la modificacion</button>
         </div>
       </form>
-      
-  <!-- """""""""""""""""""""""""""""""""""""""""""""""""""" -->
-  </div>
+          
+      <!-- """""""""""""""""""""""""""""""""""""""""""""""""""" -->
+      </div>
             <!-- End of Main Content -->
  
             <?php

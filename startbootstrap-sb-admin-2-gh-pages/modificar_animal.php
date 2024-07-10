@@ -37,18 +37,59 @@ require_once 'partes_Pagina/head.php';
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
 
-                  <!--FORMULARIO-->
-    <h1 class="my-5 text-center fw-bold">Consultar Profesional</h1>
+                    <!--FORMULARIO-->
+    <h1 class="my-5 text-center fw-bold">Modificar Animal</h1>
     <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal">
         <div class="col-md-12">
-            <label for="validationServer03" class="form-label">DNI</label>
-            <input type="number" class="form-control" aria-describedby="validationServer03Feedback" placeholder="DNI">
-            <div id="validationServer03Feedback" class="invalid-feedback">
-              Please provide a valid city.
+            <label for="validationServer05" class="form-label">Nombre del Animal</label>
+            <input type="password" class="form-control" id="validationServer05" aria-describedby="validationServer05Feedback" placeholder="Nombre del Animal">
+            <div id="validationServer05Feedback" class="invalid-feedback">
+              Please provide a valid zip.
             </div>
         </div>
+        <div class="col-md-4">
+          <label for="validationServer04" class="form-label">Raza</label>
+          <select class="form-select" id="validationServer04" aria-describedby="validationServer04Feedback" required>
+            <option selected disabled value="">Raza...</option>
+            <option>Rol 1</option>
+            <option>Rol 2</option>
+            <option>Rol 3</option>
+          </select>
+          <div id="validationServer04Feedback" class="invalid-feedback">
+            Please select a valid state.
+          </div>
+        </div>
+        <div class="col-md-4">
+            <label for="validationServer04" class="form-label">Rol del Animal</label>
+            <select class="form-select" id="validationServer04" aria-describedby="validationServer04Feedback" required>
+              <option selected disabled value="">Rol del Animal...</option>
+              <option>Rol 1</option>
+              <option>Rol 2</option>
+              <option>Rol 3</option>
+            </select>
+            <div id="validationServer04Feedback" class="invalid-feedback">
+              Please select a valid state.
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="validationServer04" class="form-label">Estado del Animal</label>
+            <select class="form-select" id="validationServer04" aria-describedby="validationServer04Feedback" required>
+              <option selected disabled value="">Estado del Animal...</option>
+              <option>Estado 1</option>
+              <option>Estado 2</option>
+              <option>Estado 3</option>
+            </select>
+            <div id="validationServer04Feedback" class="invalid-feedback">
+              Please select a valid state.
+            </div>
+        </div>
+        <div class="col-md-12">
+            <label for="exampleFormControlTextarea1" class="form-label">Descripcion de Estado en el que fue encontrado</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
+        </div>
         <div class="col-12 text-center mt-4">
-          <button class="btn btn-primary" type="submit">Consultar</button>
+          <button class="btn btn-primary" type="submit">Acepta la modificacion</button>
+          <button class="btn btn-primary" type="submit">Cancelo la modificacion</button>
         </div>
       </form>
           
