@@ -69,22 +69,24 @@
  </li>
 
  <!-- Divider -->
- <hr class="sidebar-divider">
+<hr class="sidebar-divider">
 
  <!-- Heading -->
- <div class="sidebar-heading">
-     Addons
- </div>
-
+<div class="sidebar-heading">
+    CAMPAÑAS / INFO
+</div>
  <!-- Nav Item - Pages Collapse Menu -->
  <li class="nav-item">
      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
          aria-expanded="true" aria-controls="collapsePages">
          <i class="fas fa-fw fa-folder"></i>
-         <span>Pages</span>
+         <span>Cargar Nueva</span>
      </a>
      <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
+         <a class="collapse-item" href="#">Nueva Campaña</a>
+         <a class="collapse-item" href="#">Nueva Noticia</a>
+<!--
              <h6 class="collapse-header">Login Screens:</h6>
              <a class="collapse-item" href="login.php">Login</a>
              <a class="collapse-item" href="register.php">Register</a>
@@ -93,24 +95,25 @@
              <h6 class="collapse-header">Other Pages:</h6>
              <a class="collapse-item" href="404.html">404 Page</a>
              <a class="collapse-item" href="blank.html">Blank Page</a>
+-->
          </div>
      </div>
  </li>
 
  <!-- Nav Item - Charts -->
- <li class="nav-item">
+ <!--<li class="nav-item">
      <a class="nav-link" href="charts.html">
          <i class="fas fa-fw fa-chart-area"></i>
          <span>Charts</span></a>
  </li>
-
+-->
  <!-- Nav Item - Tables -->
- <li class="nav-item">
+<!-- <li class="nav-item">
      <a class="nav-link" href="tables.html">
          <i class="fas fa-fw fa-table"></i>
          <span>Tables</span></a>
  </li>
-
+-->
  <!-- Divider -->
  <hr class="sidebar-divider d-none d-md-block">
 
