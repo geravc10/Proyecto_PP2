@@ -41,7 +41,7 @@ require_once 'partes_Pagina/head.php';
     <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal">
         <div class="col-md-4">
           <label for="validationServer01" class="form-label">Nombre</label>
-          <input type="text" class="form-control" id="nom_for" placeholder="Nombre" required>
+          <input type="text" class="form-control" id="nom_for" placeholder="Nombre" required >
           <div class="valid-feedback">
             Looks good!
           </div>

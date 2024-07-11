@@ -3,8 +3,6 @@
 
 <?php
 
-session_start();
-
 require_once 'funciones/conexion.php';
 $MiConexion=ConexionBD();
 
@@ -17,16 +15,10 @@ if(!empty($_POST['BotonLogin'])){
     //aca vamos a poner la conexion a BD 
 $Mensaje=ValidarUsuarioPass();
     if(empty($Mensaje)){
-        require_once 'funciones/login_funcion.php';
-        $UsuarioLogueado=DatosLogin($_POST['email'], $_POST['pass'], $MiConexion);
-
-        $_SESSION['usuario_nombre']= $UsuarioLogueado['Nombre'];
-        $_SESSION['usuario_apellido']=$UsuarioLogueado['Apellido'];
+    $UsuarioLogueado=DatosLogin($_POST[email], $_POST[pass], $MiConexion);
         header('Location: index.php');  
-        exit;  
-        
+         exit;
     }
-
               
 }
 

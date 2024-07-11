@@ -2,9 +2,20 @@
 function DatosLogin($vUsuario, $vClave, $vConexion){
     $Usuario=array();
 
-    $SQL="SELECT * 
-    FROM persona p 
-    ";
+    $SQL=
+        "SELECT 
+            p.CONTRASENA,
+            dc.CORREO_ELECTRONICO
+        FROM 
+            persona AS p
+        JOIN 
+            datos_de_contacto AS dc 
+        ON 
+            p.ID_DATOS_DE_CONTACTO = dc.ID_DATOS_DE_CONTACTO
+        WHERE 
+            dc.CORREO_ELECTRONICO = '$vUsuario' 
+        AND 
+            p.CONTRASENA = '$vClave'";
 
     $rs=mysqli_query($vConexion, $SQL);
 
