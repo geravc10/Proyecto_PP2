@@ -1,77 +1,68 @@
 <!DOCTYPE html>
 <html lang="ES">
 
+
 <?php
-session_start();
 
-if (!empty($_SESSION["DNI_Persona"])) {
-  header('Location: index.php');
-  exit();
-}
 
 session_start();
+
+
+
 
 
 
 require_once 'funciones/conexion.php';
 $MiConexion=ConexionBD();
 
+
 require_once 'funciones/validaciones.php';
 $Mensaje="";
+
 
 //si se presiona el BontonLogin
 if(!empty($_POST['BotonLogin'])){
 
-    //aca vamos a poner la conexion a BD 
+
+    //aca vamos a poner la conexion a BD
 $Mensaje=ValidarUsuarioPass();
     if(empty($Mensaje)){
-<<<<<<< HEAD
-=======
  
->>>>>>> 7bd660b770495a9f8c84e5de59c6272c81fcc9ff
         require_once 'funciones/login_funcion.php';
         $UsuarioLogueado=DatosLogin($_POST['email'], $_POST['pass'], $MiConexion);
 
+
         if(empty($UsuarioLogueado)){
 
-        $Mensaje="Verifique Email y Contraseña.";
-            
-<<<<<<< HEAD
-        } else{           
-        
-            $_SESSION['usuario_nombre']= $UsuarioLogueado['Nombre'];
-            $_SESSION['usuario_apellido']=$UsuarioLogueado['Apellido'];
-            
-            header('Location: index.php');  
-            exit;  
-        }
-                    
-    } 
-=======
-        }else if($UsuarioLogueado['Estado']==0){ 
+
+            $Mensaje="Verifique Email y Contraseña.";
+           
+        }else if($UsuarioLogueado['Estado']==0){
             $Mensaje="Usuario inactivo";
         }else{
             $_SESSION['usuario_nombre']= $UsuarioLogueado['Nombre'];
             $_SESSION['usuario_apellido']=$UsuarioLogueado['Apellido'];
             $_SESSION['usuario_estado']=$UsuarioLogueado['Estado'];
->>>>>>> 7bd660b770495a9f8c84e5de59c6272c81fcc9ff
-        
+       
             header('Location: index.php');  
             exit;
-        
+       
         }
-          
-<<<<<<< HEAD
-}
-=======
+         
    }
 }  
 
 
-                
+
+
+               
  
 
->>>>>>> 7bd660b770495a9f8c84e5de59c6272c81fcc9ff
+
+
+
+
+
 
 
 
@@ -79,14 +70,19 @@ $Mensaje=ValidarUsuarioPass();
     require_once "partes_Pagina/head.php";
 ?>
 
+
 <body class="bg-gradient-light">
 
+
     <div class="container">
+
 
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
+
             <div class="col-xl-10 col-lg-12 col-md-9">
+
 
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
@@ -145,22 +141,30 @@ $Mensaje=ValidarUsuarioPass();
                     </div>
                 </div>
 
+
             </div>
+
 
         </div>
 
+
     </div>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
+
 </body>
+
 
 </html>
