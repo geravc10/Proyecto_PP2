@@ -15,11 +15,33 @@ if(!empty($_POST['BotonLogin'])){
     //aca vamos a poner la conexion a BD 
 $Mensaje=ValidarUsuarioPass();
     if(empty($Mensaje)){
+<<<<<<< HEAD
     $UsuarioLogueado=DatosLogin($_POST[email], $_POST[pass], $MiConexion);
         header('Location: index.php');  
          exit;
     }
               
+=======
+        require_once 'funciones/login_funcion.php';
+        $UsuarioLogueado=DatosLogin($_POST['email'], $_POST['pass'], $MiConexion);
+
+        if(empty($UsuarioLogueado)){
+
+            $Mensaje="Verifique Email y Contraseña.";
+            
+        }else{           
+            
+                $_SESSION['usuario_nombre']= $UsuarioLogueado['Nombre'];
+                $_SESSION['usuario_apellido']=$UsuarioLogueado['Apellido'];
+                
+                header('Location: index.php');  
+                exit;  
+            }
+                
+            } 
+        
+          
+>>>>>>> 9485c95faf285ef834a83ae2e371f61254980687
 }
 
 
@@ -55,13 +77,13 @@ $Mensaje=ValidarUsuarioPass();
                                     <?php }
                                     ?>
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Bienvenido!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">¡Bienvenido!</h1>
                                     </div>
                                     <form class="user" method= 'post'>
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Email" name="email">
+                                                placeholder="Email" name="email" value= <?php echo !empty($_POST['email']) ? $_POST['email'] : '' ?>>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"

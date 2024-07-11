@@ -2,20 +2,17 @@
 function DatosLogin($vUsuario, $vClave, $vConexion){
     $Usuario=array();
 
-    $SQL=
-        "SELECT 
-            p.CONTRASENA,
-            dc.CORREO_ELECTRONICO
+    $SQL="SELECT p.*
         FROM 
-            persona AS p
-        JOIN 
-            datos_de_contacto AS dc 
-        ON 
-            p.ID_DATOS_DE_CONTACTO = dc.ID_DATOS_DE_CONTACTO
+            persona as p, 
+            DATOS_DE_CONTACTO as d
         WHERE 
-            dc.CORREO_ELECTRONICO = '$vUsuario' 
+            P.ID_DATOS_DE_CONTACTO = d.ID_DATOS_DE_CONTACTO 
         AND 
-            p.CONTRASENA = '$vClave'";
+            d.CORREO_ELECTRONICO='$vUsuario' 
+        AND 
+            p.CONTRASENA= '$vClave'
+    ";
 
     $rs=mysqli_query($vConexion, $SQL);
 
@@ -23,16 +20,13 @@ function DatosLogin($vUsuario, $vClave, $vConexion){
 
     if(!empty($data)){
         
-        $Usuario['Nombre']=$data['NOMBRE'];
-        $Usuario['Apellido']=$data['APELLIDO'];
-        
-        
-        /*if(empty($data['Imagen'])){
-            $data['Imagen']='test.jpg';        
-        }*/
-        //$Usuario['IMG']="test.jpg";
-        
-        
+        if($data['ESTADO_PERSONA']==1){
+
+            $Usuario['Nombre']=$data['NOMBRE'];
+            $Usuario['Apellido']=$data['APELLIDO'];
+        }else{
+            $Usuario['Estado']=$data['ESTADO_PERSONA'];
+        }
     }
     return $Usuario;
 }
