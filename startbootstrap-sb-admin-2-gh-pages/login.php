@@ -34,7 +34,6 @@ $Mensaje=ValidarUsuarioPass();
 
         if(empty($UsuarioLogueado)){
 
-
             $Mensaje="Verifique Email y Contraseña.";
            
         }else if($UsuarioLogueado['Estado']==0){
