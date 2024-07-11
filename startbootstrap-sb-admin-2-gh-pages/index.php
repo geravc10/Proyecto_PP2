@@ -6,6 +6,12 @@
 
 session_start();
 
+
+if(empty($_SESSION['usuario_nombre'])){
+  header('Location: cerrar_sesion.php');
+  exit;
+}
+
 require_once 'partes_Pagina/head.php';
 ?>
  
@@ -35,7 +41,7 @@ require_once 'partes_Pagina/head.php';
  
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Bienvenidos <?php echo $_SESSION['usuario_nombre'] .' '. $_SESSION['usuario_apellido'] ; ?></h1>
+                        <h1 class="h3 mb-0 text-gray-800">Bienvenido <?php echo $_SESSION['usuario_nombre'] .' '. $_SESSION['usuario_apellido'] ; ?></h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
@@ -199,15 +205,15 @@ require_once 'partes_Pagina/head.php';
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">¿Ya te vas <?php echo $_SESSION['usuario_nombre']; ?>?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Selecciona "Cerrar Sesion" si queres cerrar esta sesion. </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.php">Logout</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="cerrar_sesion.php">Cerrar Sesion</a>
                 </div>
             </div>
         </div>

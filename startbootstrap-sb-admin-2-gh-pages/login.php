@@ -20,14 +20,22 @@ $Mensaje=ValidarUsuarioPass();
         require_once 'funciones/login_funcion.php';
         $UsuarioLogueado=DatosLogin($_POST['email'], $_POST['pass'], $MiConexion);
 
-        $_SESSION['usuario_nombre']= $UsuarioLogueado['Nombre'];
-        $_SESSION['usuario_apellido']=$UsuarioLogueado['Apellido'];
-        header('Location: index.php');  
-        exit;  
-        
-    }
+        if(empty($UsuarioLogueado)){
 
-              
+            $Mensaje="Verifique Email y Contraseña.";
+            
+        }else{           
+            
+                $_SESSION['usuario_nombre']= $UsuarioLogueado['Nombre'];
+                $_SESSION['usuario_apellido']=$UsuarioLogueado['Apellido'];
+                
+                header('Location: index.php');  
+                exit;  
+            }
+                
+            } 
+        
+          
 }
 
 
@@ -63,13 +71,13 @@ $Mensaje=ValidarUsuarioPass();
                                     <?php }
                                     ?>
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Bienvenido!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">¡Bienvenido!</h1>
                                     </div>
                                     <form class="user" method= 'post'>
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Email" name="email">
+                                                placeholder="Email" name="email" value= <?php echo !empty($_POST['email']) ? $_POST['email'] : '' ?>>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
