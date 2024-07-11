@@ -1,6 +1,6 @@
 <?php
 
-function ConexionBD($Host = 'localhost' ,  $User = 'root',  $Password = '', 
+function ConexionBD($Host = 'localhost' ,  $User = 'root',  $Password = 'root', 
 $BaseDeDatos='petsalud-v3.0' ) {
 
    

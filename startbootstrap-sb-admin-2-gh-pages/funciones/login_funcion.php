@@ -19,15 +19,11 @@ function DatosLogin($vUsuario, $vClave, $vConexion){
     $data= mysqli_fetch_array($rs);
 
     if(!empty($data)){
-        
-        if($data['ESTADO_PERSONA']==1){
-
             $Usuario['Nombre']=$data['NOMBRE'];
             $Usuario['Apellido']=$data['APELLIDO'];
             $Usuario['DNI_Persona']=$data['DNI'];
         }else{
             $Usuario['Estado']=$data['ESTADO_PERSONA'];
-        }
     }
     return $Usuario;
 }

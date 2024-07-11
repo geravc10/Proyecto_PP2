@@ -9,6 +9,10 @@ if (!empty($_SESSION["DNI_Persona"])) {
   exit();
 }
 
+session_start();
+
+
+
 require_once 'funciones/conexion.php';
 $MiConexion=ConexionBD();
 
@@ -21,6 +25,10 @@ if(!empty($_POST['BotonLogin'])){
     //aca vamos a poner la conexion a BD 
 $Mensaje=ValidarUsuarioPass();
     if(empty($Mensaje)){
+<<<<<<< HEAD
+=======
+ 
+>>>>>>> 7bd660b770495a9f8c84e5de59c6272c81fcc9ff
         require_once 'funciones/login_funcion.php';
         $UsuarioLogueado=DatosLogin($_POST['email'], $_POST['pass'], $MiConexion);
 
@@ -28,6 +36,7 @@ $Mensaje=ValidarUsuarioPass();
 
         $Mensaje="Verifique Email y Contraseña.";
             
+<<<<<<< HEAD
         } else{           
         
             $_SESSION['usuario_nombre']= $UsuarioLogueado['Nombre'];
@@ -38,9 +47,31 @@ $Mensaje=ValidarUsuarioPass();
         }
                     
     } 
+=======
+        }else if($UsuarioLogueado['Estado']==0){ 
+            $Mensaje="Usuario inactivo";
+        }else{
+            $_SESSION['usuario_nombre']= $UsuarioLogueado['Nombre'];
+            $_SESSION['usuario_apellido']=$UsuarioLogueado['Apellido'];
+            $_SESSION['usuario_estado']=$UsuarioLogueado['Estado'];
+>>>>>>> 7bd660b770495a9f8c84e5de59c6272c81fcc9ff
         
+            header('Location: index.php');  
+            exit;
+        
+        }
           
+<<<<<<< HEAD
 }
+=======
+   }
+}  
+
+
+                
+ 
+
+>>>>>>> 7bd660b770495a9f8c84e5de59c6272c81fcc9ff
 
 
 
