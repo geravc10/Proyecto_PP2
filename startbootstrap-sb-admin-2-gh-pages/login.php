@@ -19,6 +19,7 @@ if(!empty($_POST['BotonLogin'])){
     //aca vamos a poner la conexion a BD 
 $Mensaje=ValidarUsuarioPass();
     if(empty($Mensaje)){
+ 
         require_once 'funciones/login_funcion.php';
         $UsuarioLogueado=DatosLogin($_POST['email'], $_POST['pass'], $MiConexion);
 
@@ -38,8 +39,10 @@ $Mensaje=ValidarUsuarioPass();
         
         }
           
-   }  
-}
+   }
+}  
+
+
                 
  
 
