@@ -51,21 +51,6 @@ $Mensaje=ValidarUsuarioPass();
    }
 }  
 
-
-
-
-               
- 
-
-
-
-
-
-
-
-
-
-
     require_once "partes_Pagina/head.php";
 ?>
 
