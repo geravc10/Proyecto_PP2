@@ -2,6 +2,12 @@
 <html lang="ES">
 
 <?php
+session_start();
+
+if (!empty($_SESSION["DNI_Persona"])) {
+  header('Location: index.php');
+  exit();
+}
 
 require_once 'funciones/conexion.php';
 $MiConexion=ConexionBD();
@@ -15,33 +21,25 @@ if(!empty($_POST['BotonLogin'])){
     //aca vamos a poner la conexion a BD 
 $Mensaje=ValidarUsuarioPass();
     if(empty($Mensaje)){
-<<<<<<< HEAD
-    $UsuarioLogueado=DatosLogin($_POST[email], $_POST[pass], $MiConexion);
-        header('Location: index.php');  
-         exit;
-    }
-              
-=======
         require_once 'funciones/login_funcion.php';
         $UsuarioLogueado=DatosLogin($_POST['email'], $_POST['pass'], $MiConexion);
 
         if(empty($UsuarioLogueado)){
 
-            $Mensaje="Verifique Email y Contraseña.";
+        $Mensaje="Verifique Email y Contraseña.";
             
-        }else{           
+        } else{           
+        
+            $_SESSION['usuario_nombre']= $UsuarioLogueado['Nombre'];
+            $_SESSION['usuario_apellido']=$UsuarioLogueado['Apellido'];
             
-                $_SESSION['usuario_nombre']= $UsuarioLogueado['Nombre'];
-                $_SESSION['usuario_apellido']=$UsuarioLogueado['Apellido'];
-                
-                header('Location: index.php');  
-                exit;  
-            }
-                
-            } 
+            header('Location: index.php');  
+            exit;  
+        }
+                    
+    } 
         
           
->>>>>>> 9485c95faf285ef834a83ae2e371f61254980687
 }
 
 

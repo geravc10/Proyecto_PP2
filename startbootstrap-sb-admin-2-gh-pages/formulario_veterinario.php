@@ -39,7 +39,7 @@ require_once 'partes_Pagina/head.php';
 
                    <!--FORMULARIO-->
     <h1 class="my-5 text-center fw-bold">Crear Veterinario</h1>
-    <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal">
+    <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal" method="post">
         <div class="col-md-4">
           <label for="validationServer01" class="form-label">Nombre</label>
           <input type="text" class="form-control" id="nom_for" placeholder="Nombre" required>

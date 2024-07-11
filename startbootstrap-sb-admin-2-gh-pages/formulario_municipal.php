@@ -1,4 +1,4 @@
- 
+
 <!DOCTYPE html>
 <html lang="ES">
  
@@ -38,57 +38,129 @@ require_once 'partes_Pagina/head.php';
                     </div>
                     <!--FORMULARIO-->
 <h1 class="my-5 text-center fw-bold">Crear Empleado Municipal</h1>
-<form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal">
+<!--
+<form action="procesar_formulario.php" method="post">
+
+        <label for="id_ciudad">ID Ciudad:</label>
+        <input type="number" id="id_ciudad" name="id_ciudad" required><br>
+
+        <label for="bis">Bis:</label>
+        <input type="checkbox" id="bis" name="bis" value="1"><br>
+
+        <button type="submit">Registrar</button>
+</form>
+-->
+<form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal" method="post">
     <div class="col-md-4">
       <label for="validationServer01" class="form-label">Nombre</label>
-      <input type="text" class="form-control" id="validationServer01" placeholder="Nombre" required>
+      <input type="text" class="form-control" id="validationServer01" placeholder="Nombre" name="nombre" required>
       <div class="valid-feedback">
         Looks good!
       </div>
     </div>
+    <input type="image" src="" alt="">
     <div class="col-md-4">
       <label for="validationServer02" class="form-label">Apellido</label>
-      <input type="text" class="form-control" id="validationServer02" placeholder="Apellido" required>
+      <input type="text" class="form-control" id="validationServer02" placeholder="Apellido" name="apellido" required>
       <div class="valid-feedback">
         Looks good!
       </div>
     </div>
     <div class="col-md-4">
-      <label for="validationServerUsername" class="form-label">Usuario</label>
-      <div class="input-group has-validation">
-        <span class="input-group-text required" id="inputGroupPrepend3">@</span>
-        <input type="text" class="form-control required" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" placeholder="Usuario" required>
-        <div id="validationServerUsernameFeedback" class="invalid-feedback">
-          Please choose a username.
-        </div>
+      <label for="validationServer02" class="form-label">Fecha de Nacimiento</label>
+      <input type="date" class="form-control" id="validationServer02" placeholder="Fecha de Nacimiento" name="fecha_nacimiento" required>
+      <div class="valid-feedback">
+        Looks good!
       </div>
     </div>
-    <div class="col-md-6">
-      <label for="validationServer03" class="form-label">DNI</label>
-      <input type="text" class="form-control" aria-describedby="validationServer03Feedback" placeholder="DNI">
-      <div id="validationServer03Feedback" class="invalid-feedback">
-        Please provide a valid city.
+    <div class="col-md-4">
+      <label for="validationServer02" class="form-label">Nacionalidad</label>
+      <input type="text" class="form-control" id="validationServer02" placeholder="Nacionalidad" name="nacionalidad" required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+    </div>
+    <div class="col-md-4">
+      <label for="validationServer02" class="form-label">Informacion Personal</label>
+      <input type="text" class="form-control" id="validationServer02" placeholder="Informacion Personal" name="informacion_personal" required>
+      <div class="valid-feedback">
+        Looks good!
       </div>
     </div>
     <div class="col-md-3 pt-5">
-      <label for="validationServer04" class="form-label">Rol</label>
-      <select class="form-select" id="validationServer04" aria-describedby="validationServer04Feedback" required>
-        <option selected disabled value="">Rol...</option>
-        <option>Rol 1</option>
-        <option>Rol 2</option>
-        <option>Rol 3</option>
+      <label for="validationServer04" class="form-label">Sexo</label>
+      <select class="form-select" id="validationServer04" aria-describedby="validationServer04Feedback" name="sexo" required>
+        <option selected disabled value="">Sexo...</option>
+            <option value="M">Masculino</option>
+            <option value="F">Femenino</option>
+            <option value="O">Otro</option>
       </select>
       <div id="validationServer04Feedback" class="invalid-feedback">
         Please select a valid state.
       </div>
     </div>
-    <div class="col-md-3">
-      <label for="validationServer05" class="form-label">Contraseña</label>
-      <input type="password" class="form-control" id="validationServer05" aria-describedby="validationServer05Feedback" placeholder="Contraseña">
-      <div id="validationServer05Feedback" class="invalid-feedback">
-        Please provide a valid zip.
+    <div class="col-md-6">
+      <label for="validationServer03" class="form-label">DNI</label>
+      <input type="text" class="form-control" aria-describedby="validationServer03Feedback" placeholder="DNI" name="dni">
+      <div id="validationServer03Feedback" class="invalid-feedback">
+        Please provide a valid city.
       </div>
     </div>
+    <div class="col-md-6">
+      <label for="validationServer03" class="form-label">Nombre de Calle</label>
+      <input type="text" class="form-control" aria-describedby="validationServer03Feedback" placeholder="Nombre de Calle" name="numero">
+      <div id="validationServer03Feedback" class="invalid-feedback">
+        Please provide a valid city.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="validationServer03" class="form-label">Numero</label>
+      <input type="text" class="form-control" aria-describedby="validationServer03Feedback" placeholder="Numero " name="nombre_calle">
+      <div id="validationServer03Feedback" class="invalid-feedback">
+        Please provide a valid city.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="validationServer03" class="form-label">Telefono</label>
+      <input type="text" class="form-control" aria-describedby="validationServer03Feedback" placeholder="Telefono" name="telefono">
+      <div id="validationServer03Feedback" class="invalid-feedback">
+        Please provide a valid city.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="validationServer03" class="form-label">Email</label>
+      <input type="email" class="form-control" aria-describedby="validationServer03Feedback" placeholder="Email" name="correo_electronico">
+      <div id="validationServer03Feedback" class="invalid-feedback">
+        Please provide a valid city.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="validationServer03" class="form-label">Contraseña</label>
+      <input type="password" class="form-control" aria-describedby="validationServer03Feedback" placeholder="Contraseña" name="contrasena">
+      <div id="validationServer03Feedback" class="invalid-feedback">
+        Please provide a valid city.
+      </div>
+    </div>
+    
+    <div class="col-md-6">
+      <label for="validationServer03" class="form-label">Red Social</label>
+      <input type="text" class="form-control" aria-describedby="validationServer03Feedback" placeholder="Red Social" name="red_social">
+      <div id="validationServer03Feedback" class="invalid-feedback">
+        Please provide a valid city.
+      </div>
+    </div>
+    <div class="col-md-3 pt-5">
+      <label for="validationServer04" class="form-label">Estado</label>
+      <select class="form-select" id="validationServer04" aria-describedby="validationServer04Feedback" name="estado_persona" required>
+        <option selected disabled value="">Estado...</option>
+            <option value="0">Inactivo</option>
+            <option value="1">Activo</option>
+      </select>
+      <div id="validationServer04Feedback" class="invalid-feedback">
+        Please select a valid state.
+      </div>
+    </div>
+    
     <div class="col-12">
       <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="invalidCheck3" aria-describedby="invalidCheck3Feedback" required>
@@ -101,7 +173,7 @@ require_once 'partes_Pagina/head.php';
       </div>
     </div>
     <div class="col-12">
-      <button class="btn btn-primary" type="submit">Enviar</button>
+      <button class="btn btn-primary" type="submit" name="BotonRegistrar">Enviar</button>
     </div>
   </form>
       

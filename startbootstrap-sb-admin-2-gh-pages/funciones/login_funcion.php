@@ -24,6 +24,7 @@ function DatosLogin($vUsuario, $vClave, $vConexion){
 
             $Usuario['Nombre']=$data['NOMBRE'];
             $Usuario['Apellido']=$data['APELLIDO'];
+            $Usuario['DNI_Persona']=$data['DNI'];
         }else{
             $Usuario['Estado']=$data['ESTADO_PERSONA'];
         }
