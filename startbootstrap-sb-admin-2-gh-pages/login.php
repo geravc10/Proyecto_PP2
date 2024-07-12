@@ -37,7 +37,7 @@ $Mensaje=ValidarUsuarioPass();
             $Mensaje="Verifique Email y Contraseña.";
            
         }else if($UsuarioLogueado['Estado']==0){
-            $Mensaje="Usuario inactivo";
+            $Mensaje="Usuario inactivo!!!";
         }else{
             $_SESSION['usuario_nombre']= $UsuarioLogueado['Nombre'];
             $_SESSION['usuario_apellido']=$UsuarioLogueado['Apellido'];
