@@ -42,6 +42,8 @@ $Mensaje=ValidarUsuarioPass();
             $_SESSION['usuario_nombre']= $UsuarioLogueado['Nombre'];
             $_SESSION['usuario_apellido']=$UsuarioLogueado['Apellido'];
             $_SESSION['usuario_estado']=$UsuarioLogueado['Estado'];
+            $_SESSION['usuario_nivel']=$UsuarioLogueado['Nivel'];
+            $_SESSION['usuario_descripcion_nivel']=$UsuarioLogueado['Descripcion_nivel'];
        
             header('Location: index.php');  
             exit;
