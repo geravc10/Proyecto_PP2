@@ -1,6 +1,32 @@
+<?php
+$nivel_u=$_SESSION['usuario_nivel'];
+$color='';
+$letra="";
+
+switch($nivel_u){
+    case 1://super usuario
+        $color="bg-gradient-dark";
+        break;
+    case 2://municipal
+        $color="bg-gradient-dark";
+        break;
+    case 3://veterinario
+        $color="bg-gradient-success";
+        break;
+    case 4://responsable animal
+        $color="bg-gradient-warning";
+        break;
+    case 5://profesional
+        $color="bg-gradient-info";
+        break;
+    case 6://refugio
+        $color="bg-gradient-danger";
+        break;    
+}
+?>
 
 <!-- Topbar -->
-<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+<nav class="navbar navbar-expand navbar-light <?php echo $color; ?>  topbar mb-4 static-top shadow">
  
  <!-- Sidebar Toggle (Topbar) -->
  <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">

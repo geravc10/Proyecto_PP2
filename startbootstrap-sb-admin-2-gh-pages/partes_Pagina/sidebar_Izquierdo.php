@@ -1,5 +1,32 @@
+<?php
+$nivel_u=$_SESSION['usuario_nivel'];
+$color='';
+
+switch($nivel_u){
+    case 1://super usuario
+        $color="bg-gradient-dark";
+        break;
+    case 2://municipal
+        $color="bg-gradient-dark";
+        break;
+    case 3://veterinario
+        $color=" bg-gradient-success";
+        break;
+    case 4://responsable animal
+        $color="bg-gradient-warning";
+        break;
+    case 5://profesional
+        $color="bg-gradient-info";
+        break;
+    case 6://refugio
+        $color="bg-gradient-danger";
+        break;    
+}
+?>
+
+
 <!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav <?php echo $color; ?>  sidebar sidebar-dark accordion" id="accordionSidebar">
  
  <!-- Sidebar - Brand -->
  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
