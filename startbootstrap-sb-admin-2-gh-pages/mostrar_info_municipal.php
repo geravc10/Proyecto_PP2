@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+if(empty($_SESSION['usuario_nombre'])){
+    header('Location: cerrar_sesion.php');
+    exit;
+}
 ?> 
 <!DOCTYPE html>
 <html lang="ES">
@@ -72,12 +77,12 @@ require_once 'partes_Pagina/head.php';
                                     </tfoot>
                                     <tbody>
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>37456789</td>
-                                            <td>61</td>
-                                            <td>123456789</td>
-                                            <td>Calle 10 N° 661</td>
+                                            <td><?php echo $_SESSION['municipal_nombre']; ?></td>
+                                            <td><?php echo $_SESSION['municipal_apellido']; ?></td>
+                                            <td><?php echo $_SESSION['municipal_dni']; ?></td>
+                                            <td><?php echo $_SESSION['municipal_fecha']; ?></td>
+                                            <td><?php echo $_SESSION['municipal_telefono'].' '.$_SESSION['municipal_area'].' '.$_SESSION['municipal_rol']; ?></td>
+                                            <td><?php echo $_SESSION['municipal_direccion'].' '.$_SESSION['municipal_ciudad'].' '.$_SESSION['municipal_provincia']; ?> </td>
                                         </tr>
                                         <tr>
                                             <td>Garrett Winters</td>
@@ -165,15 +170,15 @@ require_once 'partes_Pagina/head.php';
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">¿Ya te vas <?php echo $_SESSION['usuario_nombre']; ?>?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Selecciona "Cerrar Sesion" si queres cerrar esta sesion.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.php">Logout</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="cerrar_sesion.php">Cerrar Sesion</a>
                 </div>
             </div>
         </div>

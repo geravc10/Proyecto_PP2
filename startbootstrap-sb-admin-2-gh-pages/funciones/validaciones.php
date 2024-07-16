@@ -24,4 +24,24 @@ function ValidarUsuarioPass(){
     return $vMensaje;
 }
 
+function ValidarDniConsulta(){
+
+    $vMensaje="";
+
+    if (is_numeric($_POST['dni']) <11) {
+        $vMensaje.='Debes ingresar el DNI. <br />';
+    }
+
+    if(strlen($_POST['dni']) !=8){
+        $vMensaje.='El DNI debe tener 8 numeros. <br />';
+    } 
+
+    foreach($_POST as $Id=>$Valor){
+        $_POST[$Id] = trim($_POST[$Id]);
+        $_POST[$Id] = strip_tags($_POST[$Id]);
+    }
+
+    return $vMensaje;
+}
+
 ?>

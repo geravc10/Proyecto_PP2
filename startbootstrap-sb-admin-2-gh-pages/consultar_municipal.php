@@ -1,5 +1,54 @@
 <?php
 session_start();
+
+if(empty($_SESSION['usuario_nombre'])){
+    header('Location: cerrar_sesion.php');
+    exit;
+}
+
+require_once 'funciones/conexion.php';
+$MiConexion=ConexionBD();
+
+require_once 'funciones/validaciones.php';
+
+$Mensaje="";
+if(!empty($_POST['BotonConsultar'])){
+    
+    $Mensaje=ValidarDniConsulta();
+    if(empty($Mensaje)){
+        
+        require_once 'funciones/consulta_munnicipal.php';
+        $MunicipalEncontrado=DatosMunicipal($_POST['dni'], $MiConexion);
+
+        if(empty($MunicipalEncontrado)){
+
+            $Mensaje="No se encontraron conincidencias. Verifique el número de DNI ingresado";
+        }else{
+            $_SESSION['municipal_nombre']= $MunicipalEncontrado['Nombre'];
+            $_SESSION['municipal_apellido']=$MunicipalEncontrado['Apellido'];
+            $_SESSION['municipal_dni']=$MunicipalEncontrado['dni'];
+            $_SESSION['municipal_fecha']=$MunicipalEncontrado['FechaNacimiento'];
+            $_SESSION['municipal_direccion']=$MunicipalEncontrado['Direccion'];
+            $_SESSION['municipal_ciudad']=$MunicipalEncontrado['Ciudad'];
+            $_SESSION['municipal_provincia']=$MunicipalEncontrado['Provincia'];
+            $_SESSION['municipal_telefono']=$MunicipalEncontrado['Telefono'];
+            $_SESSION['municipal_area']=$MunicipalEncontrado['Area'];
+            $_SESSION['municipal_rol']=$MunicipalEncontrado['Rol'];
+
+
+
+
+
+
+            header('Location: mostrar_info_municipal.php');  
+            exit;
+        }
+
+        
+    }
+
+}
+
 ?> 
 <!DOCTYPE html>
 <html lang="ES">
@@ -7,6 +56,19 @@ session_start();
 <?php
 require_once 'partes_Pagina/head.php';
 ?>
+<style>
+        /* Oculta las flechas en Chrome, Safari, Edge, Opera */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Oculta las flechas en Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
  
 <body id="page-top">
     <?php
@@ -40,16 +102,25 @@ require_once 'partes_Pagina/head.php';
                     </div>
                     <!--FORMULARIO-->
 <h1 class="my-5 text-center fw-bold">Consultar Empleado Municipal</h1>
-      <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal">
-        <div class="col-md-12">
+                                <?php
+                                 if(!empty($Mensaje)){ ?>
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <i class="bi bi-exclamation-triangle me-1"></i>
+                                    <?php echo $Mensaje; ?>
+                                    </div>
+                                    <?php }
+                                ?>
+      <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal" method= 'post'>
+      <div class="col-md-12">
             <label for="validationServer03" class="form-label">DNI</label>
-            <input type="number" class="form-control" aria-describedby="validationServer03Feedback" placeholder="DNI">
+            <input type="number" class="form-control" aria-describedby="validationServer03Feedback" placeholder="DNI" id="dni" onkeydown="preventDecimal(event)" name= "dni">
             <div id="validationServer03Feedback" class="invalid-feedback">
-              Please provide a valid city.
+                Please provide a valid city.
             </div>
         </div>
+
         <div class="col-12 text-center mt-4">
-          <button class="btn btn-primary" type="submit">Consultar</button>
+          <button class="btn btn-primary" type="submit" value="Login" name= "BotonConsultar">Consultar</button>
         </div>
       </form>
       
@@ -78,15 +149,15 @@ require_once 'partes_Pagina/head.php';
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">¿Ya te vas <?php echo $_SESSION['usuario_nombre']; ?>?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Selecciona "Cerrar Sesion" si queres cerrar esta sesion.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.php">Logout</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="cerrar_sesion.php">Cerrar Sesion</a>
                 </div>
             </div>
         </div>
@@ -95,6 +166,13 @@ require_once 'partes_Pagina/head.php';
     <?php
         require_once 'partes_Pagina/script.php';
     ?>
+    <script>
+        function preventDecimal(event) {
+            if (event.key === '.') {
+                event.preventDefault(); // Previene la entrada del punto
+            }
+        }
+    </script>
  
 </body>
  
