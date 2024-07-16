@@ -1,5 +1,13 @@
 <?php
 session_start();
+
+if(empty($_SESSION['usuario_nombre'])){
+  header('Location: cerrar_sesion.php');
+  exit;
+}
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="ES">
