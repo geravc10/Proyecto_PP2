@@ -1,7 +1,8 @@
 <?php
-function DatosLogin($vUsuario, $vClave, $vConexion){
-$Usuario=array();
-$SQL="SELECT p.*, d.*, n.*
+function DatosLogin($vUsuario, $vClave, $vConexion)
+{
+    $Usuario = array();
+    $SQL = "SELECT p.*, d.*, n.*
 FROM
 persona as p,
 DATOS_DE_CONTACTO as d,
@@ -15,15 +16,15 @@ d.CORREO_ELECTRONICO='$vUsuario'
 AND
 p.CONTRASENA= '$vClave'
 ";
-$rs=mysqli_query($vConexion, $SQL);
-$data= mysqli_fetch_array($rs);
-if(!empty($data)){
-$Usuario['Nombre']=$data['NOMBRE'];
-$Usuario['Apellido']=$data['APELLIDO'];
-$Usuario['Estado']=$data['ESTADO_PERSONA'];
-$Usuario['Nivel']=$data['ID_NIVEL'];
-$Usuario['Descripcion_nivel']=$data['DESCRIPCION_NIVEL'];
-}
-return $Usuario;
+    $rs = mysqli_query($vConexion, $SQL);
+    $data = mysqli_fetch_array($rs);
+    if (!empty($data)) {
+        $Usuario['Nombre'] = $data['NOMBRE'];
+        $Usuario['Apellido'] = $data['APELLIDO'];
+        $Usuario['Estado'] = $data['ESTADO_PERSONA'];
+        $Usuario['Nivel'] = $data['ID_NIVEL'];
+        $Usuario['Descripcion_nivel'] = $data['DESCRIPCION_NIVEL'];
+    }
+    return $Usuario;
 }
 ?>
