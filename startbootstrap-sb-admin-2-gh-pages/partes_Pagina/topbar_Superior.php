@@ -237,4 +237,8 @@ switch($nivel_u){
 
 
 </nav>
+<<<<<<< HEAD
 <!-- End of Topbar -->
+=======
+<!-- End of Topbar -->
+>>>>>>> fe8de376c6410586831ffa84a4581aa91579631b

@@ -96,7 +96,7 @@ justify-content-center" href="index.php">
                 <a class="collapse-item" href="consultar_veterinario.php">Veterinario</a>
                 <a class="collapse-item" href="consultar_profesional.php">Profesional</a>
                 <a class="collapse-item" href="consultar_protectora_animal.php">Protectora Animal</a>
-                <a class="collapse-item" href="consultar_dueño_animal.php">Dueño de Animal</a>
+                <a class="collapse-item" href="consultar_duenio_animal.php">Dueño de Animal</a>
                 <a class="collapse-item" href="consultar_animal.php">Animal</a>
                 <a class="collapse-item" href="consultar_municipal.php">Municipal</a>
             </div>
