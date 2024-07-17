@@ -1,20 +1,9 @@
 <?php
 session_start();
-<<<<<<< HEAD
-
-if(empty($_SESSION['usuario_nombre'])){
-  header('Location: cerrar_sesion.php');
-  exit;
-}
-
-
-
-=======
 if(empty($_SESSION['usuario_nombre'])){
 header('Location: cerrar_sesion.php');
 exit;
 }
->>>>>>> GERA-FRONTEND
 ?>
 <!DOCTYPE html>
 <html lang="ES">
