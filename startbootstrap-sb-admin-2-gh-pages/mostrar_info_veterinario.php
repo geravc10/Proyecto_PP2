@@ -30,9 +30,9 @@ require_once 'partes_Pagina/head.php';
 justify-content-between mb-4">
                         <h1 class="h3 mb-0
 text-gray-800">Bienvenidos</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn
+                        <!--<a href="#" class="d-none d-sm-inline-block btn
 btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm
-text-white-50"></i> Generate Report</a>
+text-white-50"></i> Generate Report</a>-->
                     </div>
                     <!--FORMULARIO-->
                     <h1 class="my-5 text-center fw-bold">Informacion del
@@ -42,47 +42,79 @@ text-white-50"></i> Generate Report</a>
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold
-text-primary">Datos de .......</h6>
+text-primary">Datos de <?php echo $_SESSION['usuario_nombre'] . ' ' . $_SESSION['usuario_apellido']; ?></h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>NOMBRE</th>
-                                                <th>APELLIDO</th>
                                                 <th>DNI</th>
-                                                <th>AÑOS</th>
-                                                <th>N° HABILITACION</th>
-                                                <th>DIRECCION</th>
+                                                <th>Nombre y Apellido</th>
+                                                <th>Fecha de Nacimiento</th>
+                                                <th>Años</th>
+                                                <th>Nacionalidad</th>
+                                                <th>Sexo</th>
+                                                <th>Direccion</th>
+                                                <th>Provincia</th>
+                                                <th>Email</th>
+                                                <th>Red Social</th>
+                                                <th>Telefono</th>
+                                                <th>Especialidad</th>
+                                                <th>N° Habilitacion</th>
+                                                <th>Activo</th>
                                             </tr>
                                         </thead>
-                                        <tfoot>
+                                        <!-- <tfoot>
                                             <tr>
-                                                <th>NOMBRE</th>
-                                                <th>APELLIDO</th>
                                                 <th>DNI</th>
-                                                <th>AÑOS</th>
-                                                <th>N° HABILITACION</th>
-                                                <th>DIRECCION</th>
+                                                <th>Nombre y Apellido</th>
+                                                <th>Fecha de Nacimiento</th>
+                                                <th>Años</th>
+                                                <th>Nacionalidad</th>
+                                                <th>Sexo</th>
+                                                <th>Direccion</th>
+                                                <th>Provincia</th>
+                                                <th>Email</th>
+                                                <th>Red Social</th>
+                                                <th>Telefono</th>
+                                                <th>Area de Trabajo</th>
+                                                <th>Rol de Trabajo</th>
+                                                <th>Activo</th>
                                             </tr>
-                                        </tfoot>
+                                        </tfoot> -->
                                         <tbody>
+                                            <!-- <tr>
+                                                <td><?php echo
+                                                    $_SESSION['municipal_nombre']; ?></td>
+                                                <td><?php echo
+                                                    $_SESSION['municipal_apellido']; ?></td>
+                                                <td><?php echo
+                                                    $_SESSION['municipal_dni']; ?></td>
+                                                <td><?php echo
+                                                    $_SESSION['municipal_fecha']; ?></td>
+                                                <td><?php echo
+                                                    $_SESSION['municipal_telefono'] . ' ' . $_SESSION['municipal_area'] . '
+' . $_SESSION['municipal_rol']; ?></td>
+                                                <td><?php echo
+                                                    $_SESSION['municipal_direccion'] . ' ' . $_SESSION['municipal_ciudad'] . '
+' . $_SESSION['municipal_provincia']; ?> </td>
+                                            </tr> -->
                                             <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>37456789</td>
-                                                <td>61</td>
-                                                <td>123456789</td>
-                                                <td>Calle 10 N° 661</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Garrett Winters</td>
-                                                <td>Accountant</td>
-                                                <td>45789123</td>
-                                                <td>63</td>
-                                                <td>456789123</td>
-                                                <td>Rivadavia N° 128</td>
+                                                <td>456789012</td>
+                                                <td>Juan Pérez</td>
+                                                <td>1980-01-02</td>
+                                                <td>44</td>
+                                                <td>Argentina</td>
+                                                <td>Masculino</td>
+                                                <td>Av. Belgrano N° 345</td>
+                                                <td>Córdoba</td>
+                                                <td>[dirección de correo electrónico eliminada]</td>
+                                                <td>[https://www.linkedin.com/](https://www.linkedin.com/)</td>
+                                                <td>543210987</td>
+                                                <td>Veterinaria</td>
+                                                <td>Médico Veterinario</td>
+                                                <td>Sí</td>
                                             </tr>
                                         </tbody>
                                     </table>

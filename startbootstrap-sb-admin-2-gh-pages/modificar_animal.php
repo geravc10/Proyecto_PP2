@@ -30,9 +30,9 @@ require_once 'partes_Pagina/head.php';
 justify-content-between mb-4">
                         <h1 class="h3 mb-0
 text-gray-800">Bienvenidos</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn
+                        <!--<a href="#" class="d-none d-sm-inline-block btn
 btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm
-text-white-50"></i> Generate Report</a>
+text-white-50"></i> Generate Report</a>-->
                     </div>
                     <!--FORMULARIO-->
                     <h1 class="my-5 text-center fw-bold">Modificar Animal</h1>

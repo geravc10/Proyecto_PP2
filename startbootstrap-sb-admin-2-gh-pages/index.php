@@ -34,9 +34,9 @@ justify-content-between mb-4">
                             <?php echo $_SESSION['usuario_nombre'] . ' ' .
                                 $_SESSION['usuario_apellido']; ?>
                         </h1>
-                        <a href="#" class="d-none d-sm-inline-block btn
+                        <!--<a href="#" class="d-none d-sm-inline-block btn
 btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm
-text-white-50"></i> Generate Report</a>
+text-white-50"></i> Generate Report</a>-->
                     </div>
                     <!-- SLIDER -->
                     <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">

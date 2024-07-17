@@ -26,8 +26,7 @@ if (!empty($_POST['BotonLogin'])) {
             $_SESSION['usuario_apellido'] = $UsuarioLogueado['Apellido'];
             $_SESSION['usuario_estado'] = $UsuarioLogueado['Estado'];
             $_SESSION['usuario_nivel'] = $UsuarioLogueado['Nivel'];
-            $_SESSION['usuario_descripcion_nivel'] = $UsuarioLogueado['Descripcion_ni
-vel'];
+            $_SESSION['usuario_descripcion_nivel'] = $UsuarioLogueado['Descripcion_nivel'];
             header('Location: index.php');
             exit;
         }
@@ -45,10 +44,8 @@ require_once "partes_Pagina/head.php";
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block
-bg-login-image">
-                                <img src="imagenes/Home de Veterinario
-- DueñoDeAnimal.jpg" alt="" class="img-fluid">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image">
+                                <img src="imagenes/Home de Veterinario - DueñoDeAnimal.jpg" alt="" class="img-fluid">
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
