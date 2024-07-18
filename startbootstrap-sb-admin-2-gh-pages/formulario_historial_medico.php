@@ -35,7 +35,7 @@ btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm
 text-white-50"></i> Generate Report</a>-->
                     </div>
                     <!--FORMULARIO-->
-                    <h1 class="my-5 text-center fw-bold">Crear Animal</h1>
+                    <h1 class="my-5 text-center fw-bold">Crear Historial Medico</h1>
                     <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal">
                         <div class="col-md-6">
                             <label for="validationServer05" class="form-label">Nombre
@@ -54,66 +54,24 @@ text-white-50"></i> Generate Report</a>-->
                                 Please provide a valid zip.
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <label for="validationServer04" class="form-label">Especie de Animal</label>
-                            <select class="form-select" id="validationServer04"
-                                aria-describedby="validationServer04Feedback" required>
-                                <option selected disabled value="">Especie de Animal...</option>
-                                <option value="perro">Perro</option>
-                                <option value="gato">Gato</option>
-                                <option value="ave">Ave</option>
-                                <option value="reptil">Reptil</option>
-                                <option value="roedor">Roedor</option>
-                                <option value="pez">Pez</option>
-                                <option value="otro">Otro</option>
-                            </select>
-                            <div id="validationServer04Feedback" class="invalid-feedback">
-                                Please select a valid species.
+                        <div class="col-md-6">
+                            <label for="validationServer05" class="form-label">Fecha de Creacion</label>
+                            <input type="date" class="form-control" id="validationServer05"
+                                aria-describedby="validationServer05Feedback" placeholder="Fecha de Creacion">
+                            <div id="validationServer05Feedback" class="invalid-feedback">
+                                Please provide a valid zip.
                             </div>
                         </div>
-                        <div class="col-md-4 mt-4">
-                            <label for="validationServer04" class="form-label">Raza</label>
-                            <select class="form-select" id="validationServer04"
-                                aria-describedby="validationServer04Feedback" required>
-                                <option selected disabled value="">Raza...</option>
-                                <option>Raza 1</option>
-                                <option>Raza 2</option>
-                                <option>Raza 3</option>
-                            </select>
-                            <div id="validationServer04Feedback" class="invalid-feedback">
-                                Please select a valid state.
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="validationServer04" class="form-label">Rol del Animal</label>
-                            <select class="form-select" id="validationServer04"
-                                aria-describedby="validationServer04Feedback" required>
-                                <option selected disabled value="">Rol del Animal...</option>
-                                <option value="mascota">Mascota</option>
-                                <option value="trabajo">Animal de Trabajo</option>
-                                <option value="granja">Animal de Granja</option>
-                                <option value="salvaje">Animal Salvaje</option>
-                            </select>
-                            <div id="validationServer04Feedback" class="invalid-feedback">
-                                Please select a valid role.
-                            </div>
-                        </div>
-                        <div class="col-md-12 text-center mt-5">
-                            <label for="validationServer04" class="form-label">Estado
-                                del Animal</label>
-                            <select class="form-select" id="validationServer04"
-                                aria-describedby="validationServer04Feedback" required>
-                                <option selected disabled value="">Estado del
-                                    Animal...</option>
-                                <option>ACTIVO</option>
-                                <option>INACTIVO</option>
-                            </select>
-                            <div id="validationServer04Feedback" class="invalid-feedback">
-                                Please select a valid state.
+                        <div class="col-md-6">
+                            <label for="validationServer05" class="form-label">DNI del Veterinario</label>
+                            <input type="number" class="form-control" id="validationServer05"
+                                aria-describedby="validationServer05Feedback" placeholder="DNI del Veterinario">
+                            <div id="validationServer05Feedback" class="invalid-feedback">
+                                Please provide a valid zip.
                             </div>
                         </div>
                         <div class="col-md-12 mt-4">
-                            <label for="exampleFormControlTextarea1" class="form-label">Descripcion de la Familia del animal</label>
+                            <label for="exampleFormControlTextarea1" class="form-label">Descripcion del Historial</label>
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
                         </div>
                         <div class="col-12 mt-4 text-center">

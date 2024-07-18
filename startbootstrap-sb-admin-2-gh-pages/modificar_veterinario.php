@@ -36,91 +36,177 @@ text-white-50"></i> Generate Report</a>-->
                     </div>
                     <!--FORMULARIO-->
                     <h1 class="my-5 text-center fw-bold">Modificar Veterinario</h1>
-                    <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal">
-                        <div class="col-md-4">
+                    <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal" method="post">
+                        <div class="col-md-12">
                             <label for="validationServer01" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nom_for" placeholder="Nombre" required>
+                            <input type="text" class="form-control" id="validationServer01" placeholder="Nombre"
+                                name="nombre" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <input type="image" src="" alt="">
+                        <div class="col-md-12">
                             <label for="validationServer02" class="form-label">Apellido</label>
                             <input type="text" class="form-control" id="validationServer02" placeholder="Apellido"
-                                required>
+                                name="apellido" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
+                            <label for="validationServer02" class="form-label">Fecha de
+                                Nacimiento</label>
+                            <input type="date" class="form-control" id="validationServer02"
+                                placeholder="Fecha de Nacimiento" name="fecha_nacimiento" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationServer02" class="form-label">Nacionalidad</label>
+                            <input type="text" class="form-control" id="validationServer02" placeholder="Nacionalidad"
+                                name="nacionalidad" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationServer02" class="form-label">Sexo</label>
+                            <input type="text" class="form-control" id="validationServer02" placeholder="sexo"
+                                name="nacionalidad" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-md-6">
                             <label for="validationServer03" class="form-label">DNI</label>
-                            <input type="number" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="DNI">
+                            <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
+                                placeholder="DNI" name="dni">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <label for="validationServer01" class="form-label">Direccion</label>
-                            <input type="text" class="form-control" id="nom_for" placeholder="Nombre" required>
+                        <div class="col-md-12">
+                            <label for="validationServer02" class="form-label">Informacion
+                                Personal</label>
+                            <input type="text" class="form-control" id="validationServer02"
+                                placeholder="Informacion Personal" name="informacion_personal" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <label for="validationServer05" class="form-label">Especialidad</label>
-                            <input type="password" class="form-control" id="validationServer05"
-                                aria-describedby="validationServer05Feedback" placeholder="Especialidad">
-                            <div id="validationServer05Feedback" class="invalid-feedback">
-                                Please provide a valid zip.
+                        <div class="col-md-12 mt-3 mb-3">
+                            <hr>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationServer03" class="form-label">Nombre de
+                                Calle</label>
+                            <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
+                                placeholder="Nombre de
+Calle" name="numero">
+                            <div id="validationServer03Feedback" class="invalid-feedback">
+                                Please provide a valid city.
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <label for="dateInput" class="form-label">Fecha de
-                                Nacimiento</label>
-                            <input type="date" class="form-control" id="validationServer05"
-                                aria-describedby="validationServer05Feedback" placeholder="Especialidad">
-                            <div id="validationServer05Feedback" class="invalid-feedback">
-                                Please provide a valid zip.
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="validationServer04" class="form-label">Estado</label>
-                            <select class="form-select" id="validationServer04"
-                                aria-describedby="validationServer04Feedback" required>
-                                <option selected disabled value="">Estado...</option>
-                                <option>Activo</option>
-                                <option>Inactivo</option>
-                            </select>
-                            <div id="validationServer04Feedback" class="invalid-feedback">
-                                Please select a valid state.
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="validationServerUsername" class="form-label">Usuario</label>
-                            <div class="input-group has-validation">
-                                <span class="input-group-text required" id="inputGroupPrepend3">@</span>
-                                <input type="text" class="form-control required" id="validationServerUsername"
-                                    aria-describedby="inputGroupPrepend3
-validationServerUsernameFeedback" placeholder="Usuario" required>
-                                <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                                    Please choose a username.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="validationServer05" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="validationServer05"
-                                aria-describedby="validationServer05Feedback" placeholder="Contraseña">
-                            <div id="validationServer05Feedback" class="invalid-feedback">
-                                Please provide a valid zip.
+                        <div class="col-md-6">
+                            <label for="validationServer03" class="form-label">Numero</label>
+                            <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
+                                placeholder="Numero " name="nombre_calle">
+                            <div id="validationServer03Feedback" class="invalid-feedback">
+                                Please provide a valid city.
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <label for="validationServer01" class="form-label">Matricula</label>
-                            <input type="text" class="form-control" id="nom_for" placeholder="Matricula" required>
-                            <div class="valid-feedback">
-                                Looks good!
+                            <label for="validationServer03" class="form-label">Provincia</label>
+                            <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
+                                placeholder="Provincia" name="provincia">
+                            <div id="validationServer03Feedback" class="invalid-feedback">
+                                Please provide a valid city.
+                            </div>
+                        </div>
+                        <div class="col-md-10 mt-10">
+                            <label for="validationServer03" class="form-label">Nombre de
+                                Ciudad</label>
+                            <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
+                                placeholder="Nombre de
+Ciudad" name="nombre_ciudad">
+                            <div id="validationServer03Feedback" class="invalid-feedback">
+                                Please provide a valid city.
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="validationServer03" class="form-label">BIS</label>
+                            <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
+                                placeholder="BIS" name="bis">
+                            <div id="validationServer03Feedback" class="invalid-feedback">
+                                Please provide a valid city.
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-3 mb-3">
+                            <hr>
+                        </div>
+                        <div class="col-md-12">
+                            <hr>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationServer03" class="form-label">Email</label>
+                            <input type="email" class="form-control" aria-describedby="validationServer03Feedback"
+                                placeholder="Email" name="correo_electronico">
+                            <div id="validationServer03Feedback" class="invalid-feedback">
+                                Please provide a valid city.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationServer03" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" aria-describedby="validationServer03Feedback"
+                                placeholder="Contraseña" name="contrasena">
+                            <div id="validationServer03Feedback" class="invalid-feedback">
+                                Please provide a valid city.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationServer03" class="form-label">Red
+                                Social</label>
+                            <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
+                                placeholder="Red Social" name="red_social">
+                            <div id="validationServer03Feedback" class="invalid-feedback">
+                                Please provide a valid city.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationServer03" class="form-label">Telefono</label>
+                            <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
+                                placeholder="Telefono" name="telefono">
+                            <div id="validationServer03Feedback" class="invalid-feedback">
+                                Please provide a valid city.
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-3 mb-3">
+                            <hr>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="validationServer03" class="form-label">Especialidad Veterinaria</label>
+                            <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
+                                placeholder="Especialidad" name="especialidad">
+                            <div id="validationServer03Feedback" class="invalid-feedback">
+                                Please provide a valid city.
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="validationServer03" class="form-label">Estado</label>
+                            <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
+                                placeholder="Estado" name="Estado">
+                            <div id="validationServer03Feedback" class="invalid-feedback">
+                                Please provide a valid city.
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="validationServer03" class="form-label">N° Habilitacion</label>
+                            <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
+                                placeholder="N° Habilitacion" name="habilitacion">
+                            <div id="validationServer03Feedback" class="invalid-feedback">
+                                Please provide a valid city.
                             </div>
                         </div>
                         <div class="col-12 text-center mt-4">
