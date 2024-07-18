@@ -49,12 +49,43 @@ function DatosMunicipal($vDNI, $vConexion)
         $Usuario['Apellido'] = $data['APELLIDO'];
         $Usuario['dni'] = $data['DNI'];
         $Usuario['FechaNacimiento'] = $data['FECHA_DE_NACIMIENTO'];
+        $Usuario['Nacionalidad'] = $data['NACIONALIDAD'];
         $Usuario['Direccion'] = $data['NOMBRE_CALLE'];
+        $Usuario['Numero'] = $data['NUMERO'];
         $Usuario['Ciudad'] = $data['NOMBRE_CIUDAD'];
         $Usuario['Provincia'] = $data['NOMBRE_PROVINCIA'];
         $Usuario['Telefono'] = $data['TELEFONO'];
+        $Usuario['Mail'] = $data['CORREO_ELECTRONICO'];        
         $Usuario['Area'] = $data['DESCRIPCION_AREA_MUNICIPAL'];
-        $Usuario['Rol'] = $data['DESCRIPCION_ROL_MUNICIPAL'];
+        $Usuario['Rol'] = $data['DESCRIPCION_ROL_MUNICIPAL'];        
+        
+        
+        if($data['SEXO']==null){
+            $Usuario['Sexo'] = "-";
+        }else if($data['SEXO']==1){
+            $Usuario['Sexo'] = "Masculino";
+
+        }else{
+            $Usuario['Sexo'] = "Femenino";
+        }
+
+        if($data['BIS']==0){
+            $Usuario['Bis'] = " ";
+        }else{
+            $Usuario['Bis'] = "bis";
+        }
+
+        if($data['RED_SOCIAL']==null){
+            $Usuario['Red'] = "-";
+        }else{
+            $Usuario['Red'] = $data['RED_SOCIAL'];;
+        }
+
+        if($data['ESTADO_TRABAJADOR_MUNICIPAL']==0){
+            $Usuario['Estado'] = "Inactivo";
+        }else{
+            $Usuario['Estado'] = "Activo";
+        }
 
     }
     return $Usuario;

@@ -20,17 +20,30 @@ if (!empty($_POST['BotonConsultar'])) {
             $Mensaje = "No se encontraron conincidencias. Verifique el
 número de DNI ingresado";
         } else {
-            $_SESSION['municipal_nombre'] =
-                $MunicipalEncontrado['Nombre'];
+            $_SESSION['municipal_nombre'] = $MunicipalEncontrado['Nombre'];
             $_SESSION['municipal_apellido'] = $MunicipalEncontrado['Apellido'];
+            $_SESSION['municipal_sexo'] = $MunicipalEncontrado['Sexo'];
             $_SESSION['municipal_dni'] = $MunicipalEncontrado['dni'];
             $_SESSION['municipal_fecha'] = $MunicipalEncontrado['FechaNacimiento'];
+            $_SESSION['municipal_nacionalidad'] = $MunicipalEncontrado['Nacionalidad'];
             $_SESSION['municipal_direccion'] = $MunicipalEncontrado['Direccion'];
+            $_SESSION['municipal_numero'] = $MunicipalEncontrado['Numero'];
+            $_SESSION['municipal_bis'] = $MunicipalEncontrado['Bis'];
             $_SESSION['municipal_ciudad'] = $MunicipalEncontrado['Ciudad'];
             $_SESSION['municipal_provincia'] = $MunicipalEncontrado['Provincia'];
             $_SESSION['municipal_telefono'] = $MunicipalEncontrado['Telefono'];
+            $_SESSION['municipal_mail'] = $MunicipalEncontrado['Mail'];
+            $_SESSION['municipal_red'] = $MunicipalEncontrado['Red'];            
             $_SESSION['municipal_area'] = $MunicipalEncontrado['Area'];
             $_SESSION['municipal_rol'] = $MunicipalEncontrado['Rol'];
+            $_SESSION['municipal_estado'] = $MunicipalEncontrado['Estado'];
+            
+            // Calcular la edad del municipal
+            $hoy = new DateTime();            
+            $nacimiento = new DateTime($MunicipalEncontrado['FechaNacimiento']);            
+            $diferencia = $nacimiento->diff($hoy);            
+            $edad = $diferencia->y;
+            $_SESSION['municipal_edad'] = $edad;
             header('Location: mostrar_info_municipal.php');
             exit;
         }

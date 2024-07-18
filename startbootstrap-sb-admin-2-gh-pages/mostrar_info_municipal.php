@@ -44,8 +44,7 @@ text-white-50"></i> Generate Report</a>-->
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold
-text-primary">Datos de <?php echo $_SESSION['usuario_nombre']. ' ' .$_SESSION['usuario_apellido'] ;?> </h6>
+                                <h6 class="m-0 font-weight-boldtext-primary">Datos de <?php echo $_SESSION['usuario_nombre']. ' ' .$_SESSION['usuario_apellido'] ;?> </h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -68,56 +67,22 @@ text-primary">Datos de <?php echo $_SESSION['usuario_nombre']. ' ' .$_SESSION['u
                                                 <th>Activo</th>
                                             </tr>
                                         </thead>
-                                       <!-- <tfoot>
+                                      
                                             <tr>
-                                                <th>DNI</th>
-                                                <th>Nombre y Apellido</th>
-                                                <th>Fecha de Nacimiento</th>
-                                                <th>Años</th>
-                                                <th>Nacionalidad</th>
-                                                <th>Sexo</th>
-                                                <th>Direccion</th>
-                                                <th>Provincia</th>
-                                                <th>Email</th>
-                                                <th>Red Social</th>
-                                                <th>Telefono</th>
-                                                <th>Area de Trabajo</th>
-                                                <th>Rol de Trabajo</th>
-                                                <th>Activo</th>
-                                            </tr>
-                                        </tfoot> -->
-                                        <tbody>
-                                           <!-- <tr>
-                                                <td><?php echo
-                                                    $_SESSION['municipal_nombre']; ?></td>
-                                                <td><?php echo
-                                                    $_SESSION['municipal_apellido']; ?></td>
-                                                <td><?php echo
-                                                    $_SESSION['municipal_dni']; ?></td>
-                                                <td><?php echo
-                                                    $_SESSION['municipal_fecha']; ?></td>
-                                                <td><?php echo
-                                                    $_SESSION['municipal_telefono'] . ' ' . $_SESSION['municipal_area'] . '
-' . $_SESSION['municipal_rol']; ?></td>
-                                                <td><?php echo
-                                                    $_SESSION['municipal_direccion'] . ' ' . $_SESSION['municipal_ciudad'] . '
-' . $_SESSION['municipal_provincia']; ?> </td>
-                                            </tr> -->
-                                            <tr>
-                                                <td>98765432</td>
-                                                <td>Maria Pérez</td>
-                                                <td>1995-12-24</td>
-                                                <td>29</td>
-                                                <td>Argentina</td>
-                                                <td>Femenino</td>
-                                                <td>Córdoba N° 1011</td>
-                                                <td>Córdoba</td>
-                                                <td>[dirección de correo electrónico eliminada]</td>
-                                                <td>[https://twitter.com/?lang=en](https://twitter.com/?lang=en)</td>
-                                                <td>321456789</td>
-                                                <td>Recursos Humanos</td>
-                                                <td>Jefa de Recursos Humanos</td>
-                                                <td>Sí</td>
+                                                <td><?php echo $_SESSION['municipal_dni']; ?></td>
+                                                <td><?php echo $_SESSION['municipal_nombre'].' '.$_SESSION['municipal_apellido']; ?></td>
+                                                <td><?php echo $_SESSION['municipal_fecha']; ?></td>
+                                                <td><?php echo $_SESSION['municipal_edad']; ?></td>
+                                                <td><?php echo $_SESSION['municipal_nacionalidad'];?></td>
+                                                <td><?php echo $_SESSION['municipal_sexo'];?></td>
+                                                <td><?php echo $_SESSION['municipal_direccion']. ' ' . $_SESSION['municipal_numero'] . ' ' . $_SESSION['municipal_bis']; ?></td>
+                                                <td><?php echo $_SESSION['municipal_provincia']; ?></td>
+                                                <td><?php echo $_SESSION['municipal_mail']; ?></td>
+                                                <td><?php echo $_SESSION['municipal_red']; ?></td>
+                                                <td><?php echo $_SESSION['municipal_telefono']; ?></td>
+                                                <td><?php echo $_SESSION['municipal_area']; ?></td>
+                                                <td><?php echo $_SESSION['municipal_rol']; ?></td>
+                                                <td><?php echo $_SESSION['municipal_estado']; ?></td>
                                             </tr>
                                         </tbody>
                                     </table>
