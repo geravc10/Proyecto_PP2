@@ -48,15 +48,17 @@ text-primary">Datos de .......</h6>
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>NOMBRE</th>
-                                                <th>APELLIDO</th>
-                                                <th>DNI</th>
-                                                <th>AÑOS</th>
-                                                <th>N° HABILITACION</th>
-                                                <th>DIRECCION</th>
+                                                <th>DNI Dueño</th>
+                                                <th>Nombre Dueño</th>
+                                                <th>Nombre Animal</th>
+                                                <th>Especie</th>
+                                                <th>Raza</th>
+                                                <th>Rol</th>
+                                                <th>Estado</th>
+                                                <th>Descripcion Familia</th>
                                             </tr>
                                         </thead>
-                                        <tfoot>
+                                        <!-- <tfoot>
                                             <tr>
                                                 <th>NOMBRE</th>
                                                 <th>APELLIDO</th>
@@ -65,23 +67,17 @@ text-primary">Datos de .......</h6>
                                                 <th>N° HABILITACION</th>
                                                 <th>DIRECCION</th>
                                             </tr>
-                                        </tfoot>
+                                        </tfoot> -->
                                         <tbody>
                                             <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>37456789</td>
-                                                <td>61</td>
-                                                <td>123456789</td>
-                                                <td>Calle 10 N° 661</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Garrett Winters</td>
-                                                <td>Accountant</td>
                                                 <td>45789123</td>
-                                                <td>63</td>
-                                                <td>456789123</td>
-                                                <td>Rivadavia N° 128</td>
+                                                <td>Garrett Winters</td>
+                                                <td>Firulais</td>
+                                                <td>Perro</td>
+                                                <td>Labrador</td>
+                                                <td>Accountant</td>
+                                                <td>Activo</td>
+                                                <td>Una familia amante de los animales con dos hijos pequeños.</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -125,8 +121,7 @@ btn-danger" data-toggle="modal" data-target="#deleteModal">Eliminar</button>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn
-btn-primary">Aceptar</button>
+                        <button type="button" class="btn btn-danger" onclick="window.location.href='modificar_animal.php'">Aceptar</button>
                     </div>
                 </div>
             </div>

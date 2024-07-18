@@ -71,6 +71,7 @@ justify-content-center" href="index.php">
                         <a class="collapse-item" href="formulario_veterinario.php">Veterinario</a>
                         <a class="collapse-item" href="formulario_profesional.php">Profesional</a>
                         <a class="collapse-item" href="formulario_protectora_animal.php">Protectora Animal</a>
+                        <a class="collapse-item" href="formulario_historial_medico.php">Historial Medico</a>
                     <?php }
                     if (
                         $_SESSION['usuario_nivel'] != 4 ||
@@ -99,6 +100,7 @@ justify-content-center" href="index.php">
                 <a class="collapse-item" href="consultar_duenio_animal.php">Dueño de Animal</a>
                 <a class="collapse-item" href="consultar_animal.php">Animal</a>
                 <a class="collapse-item" href="consultar_municipal.php">Municipal</a>
+                <a class="collapse-item" href="consultar_historial_medico.php">Historial Medico</a>
             </div>
         </div>
     </li>

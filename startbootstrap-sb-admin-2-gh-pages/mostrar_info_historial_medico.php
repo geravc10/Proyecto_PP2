@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (empty($_SESSION['usuario_nombre'])) {
+    header('Location: cerrar_sesion.php');
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="ES">
@@ -35,32 +39,26 @@ btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm
 text-white-50"></i> Generate Report</a>-->
                     </div>
                     <!--FORMULARIO-->
-                    <h1 class="my-5 text-center fw-bold">Informacion de Dueño de
-                        Animal</h1>
+                    <h1 class="my-5 text-center fw-bold">Informacion de Historial Medico</h1>
                     <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal">
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold
-text-primary">Datos de .......</h6>
+text-primary">Datos de <?php echo $_SESSION['usuario_nombre'] . ' ' . $_SESSION['usuario_apellido']; ?> </h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
-                                        <tr>
-                                                <th>DNI</th>
-                                                <th>Nombre y Apellido</th>
-                                                <th>Fecha de Nacimiento</th>
-                                                <th>Años</th>
-                                                <th>Nacionalidad</th>
-                                                <th>Sexo</th>
-                                                <th>Direccion</th>
-                                                <th>Provincia</th>
-                                                <th>Email</th>
-                                                <th>Red Social</th>
-                                                <th>Telefono</th>
-                                                <th>Activo</th>
+                                            <tr>
+                                                <th>Fecha Creacion</th>
+                                                <th>Nombre del Animal</th>
+                                                <th>DNI Dueño</th>
+                                                <th>Nombre y Apellido Dueño</th>
+                                                <th>DNI Veterinario</th>
+                                                <th>Nombre y Apellido Veterinario</th>
+                                                <th>Descripcion del Historial</th>
                                             </tr>
                                         </thead>
                                         <!-- <tfoot>
@@ -76,6 +74,8 @@ text-primary">Datos de .......</h6>
                                                 <th>Email</th>
                                                 <th>Red Social</th>
                                                 <th>Telefono</th>
+                                                <th>Area de Trabajo</th>
+                                                <th>Rol de Trabajo</th>
                                                 <th>Activo</th>
                                             </tr>
                                         </tfoot> -->
@@ -97,18 +97,14 @@ text-primary">Datos de .......</h6>
 ' . $_SESSION['municipal_provincia']; ?> </td>
                                             </tr> -->
                                             <tr>
-                                                <td>456789012</td>
+                                                <td>2024-07-18</td>
+                                                <td>Max</td>
+                                                <td>12345678</td>
                                                 <td>Juan Pérez</td>
-                                                <td>1980-01-02</td>
-                                                <td>44</td>
-                                                <td>Argentina</td>
-                                                <td>Masculino</td>
-                                                <td>Av. Belgrano N° 345</td>
-                                                <td>Córdoba</td>
-                                                <td>[dirección de correo electrónico eliminada]</td>
-                                                <td>[https://www.linkedin.com/](https://www.linkedin.com/)</td>
-                                                <td>543210987</td>
-                                                <td>Sí</td>
+                                                <td>87654321</td>
+                                                <td>Dr. María López</td>
+                                                <td>Max ha recibido todas sus vacunas y se encuentra en excelente estado
+                                                    de salud. Última visita: revisión general y limpieza dental.</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -152,7 +148,7 @@ btn-danger" data-toggle="modal" data-target="#deleteModal">Eliminar</button>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-danger" onclick="window.location.href='modificar_dueño_animal.php'">Aceptar</button>
+                        <button type="button" class="btn btn-danger" onclick="window.location.href='modificar_historial_medico.php'">Aceptar</button>
                     </div>
                 </div>
             </div>
@@ -173,8 +169,7 @@ btn-danger" data-toggle="modal" data-target="#deleteModal">Eliminar</button>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn
-btn-danger">Aceptar</button>
+                        <button type="button" class="btn btn-danger" >Aceptar</button>
                     </div>
                 </div>
             </div>
@@ -185,16 +180,17 @@ btn-danger">Aceptar</button>
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">¿Ya
+                            te vas <?php echo $_SESSION['usuario_nombre']; ?>?</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">Select "Logout" below if you
-                        are ready to end your current session.</div>
+                    <div class="modal-body">Selecciona "Cerrar Sesion" si
+                        queres cerrar esta sesion.</div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.php">Logout</a>
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                        <a class="btn btn-primary" href="cerrar_sesion.php">Cerrar Sesion</a>
                     </div>
                 </div>
             </div>
