@@ -1,28 +1,49 @@
 <?php
 $nivel_u = $_SESSION['usuario_nivel'];
-$color = '';
+$colorH = '';
+$colorS = '';
+$colorT = '';
+$texto = '';
 switch ($nivel_u) {
     case 1://super usuario
-        $color = "bg-gradient-dark";
+        $colorH = "bg-gradient-dark";
+        $colorS = "bg-gradient-dark";
+        $colorT = "bg-gradient-secondary";
+        $texto = "text-bg-light";
         break;
     case 2://municipal
-        $color = "bg-gradient-dark";
+        $colorH = "bg-gradient-dark";
+        $colorS = "bg-gradient-dark";
+        $colorT = "bg-gradient-secondary";
+        $texto = "text-bg-light";
         break;
     case 3://veterinario
-        $color = " bg-gradient-success";
+        $colorH = "bg-gradient-success";
+        $colorS = "bg-gradient-success";
+        $colorT = "bg-gradient-success";
+        $texto = "text-light";
         break;
     case 4://responsable animal
-        $color = "bg-gradient-warning";
+        $colorH = "bg-gradient-secondary";
+        $colorS = "bg-gradient-warning";
+        $colorT = "bg-gradient-warning";
+        $texto = "text-light";
         break;
     case 5://profesional
-        $color = "bg-gradient-info";
+        $colorH = "bg-gradient-dark";
+        $colorS = "bg-info";
+        $colorT = "bg-gradient-info";
+        $texto = "text-ligth";
         break;
     case 6://refugio
-        $color = "bg-gradient-danger";
+        $colorH = "bg-gradient-dark";
+        $colorS = "bg-gradient-danger";
+        $colorT = "bg-gradient-danger";
+        $texto = "text-ligth";
         break;
 }
 ?>
-<header class="conteneiner-fluid <?php echo $color ?> d-flex
+<header class="conteneiner-fluid <?php echo $colorH; ?> d-flex
 justify-content-center fw-bold">
     <a class="text-light m-0 mt-2 mb-2 fs-5" id="pet_header" href="index.php">PET SALUD</a>
 </header>

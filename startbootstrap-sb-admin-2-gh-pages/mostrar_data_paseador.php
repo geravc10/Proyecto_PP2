@@ -48,10 +48,10 @@ text-white-50"></i> Generate Report</a>-->
                             <div class="collapse navbar-collapse" id="navbarNav">
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="campaña_vacunacion.php">Campaña de Vacunacion</a>
+                                        <a class="nav-link" href="#">Campaña de Vacunacion</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="campaña_castracion.php">Campaña Castracion</a>
+                                        <a class="nav-link" href="#">Campaña Castracion</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#">Informacion Municipal</a>
@@ -96,100 +96,97 @@ text-center pt-5 fw-bold" id="principal">
                             ENTRE NUESTROS SERVICIOS ENCONTRARAS
                         </h1>
 -->
-                    <div class="row w-100 mx-auto my-1 fila-servicios">
-                        <div class="container mt-2 text-center">
-                            <div class="row">
-                                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                                    <div class="card">
-                                        <a href="mostrar_data_veterinario.php">
-                                            <img src="imagenes/veterinario.jpeg"
-                                                class="card-img-top mx-auto mt-4 rounded" alt="Veterinario"
-                                                id="servicio">
-                                        </a>
-                                        <div class="card-body">
-                                            <h5 class="card-title"><b>Veterinarios</b></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                                    <div class="card">
-                                        <a href="mostrar_data_refugio_animal.php">
-                                            <img src="imagenes/refugioAnimales.jpeg"
-                                                class="card-img-top mx-auto mt-4 rounded" alt="Veterinario"
-                                                id="servicio">
-                                        </a>
-                                        <div class="card-body">
-                                            <h5 class="card-title"><b>Refugio de Animales</b></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                                    <div class="card">
-                                        <a href="mostrar_data_peluquero.php">
-                                            <img src="imagenes/peluqueroCanino.jpg"
-                                                class="card-img-top mx-auto mt-4 rounded" alt="Veterinario"
-                                                id="servicio">
-                                        </a>
-                                        <div class="card-body">
-                                            <h5 class="card-title"><b>Peluquero Canino</b></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                                    <div class="card">
-                                        <a href="mostrar_data_paseador.php">
-                                            <img src="imagenes/paseador_perros.jpg"
-                                                class="card-img-top mx-auto mt-4 rounded" alt="Veterinario"
-                                                id="servicio">
-                                        </a>
-                                        <div class="card-body">
-                                            <h5 class="card-title"><b>Paseadores</b></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <!-- """""""""""""""""""""""""""""""""""""""""""""""""""" -->
                 <!-- NOTICIAS O CAMPAÑA DE VACUNACION -->
-                <div class="container-fluid text-center">
-                    <h1 class="fw-bold p-2 fs-2 border-top border-3 w-50 mx-auto
-text-center pt-5 fw-bold" id="principal">NOTICIAS</h1>
+                <div class="container-fluid">
+                    <h1 class="fw-bold p-2 fs-2 border-top border-3 w-50 mx-auto text-center pt-5 fw-bold"
+                        id="principal">PASEADORES DE PERROS</h1>
                     <div class="container mt-5">
                         <div class="row">
                             <div class="col-12">
-                                <h1 class="text-center">Campaña de Vacunación para
-                                    Animales</h1>
-                                <p class="text-center fs-5">Organizada por la
-                                    Municipalidad de Cruz del Eje</p>
-                                <p class="mt-4">La Municipalidad de Cruz del Eje se
-                                    complace en anunciar una campaña de vacunación gratuita para animales
-                                    de compañía. Esta iniciativa tiene como objetivo proteger la salud de
-                                    nuestras mascotas y prevenir enfermedades comunes que pueden
-                                    afectarlas.</p>
-                                <h2 class="mt-4">Beneficios de Vacunar a su
-                                    Mascota</h2>
-                                <p>Vacunar a su mascota es esencial para su salud y
-                                    bienestar. Los beneficios incluyen:</p>
+                                <h2 class="text-center">Contactos de los Paseadores de Perros de nuestra ciudad</h2>
+                                <p class="text-center fs-5">Organizada por la Municipalidad de Cruz del Eje</p>
+
+                                <h4 class="mt-4">Paseadores de Perros</h4>
                                 <ul class="sacarPelota">
-                                    <li>Protección contra enfermedades graves</li>
-                                    <li>Reducción del riesgo de transmisión de
-                                        enfermedades a humanos y otros animales</li>
-                                    <li>Contribución al control de enfermedades a
-                                        nivel comunitario</li>
+                                    <li>
+                                        <strong>Paseador:</strong> Ana García<br>
+                                        <strong>Dirección:</strong> Calle Paseo 101<br>
+                                        <strong>Teléfono:</strong> (03549) 111-222<br>
+                                        <strong>Barrio:</strong> Centro<br>
+                                        <strong>Horario de atención:</strong> Lunes a Viernes 9:00 - 18:00, Sábados
+                                        10:00 - 14:00<br>
+                                    </li>
+                                    <hr class="col-12">
+                                    <li>
+                                        <strong>Paseador:</strong> Luis Pérez<br>
+                                        <strong>Dirección:</strong> Avenida Caminata 202<br>
+                                        <strong>Teléfono:</strong> (03549) 222-333<br>
+                                        <strong>Barrio:</strong> Norte<br>
+                                        <strong>Horario de atención:</strong> Lunes a Viernes 8:00 - 17:00, Sábados 9:00
+                                        - 13:00<br>
+                                    </li>
+                                    <hr class="col-12">
+                                    <li>
+                                        <strong>Paseador:</strong> María Rodríguez<br>
+                                        <strong>Dirección:</strong> Calle Mascota 303<br>
+                                        <strong>Teléfono:</strong> (03549) 333-444<br>
+                                        <strong>Barrio:</strong> Oeste<br>
+                                        <strong>Horario de atención:</strong> Lunes a Viernes 10:00 - 19:00, Sábados
+                                        11:00 - 15:00<br>
+                                    </li>
+                                    <hr class="col-12">
+                                    <li>
+                                        <strong>Paseador:</strong> Jorge Fernández<br>
+                                        <strong>Dirección:</strong> Avenida Paseador 404<br>
+                                        <strong>Teléfono:</strong> (03549) 444-555<br>
+                                        <strong>Barrio:</strong> Sur<br>
+                                        <strong>Horario de atención:</strong> Lunes a Viernes 9:00 - 18:00, Sábados
+                                        10:00 - 14:00<br>
+                                    </li>
+                                    <hr class="col-12">
+                                    <li>
+                                        <strong>Paseador:</strong> Laura Martínez<br>
+                                        <strong>Dirección:</strong> Calle Canina 505<br>
+                                        <strong>Teléfono:</strong> (03549) 555-666<br>
+                                        <strong>Barrio:</strong> Este<br>
+                                        <strong>Horario de atención:</strong> Lunes a Viernes 8:00 - 17:00, Sábados 9:00
+                                        - 13:00<br>
+                                    </li>
+                                    <hr class="col-12">
+                                    <li>
+                                        <strong>Paseador:</strong> Carlos López<br>
+                                        <strong>Dirección:</strong> Avenida Perruno 606<br>
+                                        <strong>Teléfono:</strong> (03549) 666-777<br>
+                                        <strong>Barrio:</strong> Centro<br>
+                                        <strong>Horario de atención:</strong> Lunes a Viernes 9:00 - 18:00, Sábados
+                                        10:00 - 14:00<br>
+                                    </li>
+                                    <hr class="col-12">
+                                    <li>
+                                        <strong>Paseador:</strong> Marta González<br>
+                                        <strong>Dirección:</strong> Calle Paseo 707<br>
+                                        <strong>Teléfono:</strong> (03549) 777-888<br>
+                                        <strong>Barrio:</strong> Norte<br>
+                                        <strong>Horario de atención:</strong> Lunes a Viernes 8:00 - 17:00, Sábados 9:00
+                                        - 13:00<br>
+                                    </li>
+                                    <hr class="col-12">
+                                    <li>
+                                        <strong>Paseador:</strong> Juan Ramírez<br>
+                                        <strong>Dirección:</strong> Avenida Mascota 808<br>
+                                        <strong>Teléfono:</strong> (03549) 888-999<br>
+                                        <strong>Barrio:</strong> Sur<br>
+                                        <strong>Horario de atención:</strong> Lunes a Viernes 10:00 - 19:00, Sábados
+                                        11:00 - 15:00<br>
+                                    </li>
                                 </ul>
-                                <p class="mt-4">¡No pierda esta oportunidad de
-                                    proteger a su mascota y mantenerla saludable! La vacunación es gratuita
-                                    y segura.</p>
-                                <p class="mt-4"><strong>Para más información, puede
-                                        comunicarse con la Municipalidad de Cruz del Eje al teléfono (03549)
-                                        123-456 o visitar nuestra página web
-                                        www.cruzdeleje.gob.ar.</strong></p>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <!-- """""""""""""""""""""""""""""""""""""""""""""""""""" -->
             </div>
             <!-- End of Main Content -->

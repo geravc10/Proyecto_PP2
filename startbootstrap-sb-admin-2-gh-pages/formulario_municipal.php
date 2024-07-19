@@ -233,7 +233,7 @@ Ciudad" name="nombre_ciudad">
                         <div class="col-md-12 mt-3 mb-3">
                             <hr>
                         </div>
-                        <div class="col-md-4 mt-3">
+                        <div class="col-md-6 mt-3">
                             <label for="validationServer04" class="form-label">Área de Trabajo Interna</label>
                             <select class="form-select" id="validationServer04"
                                 aria-describedby="validationServer04Feedback" name="area_trabajo" required>
@@ -247,19 +247,7 @@ Ciudad" name="nombre_ciudad">
                                 Selecciona un Área de Trabajo Interna válida.
                             </div>
                         </div>
-                        <div class="col-md-4 pt-5">
-                            <label for="validationServer04" class="form-label">Estado</label>
-                            <select class="form-select" id="validationServer04"
-                                aria-describedby="validationServer04Feedback" name="estado_persona" required>
-                                <option selected disabled value="">Estado...</option>
-                                <option value="0">Inactivo</option>
-                                <option value="1">Activo</option>
-                            </select>
-                            <div id="validationServer04Feedback" class="invalid-feedback">
-                                Please select a valid state.
-                            </div>
-                        </div>
-                        <div class="col-md-4 pt-5">
+                        <div class="col-md-6 pt-3 text-center">
                             <label for="validationServer04" class="form-label">Rol</label>
                             <select class="form-select" id="validationServer04"
                                 aria-describedby="validationServer04Feedback" name="rol" required>
@@ -271,6 +259,21 @@ Ciudad" name="nombre_ciudad">
                             </select>
                             <div id="validationServer04Feedback" class="invalid-feedback">
                                 Selecciona un Rol válido.
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-3 mb-3">
+                            <hr>
+                        </div>
+                        <div class="col-md-12 mt-2 text-center">
+                            <label for="validationServer04" class="form-label">Estado</label>
+                            <select class="form-select" id="validationServer04"
+                                aria-describedby="validationServer04Feedback" name="estado_persona" required>
+                                <option selected disabled value="">Estado...</option>
+                                <option value="0">Inactivo</option>
+                                <option value="1">Activo</option>
+                            </select>
+                            <div id="validationServer04Feedback" class="invalid-feedback">
+                                Please select a valid state.
                             </div>
                         </div>
                         <div class="col-12 text-center">
