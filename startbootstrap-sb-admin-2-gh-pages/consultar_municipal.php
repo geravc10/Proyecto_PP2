@@ -26,6 +26,7 @@ número de DNI ingresado";
             $_SESSION['municipal_dni'] = $MunicipalEncontrado['dni'];
             $_SESSION['municipal_fecha'] = $MunicipalEncontrado['FechaNacimiento'];
             $_SESSION['municipal_nacionalidad'] = $MunicipalEncontrado['Nacionalidad'];
+            $_SESSION['municipal_informacion'] = $MunicipalEncontrado['Informacion'];
             $_SESSION['municipal_direccion'] = $MunicipalEncontrado['Direccion'];
             $_SESSION['municipal_numero'] = $MunicipalEncontrado['Numero'];
             $_SESSION['municipal_bis'] = $MunicipalEncontrado['Bis'];
@@ -33,6 +34,7 @@ número de DNI ingresado";
             $_SESSION['municipal_provincia'] = $MunicipalEncontrado['Provincia'];
             $_SESSION['municipal_telefono'] = $MunicipalEncontrado['Telefono'];
             $_SESSION['municipal_mail'] = $MunicipalEncontrado['Mail'];
+            $_SESSION['municipal_pass'] = $MunicipalEncontrado['Pass'];
             $_SESSION['municipal_red'] = $MunicipalEncontrado['Red'];            
             $_SESSION['municipal_area'] = $MunicipalEncontrado['Area'];
             $_SESSION['municipal_rol'] = $MunicipalEncontrado['Rol'];
@@ -142,8 +144,7 @@ bi-exclamation-triangle me-1"></i>
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">¿Ya
-                            te vas <?php echo $_SESSION['usuario_nombre']; ?>?</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">¿Ya te vas <?php echo $_SESSION['usuario_nombre']; ?>?</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>

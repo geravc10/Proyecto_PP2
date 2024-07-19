@@ -48,8 +48,10 @@ function DatosMunicipal($vDNI, $vConexion)
         $Usuario['Nombre'] = $data['NOMBRE'];
         $Usuario['Apellido'] = $data['APELLIDO'];
         $Usuario['dni'] = $data['DNI'];
+        $Usuario['Pass'] = $data['CONTRASENA'];
         $Usuario['FechaNacimiento'] = $data['FECHA_DE_NACIMIENTO'];
         $Usuario['Nacionalidad'] = $data['NACIONALIDAD'];
+        $Usuario['Informacion'] = $data['INFORMACION_PERSONAL'];
         $Usuario['Direccion'] = $data['NOMBRE_CALLE'];
         $Usuario['Numero'] = $data['NUMERO'];
         $Usuario['Ciudad'] = $data['NOMBRE_CIUDAD'];

@@ -1,5 +1,36 @@
 <?php
 session_start();
+if (empty($_SESSION['usuario_nombre'])) {
+    header('Location: cerrar_sesion.php');
+    exit;
+}
+
+require_once 'funciones/conexion.php';
+$MiConexion = ConexionBD();
+require_once 'funciones/validaciones.php';
+$Mensaje = "";
+$InfoPers="";
+if (!empty($_POST['BotonModificar'])) {
+    
+    $Mensaje = ValidarModificacionMuni();
+
+    if(empty($Mensaje)){
+        require_once 'funciones/funcion_modificar_municipal.php';
+        $MunicipalModificado = ModificarMunicipal( $MiConexion);
+
+        if(empty($MunicipalModificado)){
+            $Mensaje="Fallo la modificacion del usuario municipal.";
+        }else{
+            $Mensaje="Se modifico el usuario municipal.";
+
+        }
+    }        
+
+}
+   
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="ES">
@@ -35,11 +66,19 @@ btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm
 text-white-50"></i> Generate Report</a>-->
                     </div>
                     <!--FORMULARIO-->
-                    <h1 class="my-5 text-center fw-bold">Modificar Empleado Municipal</h1>
+                    <h1 class="my-5 text-center fw-bold">Modificar Empleado Municipal </h1>
+                    <?php
+                    if (!empty($Mensaje)) { ?>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <i class="bi bi-exclamation-triangle me-1"></i>
+                            <?php echo $Mensaje.' '.$_POST['nombre'] ; ?>
+                        </div>
+                    <?php }
+                    ?>
                     <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal" method="post">
                         <div class="col-md-12">
                             <label for="validationServer01" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="validationServer01" placeholder="Nombre"
+                            <input type="text" class="form-control" id="validationServer01" value="<?php echo $_SESSION['municipal_nombre']; ?>"
                                 name="nombre" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -48,7 +87,7 @@ text-white-50"></i> Generate Report</a>-->
                         <input type="image" src="" alt="">
                         <div class="col-md-12">
                             <label for="validationServer02" class="form-label">Apellido</label>
-                            <input type="text" class="form-control" id="validationServer02" placeholder="Apellido"
+                            <input type="text" class="form-control" id="validationServer02" value="<?php echo $_SESSION['municipal_apellido']; ?>"
                                 name="apellido" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -58,14 +97,14 @@ text-white-50"></i> Generate Report</a>-->
                             <label for="validationServer02" class="form-label">Fecha de
                                 Nacimiento</label>
                             <input type="date" class="form-control" id="validationServer02"
-                                placeholder="Fecha de Nacimiento" name="fecha_nacimiento" required>
+                                placeholder="Fecha de Nacimiento" name="fecha" required value= <?php echo $_SESSION['municipal_fecha']; ?>>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label for="validationServer02" class="form-label">Nacionalidad</label>
-                            <input type="text" class="form-control" id="validationServer02" placeholder="Nacionalidad"
+                            <input type="text" class="form-control" id="validationServer02" value="<?php echo $_SESSION['municipal_nacionalidad'];?>"
                                 name="nacionalidad" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -73,8 +112,8 @@ text-white-50"></i> Generate Report</a>-->
                         </div>
                         <div class="col-md-6">
                             <label for="validationServer02" class="form-label">Sexo</label>
-                            <input type="text" class="form-control" id="validationServer02" placeholder="sexo"
-                                name="nacionalidad" required>
+                            <input type="text" class="form-control" id="validationServer02" value="<?php echo $_SESSION['municipal_sexo'];?>"
+                                name="sexo" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -82,7 +121,7 @@ text-white-50"></i> Generate Report</a>-->
                         <div class="col-md-6">
                             <label for="validationServer03" class="form-label">DNI</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="DNI" name="dni">
+                            value="<?php echo $_SESSION['municipal_dni']; ?>" name="dni">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
@@ -91,7 +130,7 @@ text-white-50"></i> Generate Report</a>-->
                             <label for="validationServer02" class="form-label">Informacion
                                 Personal</label>
                             <input type="text" class="form-control" id="validationServer02"
-                                placeholder="Informacion Personal" name="informacion_personal" required>
+                            value="<?php echo $_SESSION['municipal_informacion']; ?>" name="informacion" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -103,8 +142,7 @@ text-white-50"></i> Generate Report</a>-->
                             <label for="validationServer03" class="form-label">Nombre de
                                 Calle</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Nombre de
-Calle" name="numero">
+                            value="<?php echo $_SESSION['municipal_direccion']; ?>" name="nombre_calle">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
@@ -112,7 +150,7 @@ Calle" name="numero">
                         <div class="col-md-6">
                             <label for="validationServer03" class="form-label">Numero</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Numero " name="nombre_calle">
+                            value="<?php echo $_SESSION['municipal_numero']; ?> " name="numero">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
@@ -120,7 +158,7 @@ Calle" name="numero">
                         <div class="col-md-12">
                             <label for="validationServer03" class="form-label">Provincia</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Provincia" name="provincia">
+                            value="<?php echo $_SESSION['municipal_provincia']; ?>" name="provincia">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
@@ -129,8 +167,7 @@ Calle" name="numero">
                             <label for="validationServer03" class="form-label">Nombre de
                                 Ciudad</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Nombre de
-Ciudad" name="nombre_ciudad">
+                            value="<?php echo $_SESSION['municipal_ciudad']; ?>" name="nombre_ciudad">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
@@ -138,7 +175,7 @@ Ciudad" name="nombre_ciudad">
                         <div class="col-md-2">
                             <label for="validationServer03" class="form-label">BIS</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="BIS" name="bis">
+                            value="<?php echo $_SESSION['municipal_bis']; ?>" name="bis">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
@@ -152,7 +189,7 @@ Ciudad" name="nombre_ciudad">
                         <div class="col-md-6">
                             <label for="validationServer03" class="form-label">Email</label>
                             <input type="email" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Email" name="correo_electronico">
+                            value="<?php echo $_SESSION['municipal_mail']; ?>" name="mail">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
@@ -160,7 +197,7 @@ Ciudad" name="nombre_ciudad">
                         <div class="col-md-6">
                             <label for="validationServer03" class="form-label">Contraseña</label>
                             <input type="password" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Contraseña" name="contrasena">
+                            value="<?php echo $_SESSION['municipal_pass']; ?>" name="contrasena">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
@@ -169,7 +206,7 @@ Ciudad" name="nombre_ciudad">
                             <label for="validationServer03" class="form-label">Red
                                 Social</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Red Social" name="red_social">
+                            value="<?php echo $_SESSION['municipal_red']; ?>" name="red">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
@@ -177,7 +214,7 @@ Ciudad" name="nombre_ciudad">
                         <div class="col-md-6">
                             <label for="validationServer03" class="form-label">Telefono</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Telefono" name="telefono">
+                            value="<?php echo $_SESSION['municipal_telefono']; ?>" name="telefono">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
@@ -188,7 +225,7 @@ Ciudad" name="nombre_ciudad">
                         <div class="col-md-12">
                             <label for="validationServer03" class="form-label">Area de Trabajo Interna</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Area Interna" name="area_interna">
+                            value="<?php echo $_SESSION['municipal_area']; ?>" name="area">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
@@ -196,7 +233,7 @@ Ciudad" name="nombre_ciudad">
                         <div class="col-md-12">
                             <label for="validationServer03" class="form-label">Estado</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Estado" name="Estado">
+                            value="<?php echo $_SESSION['municipal_estado']; ?>" name="estado">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
@@ -204,13 +241,13 @@ Ciudad" name="nombre_ciudad">
                         <div class="col-md-12">
                             <label for="validationServer03" class="form-label">Rol</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Rol" name="rol">
+                            value="<?php echo $_SESSION['municipal_rol']; ?>" name="rol">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
                         </div>
                         <div class="col-12 text-center mt-4">
-                            <button class="btn btn-primary" type="submit">Acepta la
+                            <button class="btn btn-primary" type="submit" value="modificar" name="BotonModificar">Acepta la
                                 modificacion</button>
                             <button class="btn btn-primary" type="submit">Cancelo la
                                 modificacion</button>
@@ -236,16 +273,15 @@ Ciudad" name="nombre_ciudad">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">¿Ya te vas <?php echo $_SESSION['usuario_nombre']; ?>?</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">Select "Logout" below if you
-                        are ready to end your current session.</div>
+                    <div class="modal-body">Selecciona "Cerrar Sesion" si queres cerrar esta sesion.</div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.php">Logout</a>
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                        <a class="btn btn-primary" href="cerrar_sesion.php">Cerrar Sesion</a>
                     </div>
                 </div>
             </div>
