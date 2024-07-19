@@ -71,20 +71,17 @@ text-white-50"></i> Generate Report</a>-->
                                 Looks good!
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <label for="validationServer02" class="form-label">Sexo</label>
-                            <input type="text" class="form-control" id="validationServer02" placeholder="sexo"
-                                name="nacionalidad" required>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="validationServer03" class="form-label">DNI</label>
-                            <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="DNI" name="dni">
-                            <div id="validationServer03Feedback" class="invalid-feedback">
-                                Please provide a valid city.
+                        <div class="col-md-12 mt-4 text-center">
+                            <label for="validationServer04" class="form-label">Sexo</label>
+                            <select class="form-select" id="validationServer04"
+                                aria-describedby="validationServer04Feedback" name="sexo" required>
+                                <option selected disabled value="">Sexo...</option>
+                                <option value="M">Masculino</option>
+                                <option value="F">Femenino</option>
+                                <option value="O">Otro</option>
+                            </select>
+                            <div id="validationServer04Feedback" class="invalid-feedback">
+                                Please select a valid state.
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -117,15 +114,40 @@ Calle" name="numero">
                                 Please provide a valid city.
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <label for="validationServer03" class="form-label">Provincia</label>
-                            <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Provincia" name="provincia">
-                            <div id="validationServer03Feedback" class="invalid-feedback">
-                                Please provide a valid city.
+                        <div class="col-md-6 mt-5">
+                            <label for="validationServer04" class="form-label">Provincia</label>
+                            <select class="form-select" id="validationServer04"
+                                aria-describedby="validationServer04Feedback" name="provincia" required>
+                                <option selected disabled value="">Selecciona una provincia...</option>
+                                <option value="Buenos Aires">Buenos Aires</option>
+                                <option value="Catamarca">Catamarca</option>
+                                <option value="Chaco">Chaco</option>
+                                <option value="Chubut">Chubut</option>
+                                <option value="Cordoba">Córdoba</option>
+                                <option value="Corrientes">Corrientes</option>
+                                <option value="Entre Ríos">Entre Ríos</option>
+                                <option value="Formosa">Formosa</option>
+                                <option value="Jujuy">Jujuy</option>
+                                <option value="La Pampa">La Pampa</option>
+                                <option value="La Rioja">La Rioja</option>
+                                <option value="Mendoza">Mendoza</option>
+                                <option value="Misiones">Misiones</option>
+                                <option value="Neuquén">Neuquén</option>
+                                <option value="Río Negro">Río Negro</option>
+                                <option value="Salta">Salta</option>
+                                <option value="San Juan">San Juan</option>
+                                <option value="San Luis">San Luis</option>
+                                <option value="Santa Cruz">Santa Cruz</option>
+                                <option value="Santa Fe">Santa Fe</option>
+                                <option value="Santiago del Estero">Santiago del Estero</option>
+                                <option value="Tierra del Fuego">Tierra del Fuego</option>
+                                <option value="Tucumán">Tucumán</option>
+                            </select>
+                            <div id="validationServer04Feedback" class="invalid-feedback">
+                                Selecciona una provincia válida.
                             </div>
                         </div>
-                        <div class="col-md-10 mt-10">
+                        <div class="col-md-6 mt-10">
                             <label for="validationServer03" class="form-label">Nombre de
                                 Ciudad</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
@@ -135,16 +157,17 @@ Ciudad" name="nombre_ciudad">
                                 Please provide a valid city.
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <label for="validationServer03" class="form-label">BIS</label>
-                            <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="BIS" name="bis">
-                            <div id="validationServer03Feedback" class="invalid-feedback">
-                                Please provide a valid city.
+                        <div class="col-md-12 pt-5 text-center">
+                            <label for="validationServer04" class="form-label">Bis</label>
+                            <select class="form-select" id="validationServer04"
+                                aria-describedby="validationServer04Feedback" name="bis" required>
+                                <option selected disabled value="">BIS...</option>
+                                <option value="0">SI</option>
+                                <option value="1">NO</option>
+                            </select>
+                            <div id="validationServer04Feedback" class="invalid-feedback">
+                                Please select a valid state.
                             </div>
-                        </div>
-                        <div class="col-md-12 mt-3 mb-3">
-                            <hr>
                         </div>
                         <div class="col-md-12">
                             <hr>
@@ -185,28 +208,47 @@ Ciudad" name="nombre_ciudad">
                         <div class="col-md-12 mt-3 mb-3">
                             <hr>
                         </div>
-                        <div class="col-md-12">
-                            <label for="validationServer03" class="form-label">Area de Trabajo Interna</label>
-                            <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Area Interna" name="area_interna">
-                            <div id="validationServer03Feedback" class="invalid-feedback">
-                                Please provide a valid city.
+                        <div class="col-md-6 mt-3">
+                            <label for="validationServer04" class="form-label">Área de Trabajo Interna</label>
+                            <select class="form-select" id="validationServer04"
+                                aria-describedby="validationServer04Feedback" name="area_trabajo" required>
+                                <option selected disabled value="">Selecciona un Área...</option>
+                                <option value="Area 1 - Contaduría">Contaduría</option>
+                                <option value="Area 2 - Administración">Administración</option>
+                                <option value="Area 3 - Atención al Cliente">Atención al Cliente</option>
+                                <option value="Area 4 - Sistemas">Sistemas</option>
+                            </select>
+                            <div id="validationServer04Feedback" class="invalid-feedback">
+                                Selecciona un Área de Trabajo Interna válida.
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <label for="validationServer03" class="form-label">Estado</label>
-                            <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Estado" name="Estado">
-                            <div id="validationServer03Feedback" class="invalid-feedback">
-                                Please provide a valid city.
+                        <div class="col-md-6 pt-3 text-center">
+                            <label for="validationServer04" class="form-label">Rol</label>
+                            <select class="form-select" id="validationServer04"
+                                aria-describedby="validationServer04Feedback" name="rol" required>
+                                <option selected disabled value="">Selecciona un Rol...</option>
+                                <option value="Rol 1 - Administrador/a">Administrador/a</option>
+                                <option value="Rol 2 - Supervisor/a">Supervisor/a</option>
+                                <option value="Rol 3 - Operador/a">Operador/a</option>
+                                <option value="Rol 4 - Auxiliar">Auxiliar</option>
+                            </select>
+                            <div id="validationServer04Feedback" class="invalid-feedback">
+                                Selecciona un Rol válido.
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <label for="validationServer03" class="form-label">Rol</label>
-                            <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Rol" name="rol">
-                            <div id="validationServer03Feedback" class="invalid-feedback">
-                                Please provide a valid city.
+                        <div class="col-md-12 mt-3 mb-3">
+                            <hr>
+                        </div>
+                        <div class="col-md-12 mt-2 text-center">
+                            <label for="validationServer04" class="form-label">Estado</label>
+                            <select class="form-select" id="validationServer04"
+                                aria-describedby="validationServer04Feedback" name="estado_persona" required>
+                                <option selected disabled value="">Estado...</option>
+                                <option value="0">Inactivo</option>
+                                <option value="1">Activo</option>
+                            </select>
+                            <div id="validationServer04Feedback" class="invalid-feedback">
+                                Please select a valid state.
                             </div>
                         </div>
                         <div class="col-12 text-center mt-4">

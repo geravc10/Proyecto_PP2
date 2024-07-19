@@ -1,43 +1,67 @@
 <?php
-$nivel_u=$_SESSION['usuario_nivel'];
-$color='';
-$letra="";
-
-
-switch($nivel_u){
+$nivel_u = $_SESSION['usuario_nivel'];
+$colorH = '';
+$colorS = '';
+$colorT = '';
+$texto = '';
+switch ($nivel_u) {
     case 1://super usuario
-        $color="bg-gradient-dark";
+        $colorH = "bg-gradient-dark";
+        $colorS = "bg-gradient-dark";
+        $colorT = "bg-gradient-secondary";
+        $texto = "text-bg-light";
         break;
     case 2://municipal
-        $color="bg-gradient-dark";
+        $colorH = "bg-gradient-dark";
+        $colorS = "bg-gradient-dark";
+        $colorT = "bg-gradient-secondary";
+        $texto = "text-bg-light";
         break;
     case 3://veterinario
-        $color="bg-gradient-success";
+        $colorH = "bg-gradient-success";
+        $colorS = "bg-gradient-success";
+        $colorT = "bg-gradient-success";
+        $texto = "text-light";
         break;
     case 4://responsable animal
-        $color="bg-gradient-warning";
+        $colorH = "bg-gradient-secondary";
+        $colorS = "bg-gradient-warning";
+        $colorT = "bg-gradient-warning";
+        $texto = "text-light";
         break;
     case 5://profesional
-        $color="bg-gradient-info";
+        $colorH = "bg-gradient-dark";
+        $colorS = "bg-info";
+        $colorT = "bg-gradient-info";
+        $texto = "text-ligth";
         break;
     case 6://refugio
-        $color="bg-gradient-danger";
-        break;    
+        $colorH = "bg-gradient-dark";
+        $colorS = "bg-gradient-danger";
+        $colorT = "bg-gradient-danger";
+        $texto = "text-ligth";
+        break;
 }
 ?>
 
 
 <!-- Topbar -->
-<nav class="navbar navbar-expand navbar-light <?php echo $color; ?>  topbar mb-4 static-top shadow">
+<nav class="navbar navbar-expand navbar-light <?php echo $colorT; ?>  topbar mb-4 static-top shadow">
+
+    <!-- Sidebar Toggle (Topbar) -->
+    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars"></i>
+    </button>
+
+
+    <!-- Topbar Search -->
+    <h1 class="h3 mb-0 text-white">Bienvenido
+        <?php echo $_SESSION['usuario_nombre'] . ' ' .
+            $_SESSION['usuario_apellido']; ?>
+    </h1>
+    <!--
  
- <!-- Sidebar Toggle (Topbar) -->
- <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-     <i class="fa fa-bars"></i>
- </button>
-
-
- <!-- Topbar Search -->
- <!--<form
+ <form
      class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
      <div class="input-group">
          <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
@@ -48,21 +72,21 @@ switch($nivel_u){
              </button>
          </div>
      </div>
- </form> -->
+ </form>
+-->
+
+    <!-- Topbar Navbar -->
+    <ul class="navbar-nav ml-auto">
 
 
- <!-- Topbar Navbar -->
- <ul class="navbar-nav ml-auto">
-
-
-    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-    <!-- <li class="nav-item dropdown no-arrow d-sm-none">
+        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+        <!-- <li class="nav-item dropdown no-arrow d-sm-none">
          <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
              <i class="fas fa-search fa-fw"></i>
          </a>
         Dropdown - Messages -->
-    <!--     <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+        <!--     <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
              aria-labelledby="searchDropdown">
              <form class="form-inline mr-auto w-100 navbar-search">
                  <div class="input-group">
@@ -81,15 +105,15 @@ switch($nivel_u){
 
 
     <!-- Nav Item - Alerts -->
-    <!-- <li class="nav-item dropdown no-arrow mx-1">
+        <!-- <li class="nav-item dropdown no-arrow mx-1">
          <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
              <i class="fas fa-bell fa-fw"></i>
              <!-- Counter - Alerts -->
-    <!--         <span class="badge badge-danger badge-counter">3+</span>
+        <!--         <span class="badge badge-danger badge-counter">3+</span>
          </a>
          <!-- Dropdown - Alerts -->
-    <!--     <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+        <!--     <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
              aria-labelledby="alertsDropdown">
              <h6 class="dropdown-header">
                  Alerts Center
@@ -133,15 +157,15 @@ switch($nivel_u){
 
 
      <!-- Nav Item - Messages -->
-    <!-- <li class="nav-item dropdown no-arrow mx-1">
+        <!-- <li class="nav-item dropdown no-arrow mx-1">
          <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
              <i class="fas fa-envelope fa-fw"></i>
              <!-- Counter - Messages -->
-    <!--         <span class="badge badge-danger badge-counter">7</span>
+        <!--         <span class="badge badge-danger badge-counter">7</span>
          </a>
          <!-- Dropdown - Messages -->
-    <!--     <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+        <!--     <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
              aria-labelledby="messagesDropdown">
              <h6 class="dropdown-header">
                  Message Center
@@ -201,39 +225,38 @@ switch($nivel_u){
 
      <div class="topbar-divider d-none d-sm-block"></div>
 -->
-     <!-- Nav Item - User Information -->
+        <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
-         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['usuario_nombre'].' '. $_SESSION['usuario_apellido']; ?></span>
-             <img class="img-profile rounded-circle"
-                 src="img/undraw_profile.svg">
-         </a>
-         <!-- Dropdown - User Information -->
-         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-             aria-labelledby="userDropdown">
-             <a class="dropdown-item" href="#">
-                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                 Profile
-             </a>
-             <a class="dropdown-item" href="#">
-                 <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                 Settings
-             </a>
-             <a class="dropdown-item" href="#">
-                 <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                 Activity Log
-             </a>
-             <div class="dropdown-divider"></div>
-             <a class="dropdown-item" href="cerrar_sesion.php" data-toggle="modal" data-target="#logoutModal">
-                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                 Salir
-             </a>
-         </div>
-     </li>
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <span
+                    class="mr-2 d-none d-lg-inline <?php echo $texto; ?>"><?php echo $_SESSION['usuario_nombre'] . ' ' . $_SESSION['usuario_apellido']; ?></span>
+                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+            </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Profile
+                </a>
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Settings
+                </a>
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Activity Log
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="cerrar_sesion.php" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Salir
+                </a>
+            </div>
+        </li>
 
 
- </ul>
+    </ul>
 
 
 </nav>
