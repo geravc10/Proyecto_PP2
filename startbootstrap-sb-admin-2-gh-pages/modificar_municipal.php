@@ -96,7 +96,7 @@ text-white-50"></i> Generate Report</a>-->
                     if (!empty($Mensaje)) { ?>
                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
                             <i class="bi bi-exclamation-triangle me-1"></i>
-                            <?php echo $Mensaje.' '. $_POST['bis']; ?>
+                            <?php echo $Mensaje; ?>
                         </div>
                     <?php }
                     ?>
