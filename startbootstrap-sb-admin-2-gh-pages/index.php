@@ -99,12 +99,12 @@ text-center pt-5 fw-bold" id="principal">
                     <div class="row w-100 mx-auto my-1 fila-servicios">
                         <div class="container mt-2 text-center">
                             <div class="row">
-                                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                                <div class="col-lg-3 col-md-6 col-sm-12 mb-">
                                     <div class="card">
                                         <a href="mostrar_data_veterinario.php">
                                             <img src="imagenes/veterinario.jpeg"
                                                 class="card-img-top mx-auto mt-4 rounded" alt="Veterinario"
-                                                id="servicio">
+                                                id="servicio" style="width: 50%; height: 50%;" >
                                         </a>
                                         <div class="card-body">
                                             <h5 class="card-title"><b>Veterinarios</b></h5>
@@ -116,7 +116,7 @@ text-center pt-5 fw-bold" id="principal">
                                         <a href="mostrar_data_refugio_animal.php">
                                             <img src="imagenes/refugioAnimales.jpeg"
                                                 class="card-img-top mx-auto mt-4 rounded" alt="Veterinario"
-                                                id="servicio">
+                                                id="servicio" style="width: 87%; height: 100%;">
                                         </a>
                                         <div class="card-body">
                                             <h5 class="card-title"><b>Refugio de Animales</b></h5>
@@ -128,7 +128,7 @@ text-center pt-5 fw-bold" id="principal">
                                         <a href="mostrar_data_peluquero.php">
                                             <img src="imagenes/peluqueroCanino.jpg"
                                                 class="card-img-top mx-auto mt-4 rounded" alt="Veterinario"
-                                                id="servicio">
+                                                id="servicio" style="width: 58%; height: 50%;">
                                         </a>
                                         <div class="card-body">
                                             <h5 class="card-title"><b>Peluquero Canino</b></h5>
@@ -140,7 +140,7 @@ text-center pt-5 fw-bold" id="principal">
                                         <a href="mostrar_data_paseador.php">
                                             <img src="imagenes/paseador_perros.jpg"
                                                 class="card-img-top mx-auto mt-4 rounded" alt="Veterinario"
-                                                id="servicio">
+                                                id="servicio" style="width: 78%; height: 50%;">
                                         </a>
                                         <div class="card-body">
                                             <h5 class="card-title"><b>Paseadores</b></h5>
