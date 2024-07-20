@@ -4,6 +4,12 @@ if (empty($_SESSION['usuario_nombre'])) {
     header('Location: cerrar_sesion.php');
     exit;
 }
+
+if($_SESSION['municipal_bis']==0){
+    $bis = " ";
+}else{
+    $bis = "bis";
+}
 ?>
 <!DOCTYPE html>
 <html lang="ES">
@@ -75,14 +81,20 @@ text-white-50"></i> Generate Report</a>-->
                                                 <td><?php echo $_SESSION['municipal_edad']; ?></td>
                                                 <td><?php echo $_SESSION['municipal_nacionalidad'];?></td>
                                                 <td><?php echo $_SESSION['municipal_sexo'];?></td>
-                                                <td><?php echo $_SESSION['municipal_direccion']. ' ' . $_SESSION['municipal_numero'] . ' ' . $_SESSION['municipal_bis']; ?></td>
+                                                <td><?php echo $_SESSION['municipal_direccion']. ' ' . $_SESSION['municipal_numero'] . ' ' . $bis; ?></td>
                                                 <td><?php echo $_SESSION['municipal_provincia']; ?></td>
                                                 <td><?php echo $_SESSION['municipal_mail']; ?></td>
                                                 <td><?php echo $_SESSION['municipal_red']; ?></td>
                                                 <td><?php echo $_SESSION['municipal_telefono']; ?></td>
                                                 <td><?php echo $_SESSION['municipal_area']; ?></td>
                                                 <td><?php echo $_SESSION['municipal_rol']; ?></td>
-                                                <td><?php echo $_SESSION['municipal_estado']; ?></td>
+                                                <td><?php 
+                                                if ($_SESSION['municipal_estado']=="1"){
+                                                    echo "Activo";
+                                                }else{
+                                                    echo "Inactivo";
+                                                }
+                                                ?></td>
                                             </tr>
                                         </tbody>
                                     </table>

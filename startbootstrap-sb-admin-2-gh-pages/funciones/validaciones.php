@@ -39,56 +39,68 @@ function ValidarModificacionMuni(){
     $vMensaje = '';
 
     if(empty($_POST['nombre'])){
-        $vMensaje .= 'Debes ingresar el nombre. <br />';
+        $vMensaje .= '-Nombre: Debes ingresar el nombre. <br />';
     }elseif (preg_match('/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/', $_POST['nombre'])) {
-        $vMensaje .= 'El nombre debe ser solo letras y espacios. <br />';
+        $vMensaje .= '-Nombre: El nombre debe ser solo letras y espacios. <br />';
     }    
 
     if(empty($_POST['apellido'])){
-        $vMensaje .= 'Debes ingresar el apellido. <br />';
+        $vMensaje .= '-Apellido: Debes ingresar el apellido. <br />';
     }elseif (preg_match('/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/', $_POST['apellido'])) {
-        $vMensaje .= 'El nombre debe ser solo letras y espacios. <br />';
+        $vMensaje .= '-Apellido: El apellido debe ser solo letras y espacios. <br />';
     } 
 
     if(empty($_POST['fecha'])){
-        $vMensaje .= 'Debes ingresar la fecha de nacimiento. <br />';
+        $vMensaje .= '-Fecha de nacimiento: Debes ingresar la fecha de nacimiento. <br />';
     }
 
     if(empty($_POST['nacionalidad'])){
-        $vMensaje .= 'Debes ingresar la nacionalidad. <br />';
+        $vMensaje .= '-Nacionalidad: Debes ingresar la nacionalidad. <br />';
     }elseif (preg_match('/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/', $_POST['nacionalidad'])) {
-        $vMensaje .= 'El nombre debe ser solo letras y espacios. <br />';
+        $vMensaje .= '-Nacionalidad: La nacionalidad debe ser solo letras y espacios. <br />';
     } 
 
     if(empty($_POST['sexo'])){
-        $vMensaje .= 'Debes ingresar el sexo. <br />';
+        $vMensaje .= '-Sexo: Debes ingresar el sexo. <br />';
     }    
+    
+    if(empty($_POST['nombre_calle'])){
+        $vMensaje .= '-Nombre de calle: Debes ingresar el nombre de la calle. <br />';
+    }elseif (preg_match('/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/', $_POST['nombre_calle'])) {
+        $vMensaje .= '-Nombre de calle: El nombre de la calle debe ser solo letras y espacios. <br />';
+    } 
+    
+    if (empty($_POST['numero'])) {
+        $vMensaje .= '-Numero de calle: Debes ingresar el numero de la calle. <br />';
+    }elseif (preg_match('/[^1234567890\s]/', $_POST['numero'])){
+        $vMensaje .= '-Numero de calle: Deben ser solo numeros. <br />';
+    }
 
-    if (is_numeric($_POST['contrasena']) < 11) {
-        $vMensaje .= 'Debes ingresar el Password. <br />';
+    if (empty($_POST['contrasena'])) {
+        $vMensaje .= '-Contraseña: Debes ingresar el numero de la calle. <br />';
+    }elseif (preg_match('/[^1234567890\s]/', $_POST['contrasena'])){
+        $vMensaje .= '-Contraseña: Deben ser solo numeros. <br />';
     }
 
     if (strlen($_POST['contrasena']) < 6 || strlen($_POST['contrasena']) > 10) {
-        $vMensaje .= 'El Password debe tener entre 6 y 10 numeros. <br/>';
+        $vMensaje .= '-Contraseña: El Password debe tener entre 6 y 10 numeros. <br/>';
     }
 
-    if(empty($_POST['nombre_calle'])){
-        $vMensaje .= 'Debes ingresar el nombre de la calle. <br />';
-    }elseif (preg_match('/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/', $_POST['nombre_calle'])) {
-        $vMensaje .= 'El nombre de la calle debe ser solo letras y espacios. <br />';
-    } 
-
-    if (is_numeric($_POST['numero']) < 11) {
-        $vMensaje .= 'Debes ingresar el numero de la calle. <br />';
-    }
-
-
-
-
-    /*
-    if (strpos($_POST['email'], "@gmail.com") != true) {
+    if (strpos($_POST['mail'], "@gmail.com") != true) {
         $vMensaje .= 'Debe ser un MAIL del tipo "@gmail.com" <br/>';
-    }*/
+    }
+
+    if (empty($_POST['telefono'])) {
+        $vMensaje .= '-Telefono: Debes ingresar el numero de la calle. <br />';
+    }elseif (preg_match('/[^1234567890]/', $_POST['telefono'])){
+        $vMensaje .= '-Telefono: Deben ser solo numeros. <br />';
+    }
+
+    if (strlen($_POST['telefono']) < 10 || strlen($_POST['contrasena']) > 11) {
+        $vMensaje .= '-Telefono: El Telefono debe tener entre 10 y 11 numeros. <br/>';
+    }
+
+
     foreach ($_POST as $Id => $Valor) {
         $_POST[$Id] = trim($_POST[$Id]);
         $_POST[$Id] = strip_tags($_POST[$Id]);

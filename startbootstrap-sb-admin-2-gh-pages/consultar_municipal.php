@@ -23,6 +23,7 @@ número de DNI ingresado";
             $_SESSION['municipal_nombre'] = $MunicipalEncontrado['Nombre'];
             $_SESSION['municipal_apellido'] = $MunicipalEncontrado['Apellido'];
             $_SESSION['municipal_sexo'] = $MunicipalEncontrado['Sexo'];
+            $_SESSION['municipal_sexo_id'] = $MunicipalEncontrado['SexoId'];
             $_SESSION['municipal_dni'] = $MunicipalEncontrado['dni'];
             $_SESSION['municipal_fecha'] = $MunicipalEncontrado['FechaNacimiento'];
             $_SESSION['municipal_nacionalidad'] = $MunicipalEncontrado['Nacionalidad'];
