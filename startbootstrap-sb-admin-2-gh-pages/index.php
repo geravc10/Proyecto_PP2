@@ -119,7 +119,7 @@ text-center pt-5 fw-bold" id="principal">
                                                 id="servicio" style="width: 87%; height: 100%;">
                                         </a>
                                         <div class="card-body">
-                                            <h5 class="card-title"><b>Refugio de Animales</b></h5>
+                                            <h5 class="card-title"><b>Refugio</b></h5>
                                         </div>
                                     </div>
                                 </div>
