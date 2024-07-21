@@ -26,7 +26,10 @@ if (!empty($_POST['BotonLogin'])) {
             $_SESSION['usuario_apellido'] = $UsuarioLogueado['Apellido'];
             $_SESSION['usuario_estado'] = $UsuarioLogueado['Estado'];
             $_SESSION['usuario_nivel'] = $UsuarioLogueado['Nivel'];
+            $_SESSION['usuario_dni'] = $UsuarioLogueado['Dni'];
             $_SESSION['usuario_descripcion_nivel'] = $UsuarioLogueado['Descripcion_nivel'];
+            
+
             header('Location: index.php');
             exit;
         }
@@ -61,7 +64,7 @@ bi-exclamation-triangle me-1"></i>
                                     ?>
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900
-mb-4">¡Bienvenido!</h1>
+mb-4">¡Bienvenido! </h1>
                                     </div>
                                     <form class="user" method='post'>
                                         <div class="form-group">
