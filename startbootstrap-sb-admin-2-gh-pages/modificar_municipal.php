@@ -44,6 +44,8 @@ if(empty($ListaSexo)){
                 $Mensaje="Fallo la modificacion del usuario municipal.";
             }else{
                 $Mensaje="Se modifico el usuario municipal.";
+                header('Location: consultar_municipal.php');
+                exit;
     
             }
         }        

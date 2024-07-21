@@ -4,6 +4,57 @@ if (empty($_SESSION['usuario_nombre'])) {
     header('Location: cerrar_sesion.php');
     exit;
 }
+
+require_once 'funciones/conexion.php';
+$MiConexion = ConexionBD();
+
+require_once 'funciones/funcion_consultas_generales.php';
+$ListaSexo = TraerSexo($MiConexion);
+$CantidadSexo= count($ListaSexo);
+
+require_once 'funciones/funcion_consultas_generales.php';
+$ListaProvincia = TraerProvincia($MiConexion);
+$CantidadProvinvia= count($ListaProvincia);
+
+require_once 'funciones/funcion_consultas_generales.php';
+$ListaAreas = TraerArea($MiConexion);
+$CantidadAreas= count($ListaAreas);
+
+require_once 'funciones/funcion_consultas_generales.php';
+$ListaRoles = TraerRol($MiConexion);
+$CantidadRoles= count($ListaRoles);
+
+
+require_once 'funciones/validaciones.php';
+
+$Mensaje = "";
+
+if(empty($ListaSexo)){
+    $Mensaje = "No vino nada de la tabla sexo";
+}else{
+    if (!empty($_POST['BotonRegistrar'])) {
+    
+        $Mensaje = ValidarCreacionMuni();
+    
+        if(empty($Mensaje)){
+            require_once 'funciones/funcion_crear_municipal.php';
+            $MunicipalCreado = CrearMunicipal($MiConexion);
+    
+            if(empty($MunicipalCreado)){
+                $Mensaje="Fallo la creacion del usuario municipal.";
+            }else{
+                $Mensaje="Se creo el usuario municipal.";
+                $_SESSION['usuario_creado'] = $Mensaje;
+
+                header('Location: index.php');
+                exit;
+            }
+        }        
+    
+    }
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="ES">
@@ -40,6 +91,14 @@ text-white-50"></i> Generate Report</a>-->
                     </div>
                     <!--FORMULARIO-->
                     <h1 class="my-5 text-center fw-bold">Crear Empleado Municipal</h1>
+                    <?php
+                    if (!empty($Mensaje)) { ?>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <i class="bi bi-exclamation-triangle me-1"></i>
+                            <?php echo $Mensaje; ?>
+                        </div>
+                    <?php }
+                    ?>
                     <!--
 <form action="procesar_formulario.php" method="post">
 <label for="id_ciudad">ID Ciudad:</label>
@@ -54,7 +113,7 @@ required><br>
                         <div class="col-md-4">
                             <label for="validationServer01" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="validationServer01" placeholder="Nombre"
-                                name="nombre" required>
+                                name="nombre" required value= "<?php echo (!empty($_POST['nombre']) ? $_POST['nombre']:''); ?>">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -63,16 +122,15 @@ required><br>
                         <div class="col-md-4">
                             <label for="validationServer02" class="form-label">Apellido</label>
                             <input type="text" class="form-control" id="validationServer02" placeholder="Apellido"
-                                name="apellido" required>
+                                name="apellido" required value= "<?php echo (!empty($_POST['apellido']) ? $_POST['apellido']:''); ?>">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <label for="validationServer02" class="form-label">Fecha de
-                                Nacimiento</label>
+                            <label for="validationServer02" class="form-label">Fecha de Nacimiento</label>
                             <input type="date" class="form-control" id="validationServer02"
-                                placeholder="Fecha de Nacimiento" name="fecha_nacimiento" required>
+                                placeholder="Fecha de Nacimiento" name="fecha" required value= "<?php echo (!empty($_POST['fecha']) ? $_POST['fecha']:''); ?>">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -80,7 +138,7 @@ required><br>
                         <div class="col-md-4">
                             <label for="validationServer02" class="form-label">Nacionalidad</label>
                             <input type="text" class="form-control" id="validationServer02" placeholder="Nacionalidad"
-                                name="nacionalidad" required>
+                                name="nacionalidad" required value= "<?php echo (!empty($_POST['nacionalidad']) ? $_POST['nacionalidad']:''); ?>">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -90,9 +148,30 @@ required><br>
                             <select class="form-select" id="validationServer04"
                                 aria-describedby="validationServer04Feedback" name="sexo" required>
                                 <option selected disabled value="">Sexo...</option>
+
+                                <?php 
+                                $selected='';                                
+                                for($i=0;$i<$CantidadSexo;$i++){
+                                    if(!empty($_POST['sexo'])){ 
+                                    if ( $_POST['sexo'] ==  $ListaSexo[$i]['id_sexo']) {
+                                        $selected = 'selected';
+                                    }else {
+                                        $selected='';
+                                    }} else{
+                                        if ( $_SESSION['municipal_sexo'] ==  $ListaSexo[$i]['descripcion_sexo']) {
+                                            $selected = 'selected';
+                                        }else {
+                                            $selected='';
+                                        }
+                                    }
+                                    ?>
+                                    <option value="<?php echo $ListaSexo[$i]['id_sexo']; ?>" <?php echo $selected; ?>>
+                                        <?php echo $ListaSexo[$i]['descripcion_sexo']; ?></option>
+                                <?php }  ?>
+                                    <!--
                                 <option value="M">Masculino</option>
                                 <option value="F">Femenino</option>
-                                <option value="O">Otro</option>
+                                <option value="O">Otro</option> -->
                             </select>
                             <div id="validationServer04Feedback" class="invalid-feedback">
                                 Please select a valid state.
@@ -101,16 +180,16 @@ required><br>
                         <div class="col-md-4">
                             <label for="validationServer03" class="form-label">DNI</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="DNI" name="dni">
+                                placeholder="DNI" name="dni" value= "<?php echo (!empty($_POST['dni']) ? $_POST['dni']:''); ?>">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <label for="validationServer02" class="form-label">Informacion
-                                Personal</label>
+                            <label for="validationServer02" class="form-label">Informacion Personal</label>
                             <input type="text" class="form-control" id="validationServer02"
-                                placeholder="Informacion Personal" name="informacion_personal" required>
+                                placeholder="Informacion Personal" name="informacion" required
+                                value= "<?php echo (!empty($_POST['informacion']) ? $_POST['informacion']:''); ?>">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -119,11 +198,10 @@ required><br>
                             <hr>
                         </div>
                         <div class="col-md-6">
-                            <label for="validationServer03" class="form-label">Nombre de
-                                Calle</label>
+                            <label for="validationServer03" class="form-label">Nombre de Calle</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Nombre de
-Calle" name="numero">
+                                placeholder="Nombre de Calle" name="nombre_calle"
+                                value= "<?php echo (!empty($_POST['nombre_calle']) ? $_POST['nombre_calle']:''); ?>">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
@@ -131,7 +209,8 @@ Calle" name="numero">
                         <div class="col-md-6">
                             <label for="validationServer03" class="form-label">Numero</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Numero " name="nombre_calle">
+                                placeholder="Numero " name="numero"
+                                value= "<?php echo (!empty($_POST['numero']) ? $_POST['numero']:''); ?>">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
@@ -141,6 +220,28 @@ Calle" name="numero">
                             <select class="form-select" id="validationServer04"
                                 aria-describedby="validationServer04Feedback" name="provincia" required>
                                 <option selected disabled value="">Selecciona una provincia...</option>
+                                
+                                <?php 
+                                $selected='';
+                                for($i=0;$i<$CantidadProvinvia;$i++){ 
+                                    if(!empty($_POST['provincia'])){
+                                    if ($_POST['provincia'] ==  $ListaProvincia[$i]['id_provincia']) {
+                                        $selected = 'selected';
+                                    }else {
+                                        $selected='';
+                                    }}else{
+                                        if ($_SESSION['municipal_provincia'] ==  $ListaProvincia[$i]['nombre_provincia']) {
+                                            $selected = 'selected';
+                                        }else {
+                                            $selected='';
+                                        }
+                                    }
+                                    ?>
+                                    <option value="<?php echo $ListaProvincia[$i]['id_provincia']; ?>" <?php echo $selected; ?>>
+                                        <?php echo $ListaProvincia[$i]['nombre_provincia']; ?></option>
+                                <?php } ?>
+                                
+                                <!--
                                 <option value="Buenos Aires">Buenos Aires</option>
                                 <option value="Catamarca">Catamarca</option>
                                 <option value="Chaco">Chaco</option>
@@ -163,18 +264,17 @@ Calle" name="numero">
                                 <option value="Santa Fe">Santa Fe</option>
                                 <option value="Santiago del Estero">Santiago del Estero</option>
                                 <option value="Tierra del Fuego">Tierra del Fuego</option>
-                                <option value="Tucumán">Tucumán</option>
+                                <option value="Tucumán">Tucumán</option> -->
                             </select>
                             <div id="validationServer04Feedback" class="invalid-feedback">
                                 Selecciona una provincia válida.
                             </div>
                         </div>
                         <div class="col-md-4 mt-4">
-                            <label for="validationServer03" class="form-label">Nombre de
-                                Ciudad</label>
+                            <label for="validationServer03" class="form-label">Nombre de Ciudad</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Nombre de
-Ciudad" name="nombre_ciudad">
+                                placeholder="Nombre de Ciudad" name="nombre_ciudad"
+                                value= "<?php echo (!empty($_POST['nombre_ciudad']) ? $_POST['nombre_ciudad']:''); ?>">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
@@ -184,8 +284,29 @@ Ciudad" name="nombre_ciudad">
                             <select class="form-select" id="validationServer04"
                                 aria-describedby="validationServer04Feedback" name="bis" required>
                                 <option selected disabled value="">BIS...</option>
+
+                                <?php 
+                                    $sel="";
+                                    $sele="";
+                                    if(!empty($_POST['bis'])){
+                                        if($_POST['bis']=="1"){
+                                            $sel="selected";
+                                        } else{
+                                            $sele="selected";
+                                        }             
+                                    }elseif($_SESSION['municipal_bis'] =="1"){
+                                            $sel="selected";
+                                        } else{
+                                            $sele="selected";
+                                        }             
+                                                           
+                                    ?>
+                                <option value="1" <?php echo $sel ; ?>>SI</option>
+                                <option value="0" <?php echo $sele; ?>>NO</option>
+                                
+                                <!--
                                 <option value="0">SI</option>
-                                <option value="1">NO</option>
+                                <option value="1">NO</option> -->
                             </select>
                             <div id="validationServer04Feedback" class="invalid-feedback">
                                 Please select a valid state.
@@ -200,7 +321,8 @@ Ciudad" name="nombre_ciudad">
                         <div class="col-md-6">
                             <label for="validationServer03" class="form-label">Email</label>
                             <input type="email" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Email" name="correo_electronico">
+                                placeholder="Email" name="mail"
+                                value= "<?php echo (!empty($_POST['mail']) ? $_POST['mail']:''); ?>">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
@@ -208,16 +330,17 @@ Ciudad" name="nombre_ciudad">
                         <div class="col-md-6">
                             <label for="validationServer03" class="form-label">Contraseña</label>
                             <input type="password" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Contraseña" name="contrasena">
+                                placeholder="Contraseña" name="contrasena"
+                                value= "<?php echo (!empty($_POST['contrasena']) ? $_POST['contrasena']:''); ?>">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="validationServer03" class="form-label">Red
-                                Social</label>
+                            <label for="validationServer03" class="form-label">Red Social</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Red Social" name="red_social">
+                                placeholder="Red Social" name="red"
+                                value= "<?php echo (!empty($_POST['red']) ? $_POST['red']:''); ?>">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
@@ -225,7 +348,8 @@ Ciudad" name="nombre_ciudad">
                         <div class="col-md-6">
                             <label for="validationServer03" class="form-label">Telefono</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Telefono" name="telefono">
+                                placeholder="Telefono" name="telefono"
+                                value= "<?php echo (!empty($_POST['telefono']) ? $_POST['telefono']:''); ?>">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
@@ -236,12 +360,34 @@ Ciudad" name="nombre_ciudad">
                         <div class="col-md-6 mt-3">
                             <label for="validationServer04" class="form-label">Área de Trabajo Interna</label>
                             <select class="form-select" id="validationServer04"
-                                aria-describedby="validationServer04Feedback" name="area_trabajo" required>
+                                aria-describedby="validationServer04Feedback" name="area" required>
                                 <option selected disabled value="">Selecciona un Área...</option>
+                                
+                                <?php 
+                                $selected='';
+                                for($i=0;$i<$CantidadAreas;$i++){ 
+                                    if(!empty($_POST['area'])){
+                                    if ($_POST['area'] ==  $ListaAreas[$i]['id_area_municipal']) {
+                                        $selected = 'selected';
+                                    }else {
+                                        $selected='';
+                                    }}else{
+                                        if ($_SESSION['municipal_area'] ==  $ListaAreas[$i]['descripcion_area_municipal']) {
+                                            $selected = 'selected';
+                                        }else {
+                                            $selected='';
+                                        }
+                                    }
+                                    ?>
+                                    <option value="<?php echo $ListaAreas[$i]['id_area_municipal']; ?>" <?php echo $selected; ?>>
+                                        <?php echo $ListaAreas[$i]['descripcion_area_municipal']; ?></option>
+                                <?php } ?>
+                                
+                                <!--
                                 <option value="Area 1 - Contaduría">Contaduría</option>
                                 <option value="Area 2 - Administración">Administración</option>
                                 <option value="Area 3 - Atención al Cliente">Atención al Cliente</option>
-                                <option value="Area 4 - Sistemas">Sistemas</option>
+                                <option value="Area 4 - Sistemas">Sistemas</option> -->
                             </select>
                             <div id="validationServer04Feedback" class="invalid-feedback">
                                 Selecciona un Área de Trabajo Interna válida.
@@ -252,10 +398,32 @@ Ciudad" name="nombre_ciudad">
                             <select class="form-select" id="validationServer04"
                                 aria-describedby="validationServer04Feedback" name="rol" required>
                                 <option selected disabled value="">Selecciona un Rol...</option>
+                                
+                                <?php 
+                                $selected='';
+                                for($i=0;$i<$CantidadRoles;$i++){ 
+                                    if(!empty($_POST['rol'])){
+                                    if ($_POST['rol'] ==  $ListaRoles[$i]['id_rol_municipal']) {
+                                        $selected = 'selected';
+                                    }else {
+                                        $selected='';
+                                    }}else{
+                                        if ($_SESSION['municipal_rol'] ==  $ListaRoles[$i]['descripcion_rol_municipal']) {
+                                            $selected = 'selected';
+                                        }else {
+                                            $selected='';
+                                        }
+                                    }
+                                    ?>
+                                    <option value="<?php echo $ListaRoles[$i]['id_rol_municipal']; ?>" <?php echo $selected; ?>>
+                                        <?php echo $ListaRoles[$i]['descripcion_rol_municipal']; ?></option>
+                                <?php } ?>
+                                
+                                <!--
                                 <option value="Rol 1 - Administrador/a">Administrador/a</option>
                                 <option value="Rol 2 - Supervisor/a">Supervisor/a</option>
                                 <option value="Rol 3 - Operador/a">Operador/a</option>
-                                <option value="Rol 4 - Auxiliar">Auxiliar</option>
+                                <option value="Rol 4 - Auxiliar">Auxiliar</option> -->
                             </select>
                             <div id="validationServer04Feedback" class="invalid-feedback">
                                 Selecciona un Rol válido.
@@ -267,10 +435,32 @@ Ciudad" name="nombre_ciudad">
                         <div class="col-md-12 mt-2 text-center">
                             <label for="validationServer04" class="form-label">Estado</label>
                             <select class="form-select" id="validationServer04"
-                                aria-describedby="validationServer04Feedback" name="estado_persona" required>
+                                aria-describedby="validationServer04Feedback" name="estado" required>
                                 <option selected disabled value="">Estado...</option>
+                                
+                                <?php 
+                                    $s1="";
+                                    $s2="";
+                                    if(!empty($_POST['estado'])){
+                                        if($_POST['estado']=="1"){
+                                            $s1="selected";
+                                        } else{
+                                            $s2="selected";
+                                        }             
+                                    }else if($_SESSION['municipal_estado'] =="1"){
+                                            $s1="selected";
+                                        } else{
+                                            $s2="selected";
+                                        }             
+                                                           
+                                    ?>
+
+                                <option value="0" <?php echo $s2 ; ?>>Inactivo</option>
+                                <option value="1" <?php echo $s1 ; ?>>Activo</option>
+                                
+                                <!--
                                 <option value="0">Inactivo</option>
-                                <option value="1">Activo</option>
+                                <option value="1">Activo</option> -->
                             </select>
                             <div id="validationServer04Feedback" class="invalid-feedback">
                                 Please select a valid state.
@@ -278,8 +468,8 @@ Ciudad" name="nombre_ciudad">
                         </div>
                         <div class="col-12 text-center">
                             <div class="form-check mt-4">
-                                <input class="form-check-input" type="checkbox" value="" id="invalidCheck3"
-                                    aria-describedby="invalidCheck3Feedback" required>
+                                <input class="form-check-input" type="checkbox" value="<?php echo (!empty($_POST['acepto']) ? $_POST['acepto']:''); ?>" id="invalidCheck3"
+                                    aria-describedby="invalidCheck3Feedback" required name="acepto">
                                 <label class="form-check-label" for="invalidCheck3">
                                     Acepto los Terminos y Condiciones
                                 </label>
@@ -289,7 +479,7 @@ Ciudad" name="nombre_ciudad">
                             </div>
                         </div>
                         <div class="col-12 mt-3 text-center">
-                            <button class="btn btn-primary" type="submit" name="BotonRegistrar">Enviar</button>
+                            <button class="btn btn-primary" type="submit" value="registrar" name="BotonRegistrar">Enviar</button>
                         </div>
                     </form>
                     <!-- """""""""""""""""""""""""""""""""""""""""""""""""""" -->
@@ -312,16 +502,15 @@ Ciudad" name="nombre_ciudad">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">¿Ya te vas <?php echo $_SESSION['usuario_nombre']; ?>?</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">Select "Logout" below if you
-                        are ready to end your current session.</div>
+                    <div class="modal-body">Selecciona "Cerrar Sesion" si queres cerrar esta sesion.</div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.php">Logout</a>
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                        <a class="btn btn-primary" href="cerrar_sesion.php">Cerrar Sesion</a>
                     </div>
                 </div>
             </div>
