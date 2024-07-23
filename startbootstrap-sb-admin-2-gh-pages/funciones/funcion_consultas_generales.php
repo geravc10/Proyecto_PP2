@@ -77,6 +77,25 @@ function TraerRol($vConexion)
     return $Usuario;
 }
 
+function TraerEspecialidad($vConexion)
+{
+
+    $Usuario = array();
+    $SQL = "SELECT * FROM especialidad ";
+
+    $rs = mysqli_query($vConexion, $SQL);
+   
+
+    $i=0;
+       while ($data = mysqli_fetch_array($rs)) {
+               $Usuario[$i]['id_especialidad'] = $data['ID_ESPECIALIDAD'];
+               $Usuario[$i]['descripcion_especialidad'] = $data['DESCRIPCION_ESPECIALIDAD'];
+               $i++;
+       }
+
+    return $Usuario;
+}
+
 
 
 ?>

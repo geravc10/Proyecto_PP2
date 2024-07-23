@@ -71,8 +71,7 @@ justify-content-center" href="index.php">
     </div>
     <!-- Nav Item - Pages Collapse Menu -->
     <?php if (
-        $_SESSION['usuario_nivel'] == 1 ||
-        $_SESSION['usuario_nivel'] == 2 || $_SESSION['usuario_nivel'] == 3
+        $_SESSION['usuario_nivel'] == 1 || $_SESSION['usuario_nivel'] == 2 || $_SESSION['usuario_nivel'] == 3
     ) {
         ?>
         <li class="nav-item">

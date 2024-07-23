@@ -6,6 +6,9 @@ if (empty($_SESSION['usuario_nombre'])) {
     header('Location: cerrar_sesion.php');
     exit;
 }
+
+
+
 require_once 'partes_Pagina/head.php';
 ?>
 
