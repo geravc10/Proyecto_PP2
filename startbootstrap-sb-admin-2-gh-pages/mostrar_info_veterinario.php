@@ -1,5 +1,13 @@
 <?php
 session_start();
+
+if (empty($_SESSION['usuario_nombre'])) {
+    header('Location: cerrar_sesion.php');
+    exit;
+}
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="ES">
@@ -26,23 +34,20 @@ require_once 'partes_Pagina/head.php';
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center
-justify-content-between mb-4">
-                        <h1 class="h3 mb-0
-text-gray-800">Bienvenidos</h1>
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Bienvenidos</h1>
                         <!--<a href="#" class="d-none d-sm-inline-block btn
 btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm
 text-white-50"></i> Generate Report</a>-->
                     </div>
                     <!--FORMULARIO-->
-                    <h1 class="my-5 text-center fw-bold">Informacion del
-                        Veterinario</h1>
+                    <h1 class="my-5 text-center fw-bold">Informacion del Veterinario</h1>
                     <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal">
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold
-text-primary">Datos de <?php echo $_SESSION['usuario_nombre'] . ' ' . $_SESSION['usuario_apellido']; ?></h6>
+                                <h6 class="m-0 font-weight-bold text-primary">
+                                    Datos de <?php echo $_SESSION['veterinario_nombre']; ?></h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -100,21 +105,21 @@ text-primary">Datos de <?php echo $_SESSION['usuario_nombre'] . ' ' . $_SESSION[
                                                     $_SESSION['municipal_direccion'] . ' ' . $_SESSION['municipal_ciudad'] . '
 ' . $_SESSION['municipal_provincia']; ?> </td>
                                             </tr> -->
-                                            <tr>
-                                                <td>456789012</td>
-                                                <td>Juan Pérez</td>
-                                                <td>1980-01-02</td>
-                                                <td>44</td>
-                                                <td>Argentina</td>
-                                                <td>Masculino</td>
-                                                <td>Av. Belgrano N° 345</td>
-                                                <td>Córdoba</td>
-                                                <td>[dirección de correo electrónico eliminada]</td>
-                                                <td>[https://www.linkedin.com/](https://www.linkedin.com/)</td>
-                                                <td>543210987</td>
-                                                <td>Veterinaria</td>
-                                                <td>Médico Veterinario</td>
-                                                <td>Sí</td>
+                                            <tr>    
+                                                <td><?php echo $_SESSION['veterinario_dni']; ?></td>
+                                                <td><?php echo $_SESSION['veterinario_nombre'].' '.$_SESSION['veterinario_apellido'] ; ?></td>
+                                                <td><?php echo $_SESSION['veterinario_fecha']; ?></td>
+                                                <td><?php echo $_SESSION['veterinario_edad']; ?></td>
+                                                <td><?php echo $_SESSION['veterinario_nacionalidad']; ?></td>
+                                                <td><?php echo $_SESSION['veterinario_sexo']; ?></td>
+                                                <td><?php echo $_SESSION['veterinario_direccion'].' '.$_SESSION['veterinario_numero'].' '.$_SESSION['veterinario_bis'].', '.$_SESSION['veterinario_ciudad']; ?></td>
+                                                <td><?php echo $_SESSION['veterinario_provincia']; ?></td>
+                                                <td><?php echo $_SESSION['veterinario_mail']; ?></td>
+                                                <td><?php echo $_SESSION['veterinario_red']; ?></td>
+                                                <td><?php echo $_SESSION['veterinario_telefono']; ?></td>                                                
+                                                <td><?php echo $_SESSION['veterinario_especialidad']; ?></td>
+                                                <td><?php echo $_SESSION['veterinario_matricula']; ?></td>
+                                                <td><?php echo $_SESSION['veterinario_estado']; ?></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -191,16 +196,15 @@ btn-danger">Aceptar</button>
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">¿Ya te vas <?php echo $_SESSION['usuario_nombre']; ?>?</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">Select "Logout" below if you
-                        are ready to end your current session.</div>
+                    <div class="modal-body">Selecciona "Cerrar Sesion" si queres cerrar esta sesion.</div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.php">Logout</a>
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                        <a class="btn btn-primary" href="cerrar_sesion.php">Cerrar Sesion</a>
                     </div>
                 </div>
             </div>
