@@ -61,7 +61,7 @@ function DatosVeterinario($vDNI, $vConexion)
         $Usuario['Mail'] = $data['CORREO_ELECTRONICO']; 
         $Usuario['Espcialidad'] = $data['DESCRIPCION_ESPECIALIDAD']; 
         $Usuario['Matricula'] = $data['MATRICULA']; 
-        $Usuario['Estado'] = $data['ESTADO']; 
+        $Usuario['Estado'] = $data['ESTADO_PERSONA']; 
         
         
         /*if($data['SEXO']==null){
