@@ -62,7 +62,7 @@ function DatosVeterinario($vDNI, $vConexion)
         $Usuario['Espcialidad'] = $data['DESCRIPCION_ESPECIALIDAD']; 
         $Usuario['Matricula'] = $data['MATRICULA']; 
         $Usuario['Estado'] = $data['ESTADO_PERSONA']; 
-        
+        //AGREGAR RED SOCIAL
         
         /*if($data['SEXO']==null){
             $Usuario['Sexo'] = "-";

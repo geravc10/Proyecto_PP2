@@ -37,6 +37,7 @@ if (!empty($_POST['BotonLogin'])) {
 }
 require_once "partes_Pagina/head.php";
 ?>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
 <body class="bg-gradient-light">
     <div class="container">
@@ -74,8 +75,14 @@ mb-4">¡Bienvenido! </h1>
                                                     $_POST['email'] : '' ?>>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Contraseña" name="pass">
+                                            <div class="input-group">
+                                                <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Contraseña" name="pass">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                                        <i class="fa fa-eye"></i> <!-- Puedes usar un ícono de Font Awesome o cualquier otro -->
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control
@@ -113,6 +120,20 @@ btn-user btn-block" type="submit" value="Login" name="BotonLogin">
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#exampleInputPassword');
+
+    togglePassword.addEventListener('click', function (e) {
+        // Cambia el tipo de input de 'password' a 'text' y viceversa
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        
+        // Cambia el ícono
+        this.querySelector('i').classList.toggle('fa-eye');
+        this.querySelector('i').classList.toggle('fa-eye-slash');
+    });
+</script>
 </body>
 
 </html>
