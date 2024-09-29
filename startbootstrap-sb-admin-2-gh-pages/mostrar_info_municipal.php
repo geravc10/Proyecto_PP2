@@ -50,7 +50,7 @@ text-white-50"></i> Generate Report</a>-->
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-boldtext-primary">Datos de <?php echo $_SESSION['usuario_nombre']. ' ' .$_SESSION['usuario_apellido'] ;?> </h6>
+                                <h6 class="m-0 font-weight-boldtext-primary">Datos de <?php echo  $_SESSION['municipal_nombre'].' '.$_SESSION['municipal_apellido'] ;?> </h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -101,12 +101,18 @@ text-white-50"></i> Generate Report</a>-->
                                 </div>
                             </div>
                         </div>
+                        <?php 
+                    if (
+                        $_SESSION['usuario_nivel'] == 1 ||
+                        $_SESSION['usuario_nivel'] == 2
+                    ) { ?>
                         <div class="col-12 text-center">
                             <button type="button" class="btn
 btn-primary" data-toggle="modal" data-target="#modifyModal">Modificar</button>
                             <button type="button" class="btn
 btn-danger" data-toggle="modal" data-target="#deleteModal">Eliminar</button>
                         </div>
+                        <?php } ?>
                     </form>
                     <!-- """""""""""""""""""""""""""""""""""""""""""""""""""" -->
                 </div>

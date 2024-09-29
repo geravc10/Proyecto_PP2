@@ -97,7 +97,7 @@ justify-content-center" href="index.php">
                         $_SESSION['usuario_nivel'] != 4 ||
                         $_SESSION['usuario_nivel'] != 5
                     ) { ?>
-                        <a class="collapse-item" href="formulario_dueño_animal.php">Dueño de Animal</a>
+                        <a class="collapse-item" href="formulario_duenio_animal.php">Dueño de Animal</a>
                         <a class="collapse-item" href="formulario_animal.php">Animal</a>
                     <?php } ?>
                 </div>

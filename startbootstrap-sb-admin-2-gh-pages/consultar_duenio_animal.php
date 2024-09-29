@@ -1,5 +1,61 @@
 <?php
 session_start();
+if (empty($_SESSION['usuario_nombre'])) {
+    header('Location: cerrar_sesion.php');
+    exit;
+}
+
+require_once 'funciones/conexion.php';
+$MiConexion = ConexionBD();
+require_once 'funciones/validaciones.php';
+$Mensaje = "";
+
+if (!empty($_POST['BotonConsultar'])) {
+
+    $Mensaje = ValidarDniConsulta();
+
+    if (empty($Mensaje)) {
+
+        require_once 'funciones/funcion_consulta_duenio_animal.php';
+        $DuenioEncontrado = DatosDuenioAnimal($_POST['dni'], $MiConexion);
+
+        if (empty($DuenioEncontrado)) {
+            $Mensaje = "No se encontraron conincidencias. Verifique el número de DNI ingresado";
+        } else {
+            $_SESSION['duenio_nombre'] = $DuenioEncontrado['Nombre'];
+            $_SESSION['duenio_apellido'] = $DuenioEncontrado['Apellido'];
+            $_SESSION['duenio_sexo'] = $DuenioEncontrado['Sexo'];
+            $_SESSION['duenio_sexo_id'] = $DuenioEncontrado['SexoId'];
+            $_SESSION['duenio_dni'] = $DuenioEncontrado['dni'];
+            $_SESSION['duenio_fecha'] = $DuenioEncontrado['FechaNacimiento'];
+            $_SESSION['duenio_nacionalidad'] = $DuenioEncontrado['Nacionalidad'];
+            $_SESSION['duenio_informacion'] = $DuenioEncontrado['Informacion'];
+            $_SESSION['duenio_direccion'] = $DuenioEncontrado['Direccion'];
+            $_SESSION['duenio_numero'] = $DuenioEncontrado['Numero'];
+            $_SESSION['duenio_bis'] = $DuenioEncontrado['Bis'];
+            $_SESSION['duenio_ciudad'] = $DuenioEncontrado['Ciudad'];
+            $_SESSION['duenio_provincia'] = $DuenioEncontrado['Provincia'];
+            $_SESSION['duenio_telefono'] = $DuenioEncontrado['Telefono'];
+            $_SESSION['duenio_mail'] = $DuenioEncontrado['Mail'];
+            $_SESSION['duenio_pass'] = $DuenioEncontrado['Pass'];
+            $_SESSION['duenio_red'] = $DuenioEncontrado['Red'];
+            $_SESSION['duenio_estado'] = $DuenioEncontrado['Estado'];
+                       
+            // Calcular la edad del dueño de animal
+            $hoy = new DateTime();            
+            $nacimiento = new DateTime($DuenioEncontrado['FechaNacimiento']);            
+            $diferencia = $nacimiento->diff($hoy);            
+            $edad = $diferencia->y;
+            $_SESSION['duenio_edad'] = $edad;
+
+            header('Location: mostrar_info_duenio_animal.php');
+            exit;
+        }
+    }
+
+
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ES">
@@ -36,17 +92,28 @@ text-white-50"></i> Generate Report</a>-->
                     </div>
                     <!--FORMULARIO-->
                     <h1 class="my-5 text-center fw-bold">Consultar Dueño de Animal</h1>
-                    <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal">
+
+                    <?php
+                    if (!empty($Mensaje)) { ?>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <i class="bi bi-exclamation-triangle me-1"></i>
+                            <?php echo $Mensaje; ?>
+                        </div>
+                    <?php }
+                    ?>
+
+                    <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal" method='post'>
                         <div class="col-md-12">
                             <label for="validationServer03" class="form-label">DNI</label>
                             <input type="number" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="DNI">
+                                placeholder="DNI" name= "dni">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
                         </div>
                         <div class="col-12 text-center mt-4">
-                            <button class="btn btn-primary" type="submit">Consultar</button>
+                            <button class="btn btn-primary" type="submit"
+                            value="Login" name="BotonConsultar">Consultar</button>
                         </div>
                     </form>
                     <!-- """""""""""""""""""""""""""""""""""""""""""""""""""" -->
@@ -69,16 +136,15 @@ text-white-50"></i> Generate Report</a>-->
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">¿Ya te vas <?php echo $_SESSION['usuario_nombre']; ?>?</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">Select "Logout" below if you
-                        are ready to end your current session.</div>
+                    <div class="modal-body">Selecciona "Cerrar Sesion" si queres cerrar esta sesion.</div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.php">Logout</a>
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                        <a class="btn btn-primary" href="cerrar_sesion.php">Cerrar Sesion</a>
                     </div>
                 </div>
             </div>

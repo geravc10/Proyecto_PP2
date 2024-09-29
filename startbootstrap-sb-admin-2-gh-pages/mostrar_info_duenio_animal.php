@@ -1,5 +1,16 @@
 <?php
 session_start();
+if (empty($_SESSION['usuario_nombre'])) {
+    header('Location: cerrar_sesion.php');
+    exit;
+}
+
+if($_SESSION['duenio_bis']==0){
+    $bis = " ";
+}else{
+    $bis = "bis";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ES">
@@ -41,8 +52,7 @@ text-white-50"></i> Generate Report</a>-->
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold
-text-primary">Datos de .......</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Datos de <?php echo  $_SESSION['duenio_nombre'].' '.$_SESSION['duenio_apellido'] ;?></h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -62,65 +72,45 @@ text-primary">Datos de .......</h6>
                                                 <th>Telefono</th>
                                                 <th>Activo</th>
                                             </tr>
-                                        </thead>
-                                        <!-- <tfoot>
+                                        </thead>                                     
                                             <tr>
-                                                <th>DNI</th>
-                                                <th>Nombre y Apellido</th>
-                                                <th>Fecha de Nacimiento</th>
-                                                <th>Años</th>
-                                                <th>Nacionalidad</th>
-                                                <th>Sexo</th>
-                                                <th>Direccion</th>
-                                                <th>Provincia</th>
-                                                <th>Email</th>
-                                                <th>Red Social</th>
-                                                <th>Telefono</th>
-                                                <th>Activo</th>
-                                            </tr>
-                                        </tfoot> -->
-                                        <tbody>
-                                            <!-- <tr>
-                                                <td><?php echo
-                                                    $_SESSION['municipal_nombre']; ?></td>
-                                                <td><?php echo
-                                                    $_SESSION['municipal_apellido']; ?></td>
-                                                <td><?php echo
-                                                    $_SESSION['municipal_dni']; ?></td>
-                                                <td><?php echo
-                                                    $_SESSION['municipal_fecha']; ?></td>
-                                                <td><?php echo
-                                                    $_SESSION['municipal_telefono'] . ' ' . $_SESSION['municipal_area'] . '
-' . $_SESSION['municipal_rol']; ?></td>
-                                                <td><?php echo
-                                                    $_SESSION['municipal_direccion'] . ' ' . $_SESSION['municipal_ciudad'] . '
-' . $_SESSION['municipal_provincia']; ?> </td>
-                                            </tr> -->
-                                            <tr>
-                                                <td>456789012</td>
-                                                <td>Juan Pérez</td>
-                                                <td>1980-01-02</td>
-                                                <td>44</td>
-                                                <td>Argentina</td>
-                                                <td>Masculino</td>
-                                                <td>Av. Belgrano N° 345</td>
-                                                <td>Córdoba</td>
-                                                <td>[dirección de correo electrónico eliminada]</td>
-                                                <td>[https://www.linkedin.com/](https://www.linkedin.com/)</td>
-                                                <td>543210987</td>
-                                                <td>Sí</td>
+                                                <td><?php echo $_SESSION['duenio_dni'] ; ?></td>
+                                                <td><?php echo $_SESSION['duenio_nombre'].' '.$_SESSION['duenio_apellido'] ; ?></td>
+                                                <td><?php echo $_SESSION['duenio_fecha'] ; ?></td>
+                                                <td><?php echo $_SESSION['duenio_edad'] ; ?></td>
+                                                <td><?php echo $_SESSION['duenio_nacionalidad'] ; ?></td>
+                                                <td><?php echo $_SESSION['duenio_sexo'] ; ?></td>
+                                                <td><?php echo $_SESSION['duenio_direccion']. ' ' . $_SESSION['duenio_numero'] . ' ' . $bis; ?></td>
+                                                <td><?php echo $_SESSION['duenio_provincia'] ; ?></td>
+                                                <td><?php echo $_SESSION['duenio_mail'] ; ?></td>
+                                                <td><?php echo $_SESSION['duenio_red'] ; ?></td>
+                                                <td><?php echo $_SESSION['duenio_telefono'] ; ?></td>
+                                                <td><?php 
+                                                if ($_SESSION['duenio_estado']=="1"){
+                                                    echo "Activo";
+                                                }else{
+                                                    echo "Inactivo";
+                                                }
+                                                ?></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
+
+                        <?php 
+                    if (
+                        $_SESSION['usuario_nivel'] == 1 ||
+                        $_SESSION['usuario_nivel'] == 2
+                    ) { ?>
                         <div class="col-12 text-center">
                             <button type="button" class="btn
 btn-primary" data-toggle="modal" data-target="#modifyModal">Modificar</button>
                             <button type="button" class="btn
 btn-danger" data-toggle="modal" data-target="#deleteModal">Eliminar</button>
                         </div>
+                        <?php } ?>
                     </form>
                     <!-- """""""""""""""""""""""""""""""""""""""""""""""""""" -->
                 </div>

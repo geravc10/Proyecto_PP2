@@ -126,12 +126,18 @@ text-white-50"></i> Generate Report</a>-->
                                 </div>
                             </div>
                         </div>
+                        <?php 
+                    if (
+                        $_SESSION['usuario_nivel'] == 1 ||
+                        $_SESSION['usuario_nivel'] == 2
+                    ) { ?>
                         <div class="col-12 text-center">
                             <button type="button" class="btn
 btn-primary" data-toggle="modal" data-target="#modifyModal">Modificar</button>
                             <button type="button" class="btn
 btn-danger" data-toggle="modal" data-target="#deleteModal">Eliminar</button>
                         </div>
+                        <?php } ?>
                     </form>
                     <!-- """""""""""""""""""""""""""""""""""""""""""""""""""" -->
                 </div>
