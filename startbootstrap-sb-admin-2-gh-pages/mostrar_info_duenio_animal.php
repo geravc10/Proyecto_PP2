@@ -105,8 +105,7 @@ text-white-50"></i> Generate Report</a>-->
                         $_SESSION['usuario_nivel'] == 2
                     ) { ?>
                         <div class="col-12 text-center">
-                            <button type="button" class="btn
-btn-primary" data-toggle="modal" data-target="#modifyModal">Modificar</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modifyModal">Modificar</button>
                             <button type="button" class="btn
 btn-danger" data-toggle="modal" data-target="#deleteModal">Eliminar</button>
                         </div>
@@ -142,7 +141,7 @@ btn-danger" data-toggle="modal" data-target="#deleteModal">Eliminar</button>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-danger" onclick="window.location.href='modificar_dueño_animal.php'">Aceptar</button>
+                        <button type="button" class="btn btn-danger" onclick="window.location.href='modificar_duenio_animal.php'">Aceptar</button>
                     </div>
                 </div>
             </div>

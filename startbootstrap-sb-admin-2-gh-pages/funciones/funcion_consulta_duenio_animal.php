@@ -58,7 +58,7 @@ function DatosDuenioAnimal($vDNI, $vConexion)
         $Usuario['Provincia'] = $data['NOMBRE_PROVINCIA'];
         $Usuario['Telefono'] = $data['TELEFONO'];
         $Usuario['Mail'] = $data['CORREO_ELECTRONICO'];         
-        $Usuario['Estado'] = $data['ESTADO_PERSONA'];         
+        $Usuario['Estado'] = $data['ESTADO_DUENO_ANIMAL'];         
 
         if($data['BIS']==0){
             $Usuario['Bis'] = " ";
@@ -66,11 +66,11 @@ function DatosDuenioAnimal($vDNI, $vConexion)
             $Usuario['Bis'] = "bis";
         }
         
-        if($data['ESTADO_VETERINARIO']==0){
+       /* if($data['ESTADO_DUENO_ANIMAL']==0){
             $Usuario['Estado'] = "Inactivo";
         }else{
             $Usuario['Estado'] = "Activo";
-        }
+        }*/
         
     }
     return $Usuario;

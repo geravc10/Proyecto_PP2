@@ -107,8 +107,7 @@ text-white-50"></i> Generate Report</a>-->
                         $_SESSION['usuario_nivel'] == 2
                     ) { ?>
                         <div class="col-12 text-center">
-                            <button type="button" class="btn
-btn-primary" data-toggle="modal" data-target="#modifyModal">Modificar</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modifyModal">Modificar</button>
                             <button type="button" class="btn
 btn-danger" data-toggle="modal" data-target="#deleteModal">Eliminar</button>
                         </div>
