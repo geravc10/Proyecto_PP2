@@ -1,5 +1,81 @@
 <?php
 session_start();
+
+if (empty($_SESSION['usuario_nombre'])) {
+    header('Location: cerrar_sesion.php');
+    exit;
+}
+
+require_once 'funciones/conexion.php';
+$MiConexion = ConexionBD();
+require_once 'funciones/validaciones.php';
+$Mensaje = "";
+
+if (!empty($_POST['BotonConsultar'])) {
+    $Mensaje = ValidarIdAnimal();
+
+    if (empty($Mensaje)) {
+        require_once 'funciones/funcion_consulta_animal.php';
+        $AnimalEncontrado = DatosAnimal($MiConexion, $_POST['codigo']);
+
+        if (empty($AnimalEncontrado)) {
+            $Mensaje = "No se encontraron conincidencias. Verifique el número de Identificacion ingresado.";
+        } else {
+            $_SESSION['animal_nombre'] = $AnimalEncontrado['Nombre'];
+            $_SESSION['animal_apellido'] = $AnimalEncontrado['Apellido'];
+            $_SESSION['animal_dni'] = $AnimalEncontrado['dni'];
+            $_SESSION['animal_sexo'] = $AnimalEncontrado['sexo'];
+            $_SESSION['animal_Id_Sexo'] = $AnimalEncontrado['SexoID'];
+            $_SESSION['animal_FechaNacimiento'] = $AnimalEncontrado['FechaNacimiento'];
+            $_SESSION['animal_Nacionalidad'] = $AnimalEncontrado['Nacionalidad'];
+            $_SESSION['animal_Informacion'] = $AnimalEncontrado['Informacion'];
+            $_SESSION['animal_Direccion'] = $AnimalEncontrado['Direccion'];
+            $_SESSION['animal_Bis'] = $AnimalEncontrado['Bis'];
+            $_SESSION['animal_Numero'] = $AnimalEncontrado['Numero'];
+            $_SESSION['animal_Id_Ciudad'] = $AnimalEncontrado['Id_Ciudad'];
+            $_SESSION['animal_Ciudad'] = $AnimalEncontrado['Ciudad'];
+            $_SESSION['animal_Id_Provincia'] = $AnimalEncontrado['Id_Provincia'];
+            $_SESSION['animal_Provincia'] = $AnimalEncontrado['Provincia'];
+            $_SESSION['animal_Telefono'] = $AnimalEncontrado['Telefono'];
+            $_SESSION['animal_Mail'] = $AnimalEncontrado['Mail'];
+            $_SESSION['animal_Estado_Dueno'] = $AnimalEncontrado['Estado_Dueno'];
+            $_SESSION['animal_Nombre_Animal'] = $AnimalEncontrado['Nombre_Animal'];
+           //$_SESSION['animal_Estado_Animal'] = $AnimalEncontrado['Estado_Animal'];
+            $_SESSION['animal_Id_Raza'] = $AnimalEncontrado['Id_Raza_Animal'];
+            $_SESSION['animal_Descripcion_Raza'] = $AnimalEncontrado['Descripcion_Raza_Animal'];
+            $_SESSION['animal_Id_Especie'] = $AnimalEncontrado['Id_Especie_Animal'];
+            $_SESSION['animal_Descripcion_Especie'] = $AnimalEncontrado['Descripcion_Especie_Animal'];
+            $_SESSION['animal_Id_Rol'] = $AnimalEncontrado['Id_Rol_Animal'];
+            $_SESSION['animal_Descripcion_Rol'] = $AnimalEncontrado['Descripcion_Rol_Animal'];
+            $_SESSION['animal_Descripcion_Familia'] = $AnimalEncontrado['Descripcion_Familia'];
+            $_SESSION['animal_Id'] = $AnimalEncontrado['Id_Animal'];
+
+            //estado animal
+            if($AnimalEncontrado['Estado_Animal']==0){
+                $_SESSION['animal_Estado_Animal'] = "no";
+            }else{
+                $_SESSION['animal_Estado_Animal'] = "si";
+            }
+            
+            // Calcular la edad del dueño de animal
+            $hoy = new DateTime();            
+            $nacimiento = new DateTime($AnimalEncontrado['FechaNacimiento']);            
+            $diferencia = $nacimiento->diff($hoy);            
+            $edad = $diferencia->y;
+            $_SESSION['animal_duenio_edad'] = $edad;
+
+            header('Location: mostrar_info_animal.php');
+            exit;
+
+        }
+
+    }
+}
+
+    
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="ES">
@@ -36,15 +112,26 @@ text-white-50"></i> Generate Report</a>-->
                     </div>
                     <!--FORMULARIO-->
                     <h1 class="my-5 text-center fw-bold">Consultar Animal</h1>
-                    <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal">
+
+                    <?php
+                    if (!empty($Mensaje)) { ?>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <i class="bi bi-exclamation-triangle me-1"></i>
+                            <?php echo $Mensaje; ?>
+                        </div>
+                    <?php }
+                    ?>
+
+                    <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal"method='post'>
                         <div class="col-md-12">
-                            <label for="validationServer03" class="form-label">ID</label>
+                            <label for="validationServer03" class="form-label">Codigo de identificacion del animal</label>
                             <input type="number" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="ID">
+                                placeholder="Codigo Animal" name="codigo">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
                         </div>
+                        <!--
                         <div class="col-md-12 mt-4">
                             <label for="validationServer03" class="form-label">Nombre</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
@@ -53,8 +140,10 @@ text-white-50"></i> Generate Report</a>-->
                                 Please provide a valid city.
                             </div>
                         </div>
+                    -->
                         <div class="col-12 text-center mt-4">
-                            <button class="btn btn-primary" type="submit">Consultar</button>
+                            <button class="btn btn-primary" type="submit"
+                            value="Login" name="BotonConsultar">Consultar</button>
                         </div>
                     </form>
                     <!-- """""""""""""""""""""""""""""""""""""""""""""""""""" -->
@@ -77,16 +166,15 @@ text-white-50"></i> Generate Report</a>-->
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">¿Ya te vas <?php echo $_SESSION['usuario_nombre']; ?>?</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">Select "Logout" below if you
-                        are ready to end your current session.</div>
+                    <div class="modal-body">Selecciona "Cerrar Sesion" si queres cerrar esta sesion.</div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.php">Logout</a>
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                        <a class="btn btn-primary" href="cerrar_sesion.php">Cerrar Sesion</a>
                     </div>
                 </div>
             </div>

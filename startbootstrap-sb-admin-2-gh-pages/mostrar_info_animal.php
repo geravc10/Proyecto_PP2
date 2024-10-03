@@ -1,5 +1,26 @@
 <?php
 session_start();
+
+if (empty($_SESSION['usuario_nombre'])) {
+    header('Location: cerrar_sesion.php');
+    exit;
+}
+
+if($_SESSION['animal_Bis']==0){
+    $bis = " ";
+}else{
+    $bis = "bis";
+}
+
+
+if($_SESSION['animal_Estado_Animal']=="si"){
+    $estado = "Activo";
+}else{
+    $estado = "Inactivo";
+}
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="ES">
@@ -40,44 +61,35 @@ text-white-50"></i> Generate Report</a>-->
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold
-text-primary">Datos de .......</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Datos de <?php echo $_SESSION['animal_Nombre_Animal']; ?> </h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>DNI Dueño</th>
-                                                <th>Nombre Dueño</th>
+                                                <th>DNI</th>
+                                                <th>Nombre y apellido del Dueño</th>
                                                 <th>Nombre Animal</th>
-                                                <th>Especie</th>
-                                                <th>Raza</th>
+                                                <th>Especie y raza</th>
                                                 <th>Rol</th>
-                                                <th>Estado</th>
+                                                <th>Datos de contacto</th>
+                                                <th>Ddireccion</th>
+                                                <th>Estado Animal</th>
                                                 <th>Descripcion Familia</th>
                                             </tr>
-                                        </thead>
-                                        <!-- <tfoot>
-                                            <tr>
-                                                <th>NOMBRE</th>
-                                                <th>APELLIDO</th>
-                                                <th>DNI</th>
-                                                <th>AÑOS</th>
-                                                <th>N° HABILITACION</th>
-                                                <th>DIRECCION</th>
-                                            </tr>
-                                        </tfoot> -->
+                                        </thead>                                        
                                         <tbody>
                                             <tr>
-                                                <td>45789123</td>
-                                                <td>Garrett Winters</td>
-                                                <td>Firulais</td>
-                                                <td>Perro</td>
-                                                <td>Labrador</td>
-                                                <td>Accountant</td>
-                                                <td>Activo</td>
-                                                <td>Una familia amante de los animales con dos hijos pequeños.</td>
+                                                <td><?php echo $_SESSION['animal_dni']; ?></td>
+                                                <td><?php echo $_SESSION['animal_nombre']. ' ' .$_SESSION['animal_apellido'] ; ?></td>
+                                                <td><?php echo $_SESSION['animal_Nombre_Animal']; ?></td>
+                                                <td><?php echo $_SESSION['animal_Descripcion_Especie']. ' - ' .$_SESSION['animal_Descripcion_Raza']; ?></td>
+                                                <td><?php echo $_SESSION['animal_Descripcion_Rol']; ?></td>
+                                                <td><?php echo $_SESSION['animal_Telefono'] .' - '. $_SESSION['animal_Mail']; ?></td>
+                                                <td><?php echo $_SESSION['animal_Direccion'] . ' ' . $_SESSION['animal_Numero'] . ' ' . $_SESSION['animal_Bis'] . ' ' .$_SESSION['animal_Ciudad'] . ' ' . $_SESSION['animal_Provincia']; ?></td>
+                                                <td><?php echo $estado; ?></td>
+                                                <td><?php echo $_SESSION['animal_Descripcion_Familia']; ?></td>
                                             </tr>
                                         </tbody>
                                     </table>

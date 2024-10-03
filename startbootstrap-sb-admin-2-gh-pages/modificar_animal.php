@@ -1,5 +1,52 @@
 <?php
 session_start();
+
+if (empty($_SESSION['usuario_nombre'])) {
+    header('Location: cerrar_sesion.php');
+    exit;
+}
+
+require_once 'funciones/conexion.php';
+$MiConexion = ConexionBD();
+
+require_once 'funciones/funcion_consultas_generales.php';
+$ListaEspecies = TraerEspecieAnimal($MiConexion);
+$CantidadEspecies= count($ListaEspecies);
+
+require_once 'funciones/funcion_consultas_generales.php';
+$ListaRazas = TraerRazaAnimal($MiConexion);
+$CantidadRazas= count($ListaRazas);
+
+require_once 'funciones/funcion_consultas_generales.php';
+$ListaRoles = TraerRolAnimal($MiConexion);
+$CantidadRoles= count($ListaRoles);
+
+require_once 'funciones/validaciones.php';
+$Mensaje = "";
+
+if (!empty($_POST['BotonModificar'])) {
+
+    $Mensaje = ValidarModificacionAnimal();
+
+    if(empty($Mensaje)){
+
+        require_once 'funciones/funcion_modificar_animal.php';
+        $AnimalModificado = ModificarAnimal($MiConexion, $_SESSION['animal_Id']);
+
+        if(empty($AnimalModificado)){
+            $Mensaje="Fallo la modificacion del Dueño del animal.";
+        }else{
+            $Mensaje="Se modifico el Dueño del animal.";
+            header('Location: consultar_animal.php');
+            exit;
+
+        }
+    } 
+}
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="ES">
@@ -36,12 +83,24 @@ text-white-50"></i> Generate Report</a>-->
                     </div>
                     <!--FORMULARIO-->
                     <h1 class="my-5 text-center fw-bold">Modificar Animal</h1>
-                    <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal">
+
+                    <?php
+                    if (!empty($Mensaje)) { ?>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <i class="bi bi-exclamation-triangle me-1"></i>
+                            <?php echo $Mensaje; ?>
+                        </div>
+                    <?php }
+                    ?>
+
+                    <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal" method="post">
                         <div class="col-md-12">
                             <label for="validationServer05" class="form-label">Nombre
                                 del Animal</label>
-                            <input type="password" class="form-control" id="validationServer05"
-                                aria-describedby="validationServer05Feedback" placeholder="Nombre del Animal">
+                            <input type="text" class="form-control" id="validationServer05"
+                                aria-describedby="validationServer05Feedback" placeholder="Nombre del Animal"
+                                name = "nombre"
+                                value="<?php echo (empty($_POST['nombre'])) ? $_SESSION['animal_Nombre_Animal'] : $_POST['nombre']; ?>">
                             <div id="validationServer05Feedback" class="invalid-feedback">
                                 Please provide a valid zip.
                             </div>
@@ -49,11 +108,36 @@ text-white-50"></i> Generate Report</a>-->
                         <div class="col-md-4">
                             <label for="validationServer04" class="form-label">Raza</label>
                             <select class="form-select" id="validationServer04"
-                                aria-describedby="validationServer04Feedback" required>
+                                aria-describedby="validationServer04Feedback" required
+                                name = "raza">
                                 <option selected disabled value="">Raza...</option>
+                                
+                                <?php 
+                                $selected='';                                
+                                for($i=0;$i<$CantidadRazas;$i++){  
+                                    if(!empty($_POST['raza'])){                                   
+                                        if ($_POST['raza'] ==  $ListaRazas[$i]['id_raza']) {
+                                            $selected = 'selected';
+                                        }else {
+                                            $selected='';
+                                        }
+                                    }else{
+                                        if ($_SESSION['animal_Id_Raza'] ==  $ListaRazas[$i]['id_raza']) {
+                                            $selected = 'selected';
+                                        }else {
+                                            $selected='';
+                                        }
+                                    }
+                                    ?>
+                                    <option value="<?php echo $ListaRazas[$i]['id_raza']; ?>" <?php echo $selected; ?>>
+                                        <?php echo $ListaRazas[$i]['descripcion_raza']; ?></option>
+                                <?php }  ?>
+                                
+                                <!--
                                 <option>Rol 1</option>
                                 <option>Rol 2</option>
                                 <option>Rol 3</option>
+                                -->
                             </select>
                             <div id="validationServer04Feedback" class="invalid-feedback">
                                 Please select a valid state.
@@ -63,12 +147,36 @@ text-white-50"></i> Generate Report</a>-->
                             <label for="validationServer04" class="form-label">Rol del
                                 Animal</label>
                             <select class="form-select" id="validationServer04"
-                                aria-describedby="validationServer04Feedback" required>
-                                <option selected disabled value="">Rol del
-                                    Animal...</option>
+                                aria-describedby="validationServer04Feedback" required
+                                name = "rol">
+                                <option selected disabled value="">Rol del Animal...</option>
+
+                                    <?php 
+                                $selected='';                                
+                                for($i=0;$i<$CantidadRoles;$i++){  
+                                    if(!empty($_POST['rol'])){                                   
+                                        if ($_POST['rol'] ==  $ListaRoles[$i]['id_rol']) {
+                                            $selected = 'selected';
+                                        }else {
+                                            $selected='';
+                                        }
+                                    }else{
+                                        if ($_SESSION['animal_Id_Rol'] ==  $ListaRoles[$i]['id_rol']) {
+                                            $selected = 'selected';
+                                        }else {
+                                            $selected='';
+                                        }
+                                    }
+                                    ?>
+                                    <option value="<?php echo $ListaRoles[$i]['id_rol']; ?>" <?php echo $selected; ?>>
+                                        <?php echo $ListaRoles[$i]['descripcion_rol']; ?></option>
+                                <?php }  ?>
+
+                                <!--    
                                 <option>Rol 1</option>
                                 <option>Rol 2</option>
                                 <option>Rol 3</option>
+                                    -->
                             </select>
                             <div id="validationServer04Feedback" class="invalid-feedback">
                                 Please select a valid state.
@@ -78,25 +186,38 @@ text-white-50"></i> Generate Report</a>-->
                             <label for="validationServer04" class="form-label">Estado
                                 del Animal</label>
                             <select class="form-select" id="validationServer04"
-                                aria-describedby="validationServer04Feedback" required>
-                                <option selected disabled value="">Estado del
-                                    Animal...</option>
+                                aria-describedby="validationServer04Feedback" required
+                                name = "estado">                               
+
+                                <?php 
+                                    $selectedBis = isset($_POST['estado']) ? $_POST['estado'] : (isset($_SESSION['animal_Estado_Animal']) ? $_SESSION['animal_Estado_Animal'] : ''); // Verificar si se ha enviado el valor
+            
+                                    $s0 = $selectedBis === '' ? 'selected' : ''; // Selecciona 'Estado...' si no hay valor
+                                    $s1 = $selectedBis === 'si' ? 'selected' : ''; // Selecciona 'Inactivo' si se ha elegido 'no'
+                                    $s2 = $selectedBis === 'no' ? 'selected' : ''; // Selecciona 'Activo' si se ha elegido 'si'
+                                ?>                                
+                                <option <?php echo $s0; ?> disabled value="">Estado...</option>                                
+                                <option value="no" <?php echo $s2 ; ?>>Inactivo</option>
+                                <option value="si" <?php echo $s1 ; ?>>Activo</option>
+
+                                <!--
+                                <option selected disabled value="">Estado del Animal...</option>
                                 <option>Estado 1</option>
                                 <option>Estado 2</option>
                                 <option>Estado 3</option>
+                                    -->
                             </select>
                             <div id="validationServer04Feedback" class="invalid-feedback">
                                 Please select a valid state.
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <label for="exampleFormControlTextarea1" class="form-label">Descripcion de Estado en el que
-                                fue
-                                encontrado</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
+                            <label for="exampleFormControlTextarea1" class="form-label">Descripcion familiar</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
+                            name = "descripcion"><?php echo (!empty($_POST['descripcion']) ? $_POST['descripcion']:$_SESSION['animal_Descripcion_Familia']); ?></textarea>
                         </div>
                         <div class="col-12 text-center mt-4">
-                            <button class="btn btn-primary" type="submit">Acepta la
+                            <button class="btn btn-primary" type="submit" type="submit"value="modificar" name="BotonModificar">Acepta la
                                 modificacion</button>
                             <button class="btn btn-primary" type="submit">Cancelo la
                                 modificacion</button>
@@ -122,16 +243,15 @@ text-white-50"></i> Generate Report</a>-->
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">¿Ya te vas <?php echo $_SESSION['usuario_nombre']; ?>?</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">Select "Logout" below if you
-                        are ready to end your current session.</div>
+                    <div class="modal-body">Selecciona "Cerrar Sesion" si queres cerrar esta sesion.</div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.php">Logout</a>
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                        <a class="btn btn-primary" href="cerrar_sesion.php">Cerrar Sesion</a>
                     </div>
                 </div>
             </div>
