@@ -38,16 +38,15 @@ text-white-50"></i> Generate Report</a>-->
                     <h1 class="my-5 text-center fw-bold">Crear Animal</h1>
                     <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal">
                         <div class="col-md-6">
-                            <label for="validationServer05" class="form-label">Nombre
-                                del Animal</label>
+                            <label for="validationServer05" class="form-label"><b style="color: red;">*</b> Codigo de Verificacion Animal</label>
                             <input type="password" class="form-control" id="validationServer05"
-                                aria-describedby="validationServer05Feedback" placeholder="Nombre del Animal">
+                                aria-describedby="validationServer05Feedback" placeholder="Codigo Animal">
                             <div id="validationServer05Feedback" class="invalid-feedback">
                                 Please provide a valid zip.
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="validationServer05" class="form-label">DNI del Dueño</label>
+                            <label for="validationServer05" class="form-label"><b style="color: red;">*</b> DNI del Dueño</label>
                             <input type="number" class="form-control" id="validationServer05"
                                 aria-describedby="validationServer05Feedback" placeholder="DNI del Dueño">
                             <div id="validationServer05Feedback" class="invalid-feedback">
@@ -55,7 +54,7 @@ text-white-50"></i> Generate Report</a>-->
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <label for="validationServer04" class="form-label">Especie de Animal</label>
+                            <label for="validationServer04" class="form-label"><b style="color: red;">*</b> Especie de Animal</label>
                             <select class="form-select" id="validationServer04"
                                 aria-describedby="validationServer04Feedback" required>
                                 <option selected disabled value="">Especie de Animal...</option>
@@ -72,7 +71,7 @@ text-white-50"></i> Generate Report</a>-->
                             </div>
                         </div>
                         <div class="col-md-4 mt-4">
-                            <label for="validationServer04" class="form-label">Raza</label>
+                            <label for="validationServer04" class="form-label"><b style="color: red;">*</b> Raza</label>
                             <select class="form-select" id="validationServer04"
                                 aria-describedby="validationServer04Feedback" required>
                                 <option selected disabled value="">Raza...</option>
@@ -85,7 +84,7 @@ text-white-50"></i> Generate Report</a>-->
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <label for="validationServer04" class="form-label">Rol del Animal</label>
+                            <label for="validationServer04" class="form-label"><b style="color: red;">*</b> Rol del Animal</label>
                             <select class="form-select" id="validationServer04"
                                 aria-describedby="validationServer04Feedback" required>
                                 <option selected disabled value="">Rol del Animal...</option>
@@ -98,9 +97,8 @@ text-white-50"></i> Generate Report</a>-->
                                 Please select a valid role.
                             </div>
                         </div>
-                        <div class="col-md-12 text-center mt-5">
-                            <label for="validationServer04" class="form-label">Estado
-                                del Animal</label>
+                        <div class="col-md-4 text-center mt-5">
+                            <label for="validationServer04" class="form-label"><b style="color: red;">*</b> Estado del Animal</label>
                             <select class="form-select" id="validationServer04"
                                 aria-describedby="validationServer04Feedback" required>
                                 <option selected disabled value="">Estado del
@@ -112,8 +110,34 @@ text-white-50"></i> Generate Report</a>-->
                                 Please select a valid state.
                             </div>
                         </div>
+                        <div class="col-md-4 text-center mt-5">
+                            <label for="validationServer04" class="form-label"><b style="color: red;">*</b> Estado de vacunacion</label>
+                            <select class="form-select" id="validationServer04"
+                                aria-describedby="validationServer04Feedback" required>
+                                <option selected disabled value="">
+                                    Vacuna...</option>
+                                <option>SI</option>
+                                <option>NO</option>
+                            </select>
+                            <div id="validationServer04Feedback" class="invalid-feedback">
+                                Please select a valid state.
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-center mt-5">
+                            <label for="validationServer04" class="form-label"><b style="color: red;">*</b> Estado de castracion</label>
+                            <select class="form-select" id="validationServer04"
+                                aria-describedby="validationServer04Feedback" required>
+                                <option selected disabled value="">
+                                    Castracion...</option>
+                                <option>SI</option>
+                                <option>NO</option>
+                            </select>
+                            <div id="validationServer04Feedback" class="invalid-feedback">
+                                Please select a valid state.
+                            </div>
+                        </div>
                         <div class="col-md-12 mt-4">
-                            <label for="exampleFormControlTextarea1" class="form-label">Descripcion de la Familia del animal</label>
+                            <label for="exampleFormControlTextarea1" class="form-label"><b style="color: red;">*</b> Descripcion de la Familia del animal</label>
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
                         </div>
                         <div class="col-12 mt-4 text-center">

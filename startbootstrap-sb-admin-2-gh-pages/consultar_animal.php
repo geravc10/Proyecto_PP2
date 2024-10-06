@@ -38,17 +38,9 @@ text-white-50"></i> Generate Report</a>-->
                     <h1 class="my-5 text-center fw-bold">Consultar Animal</h1>
                     <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal">
                         <div class="col-md-12">
-                            <label for="validationServer03" class="form-label">ID</label>
+                            <label for="validationServer03" class="form-label">Codigo de Verificacion Animal</label>
                             <input type="number" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="ID">
-                            <div id="validationServer03Feedback" class="invalid-feedback">
-                                Please provide a valid city.
-                            </div>
-                        </div>
-                        <div class="col-md-12 mt-4">
-                            <label for="validationServer03" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Nombre">
+                                placeholder="Codigo Animal">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>

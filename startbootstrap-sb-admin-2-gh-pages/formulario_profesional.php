@@ -38,28 +38,28 @@ text-white-50"></i> Generate Report</a>-->
                     <h1 class="my-5 text-center fw-bold">Crear Profesional</h1>
                     <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal">
                         <div class="col-md-6">
-                            <label for="validationServer01" class="form-label">Nombre</label>
+                            <label for="validationServer01" class="form-label"><b style="color: red;">*</b> Nombre</label>
                             <input type="text" class="form-control" id="nom_for" placeholder="Nombre" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="validationServer01" class="form-label">Apellido</label>
+                            <label for="validationServer01" class="form-label"><b style="color: red;">*</b> Apellido</label>
                             <input type="text" class="form-control" id="nom_for" placeholder="Nombre" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="validationServer01" class="form-label">DNI</label>
+                            <label for="validationServer01" class="form-label"><b style="color: red;">*</b> DNI</label>
                             <input type="text" class="form-control" id="nom_for" placeholder="DNI" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="validationServer01" class="form-label">Direccion del DNI</label>
+                            <label for="validationServer01" class="form-label"><b style="color: red;">*</b> Direccion del DNI</label>
                             <input type="text" class="form-control" id="nom_for" placeholder="Direccion del Profesional"
                                 required>
                             <div class="valid-feedback">
@@ -67,7 +67,7 @@ text-white-50"></i> Generate Report</a>-->
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="validationServer01" class="form-label">Nombre
+                            <label for="validationServer01" class="form-label"><b style="color: red;">*</b> Nombre
                                 del Local</label>
                             <input type="text" class="form-control" id="nom_for" placeholder="Nombre del Local"
                                 required>
@@ -76,7 +76,7 @@ text-white-50"></i> Generate Report</a>-->
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="validationServer01" class="form-label">Direccion del Local</label>
+                            <label for="validationServer01" class="form-label"><b style="color: red;">*</b> Direccion del Local</label>
                             <input type="text" class="form-control" id="nom_for" placeholder="Direccion del Local"
                                 required>
                             <div class="valid-feedback">
@@ -84,7 +84,7 @@ text-white-50"></i> Generate Report</a>-->
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="validationServer04" class="form-label">Especialidad</label>
+                            <label for="validationServer04" class="form-label"><b style="color: red;">*</b> Especialidad</label>
                             <select class="form-select" id="validationServer04"
                                 aria-describedby="validationServer04Feedback" required>
                                 <option selected disabled value="">Especialidad...</option>
@@ -96,7 +96,7 @@ text-white-50"></i> Generate Report</a>-->
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="dateInput" class="form-label">Fecha de
+                            <label for="dateInput" class="form-label"><b style="color: red;">*</b> Fecha de
                                 Creacion</label>
                             <input type="date" class="form-control" id="validationServer05"
                                 aria-describedby="validationServer05Feedback" placeholder="Especialidad">
@@ -105,7 +105,7 @@ text-white-50"></i> Generate Report</a>-->
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <label for="validationServer04" class="form-label">Estado</label>
+                            <label for="validationServer04" class="form-label"><b style="color: red;">*</b> Estado</label>
                             <select class="form-select" id="validationServer04"
                                 aria-describedby="validationServer04Feedback" required>
                                 <option selected disabled value="">Estado...</option>
@@ -117,7 +117,7 @@ text-white-50"></i> Generate Report</a>-->
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <label for="validationServerUsername" class="form-label">Usuario</label>
+                            <label for="validationServerUsername" class="form-label"><b style="color: red;">*</b> Usuario</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text required" id="inputGroupPrepend3">@</span>
                                 <input type="text" class="form-control required" id="validationServerUsername"
@@ -129,7 +129,7 @@ validationServerUsernameFeedback" placeholder="Usuario" required>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <label for="validationServer05" class="form-label">Contraseña</label>
+                            <label for="validationServer05" class="form-label"><b style="color: red;">*</b> Contraseña</label>
                             <input type="password" class="form-control" id="validationServer05"
                                 aria-describedby="validationServer05Feedback" placeholder="Contraseña">
                             <div id="validationServer05Feedback" class="invalid-feedback">
@@ -137,7 +137,7 @@ validationServerUsernameFeedback" placeholder="Usuario" required>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <label for="validationServer01" class="form-label">N°
+                            <label for="validationServer01" class="form-label"><b style="color: red;">*</b> N°
                                 Habilitacion</label>
                             <input type="text" class="form-control" id="nom_for" placeholder="N° Habilitacion" required>
                             <div class="valid-feedback">
@@ -145,7 +145,7 @@ validationServerUsernameFeedback" placeholder="Usuario" required>
                             </div>
                         </div>
                 </div>
-                <div class="col-12">
+                <div class="col-12 text-center">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="invalidCheck3"
                             aria-describedby="invalidCheck3Feedback" required>
@@ -157,7 +157,7 @@ validationServerUsernameFeedback" placeholder="Usuario" required>
                         </div>
                     </div>
                 </div>
-                <div class="col-12">
+                <div class="col-12 text-center mt-4">
                     <button class="btn btn-primary" type="submit">Enviar</button>
                 </div>
                 </form>

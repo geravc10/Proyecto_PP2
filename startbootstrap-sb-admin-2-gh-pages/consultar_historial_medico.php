@@ -6,6 +6,8 @@ session_start();
 <?php
 require_once 'partes_Pagina/head.php';
 ?>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
 
 <body id="page-top">
     <?php
@@ -37,25 +39,110 @@ text-white-50"></i> Generate Report</a>-->
                     <!--FORMULARIO-->
                     <h1 class="my-5 text-center fw-bold">Consultar Historial Medico</h1>
                     <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal">
-                        <div class="col-md-12">
-                            <label for="validationServer03" class="form-label">DNI Dueño</label>
-                            <input type="number" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="DNI Dueño">
-                            <div id="validationServer03Feedback" class="invalid-feedback">
-                                Please provide a valid city.
+                        <div class="col-md-6">
+                            <label for="validationServer05" class="form-label">Codigo de Verificacion Animal</label>
+                            <input type="number" class="form-control" id="validationServer05"
+                                aria-describedby="validationServer05Feedback" placeholder="Codigo Animal">
+                            <div id="validationServer05Feedback" class="invalid-feedback">
+                                Please provide a valid zip.
                             </div>
                         </div>
-                        <div class="col-md-12 mt-4">
-                            <label for="validationServer03" class="form-label">Nombre Animal</label>
-                            <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Nombre Animal">
-                            <div id="validationServer03Feedback" class="invalid-feedback">
-                                Please provide a valid city.
-                            </div>
-                        </div>
-                        <div class="col-12 text-center mt-4">
+                        <div class="col-6 text-center mt-5">
                             <button class="btn btn-primary" type="submit">Consultar</button>
                         </div>
+                        <div class="col-md-12 mt-5 mb-1 text-center">
+                            <hr>
+                        </div>
+
+                        <p class="text-center">Informacion del Animal y Dueño</p>
+                        <div class="col-md-12">
+                            <label for="validationServer05" class="form-label">DNI Dueño</label>
+                            <input type="number" class="form-control" id="validationServer05"
+                                aria-describedby="validationServer05Feedback" placeholder="" readonly>
+                            <div id="validationServer05Feedback" class="invalid-feedback">
+                                Please provide a valid zip.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationServer05" class="form-label">ID Animal</label>
+                            <input type="number" class="form-control" id="validationServer05"
+                                aria-describedby="validationServer05Feedback" placeholder="" readonly>
+                            <div id="validationServer05Feedback" class="invalid-feedback">
+                                Please provide a valid zip.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationServer05" class="form-label">Nombre Animal</label>
+                            <input type="text" class="form-control" id="validationServer05"
+                                aria-describedby="validationServer05Feedback" placeholder="" readonly>
+                            <div id="validationServer05Feedback" class="invalid-feedback">
+                                Please provide a valid zip.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationServer05" class="form-label">Especie</label>
+                            <input type="text" class="form-control" id="validationServer05"
+                                aria-describedby="validationServer05Feedback" placeholder="" readonly>
+                            <div id="validationServer05Feedback" class="invalid-feedback">
+                                Please provide a valid zip.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationServer05" class="form-label">Raza</label>
+                            <input type="text" class="form-control" id="validationServer05"
+                                aria-describedby="validationServer05Feedback" placeholder="" readonly>
+                            <div id="validationServer05Feedback" class="invalid-feedback">
+                                Please provide a valid zip.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationServer05" class="form-label">Rol</label>
+                            <input type="text" class="form-control" id="validationServer05"
+                                aria-describedby="validationServer05Feedback" placeholder="" readonly>
+                            <div id="validationServer05Feedback" class="invalid-feedback">
+                                Please provide a valid zip.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationServer05" class="form-label">Estado</label>
+                            <input type="text" class="form-control" id="validationServer05"
+                                aria-describedby="validationServer05Feedback" placeholder="" readonly>
+                            <div id="validationServer05Feedback" class="invalid-feedback">
+                                Please provide a valid zip.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationServer05" class="form-label">Esta castrado?</label>
+                            <input type="text" class="form-control" id="validationServer05"
+                                aria-describedby="validationServer05Feedback" placeholder="" readonly>
+                            <div id="validationServer05Feedback" class="invalid-feedback">
+                                Please provide a valid zip.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationServer05" class="form-label">Esta vacunado?</label>
+                            <input type="text" class="form-control" id="validationServer05"
+                                aria-describedby="validationServer05Feedback" placeholder="" readonly>
+                            <div id="validationServer05Feedback" class="invalid-feedback">
+                                Please provide a valid zip.
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-5 mb-1 text-center">
+                            <hr>
+                            <h4>Enfermedad que presenta</h4>
+                        </div>
+                        <div class="col-md-12 mt-4">
+                            <label for="exampleFormControlTextarea1" class="form-label">Descripción de Enfermedades</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
+                                disabled></textarea>
+                        </div>
+                        <div class="col-md-12 mt-4">
+                            <label for="exampleFormControlTextarea1" class="form-label">Descripción del
+                                Historial</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
+                                disabled></textarea>
+                        </div>
+
                     </form>
                     <!-- """""""""""""""""""""""""""""""""""""""""""""""""""" -->
                 </div>
@@ -94,6 +181,8 @@ text-white-50"></i> Generate Report</a>-->
         <?php
         require_once 'partes_Pagina/script.php';
         ?>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>
