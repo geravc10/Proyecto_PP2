@@ -43,6 +43,8 @@ function DatosAnimal($vConexion,$vCodigo)
             ra.ID_RAZA_ANIMAL = a.ID_RAZA_ANIMAL
         AND
             r.ID_ROL_ANIMAL = a.ID_ROL_ANIMAL
+        AND
+            ea.ID_TIPO_ANIMAL =  a.ID_TIPO_ANIMAL
         /*
         HICE LA CONSULTA HASTA ACA. FALTA TERMINAR Y PROBAR
         */

@@ -90,7 +90,7 @@ text-white-50"></i> Generate Report</a>-->
 
                     <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal" method="post">
                         <div class="col-md-4">
-                            <label for="validationServer01" class="form-label">Nombre</label>
+                            <label for="validationServer01" class="form-label"><b style="color: red;">*</b> Nombre</label>
                             <input type="text" class="form-control" id="validationServer01" placeholder="Nombre"
                                 name="nombre" required value= "<?php echo (!empty($_POST['nombre']) ? $_POST['nombre']:''); ?>">
                             <div class="valid-feedback">
@@ -99,7 +99,7 @@ text-white-50"></i> Generate Report</a>-->
                         </div>
                         <input type="image" src="" alt="">
                         <div class="col-md-4">
-                            <label for="validationServer02" class="form-label">Apellido</label>
+                            <label for="validationServer02" class="form-label"><b style="color: red;">*</b> Apellido</label>
                             <input type="text" class="form-control" id="validationServer02" placeholder="Apellido"
                                 name="apellido" required value= "<?php echo (!empty($_POST['apellido']) ? $_POST['apellido']:''); ?>">
                             <div class="valid-feedback">
@@ -107,7 +107,7 @@ text-white-50"></i> Generate Report</a>-->
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <label for="validationServer02" class="form-label">Fecha de
+                            <label for="validationServer02" class="form-label"><b style="color: red;">*</b> Fecha de
                                 Nacimiento</label>
                             <input type="date" class="form-control" id="validationServer02"
                                 placeholder="Fecha de Nacimiento" name="fecha" required
@@ -117,7 +117,7 @@ text-white-50"></i> Generate Report</a>-->
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <label for="validationServer02" class="form-label">Nacionalidad</label>
+                            <label for="validationServer02" class="form-label"><b style="color: red;">*</b> Nacionalidad</label>
                             <input type="text" class="form-control" id="validationServer02" placeholder="Nacionalidad"
                                 name="nacionalidad" required
                                 value= "<?php echo (!empty($_POST['nacionalidad']) ? $_POST['nacionalidad']:''); ?>">
@@ -126,7 +126,7 @@ text-white-50"></i> Generate Report</a>-->
                             </div>
                         </div>
                         <div class="col-md-4 pt-5">
-                            <label for="validationServer04" class="form-label">Sexo</label>
+                            <label for="validationServer04" class="form-label"><b style="color: red;">*</b> Sexo</label>
                             <select class="form-select" id="validationServer04"
                                 aria-describedby="validationServer04Feedback" name="sexo" required>
                                 <option selected disabled value="">Sexo...</option>
@@ -155,7 +155,7 @@ text-white-50"></i> Generate Report</a>-->
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <label for="validationServer03" class="form-label">DNI</label>
+                            <label for="validationServer03" class="form-label"><b style="color: red;">*</b> DNI</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
                                 placeholder="DNI" name="dni"
                                 value= "<?php echo (!empty($_POST['dni']) ? $_POST['dni']:''); ?>">
@@ -164,7 +164,7 @@ text-white-50"></i> Generate Report</a>-->
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <label for="validationServer02" class="form-label">Informacion
+                            <label for="validationServer02" class="form-label"><b style="color: red;">*</b> Informacion
                                 Personal</label>
                             <input type="text" class="form-control" id="validationServer02"
                                 placeholder="Informacion Personal" name="informacion"
@@ -177,7 +177,7 @@ text-white-50"></i> Generate Report</a>-->
                             <hr>
                         </div>
                         <div class="col-md-6">
-                            <label for="validationServer03" class="form-label">Nombre de
+                            <label for="validationServer03" class="form-label"><b style="color: red;">*</b> Nombre de
                                 Calle</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
                                 placeholder="Nombre de Calle" name="calle"
@@ -187,7 +187,7 @@ text-white-50"></i> Generate Report</a>-->
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="validationServer03" class="form-label">Numero</label>
+                            <label for="validationServer03" class="form-label"><b style="color: red;">*</b> Numero</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
                                 placeholder="Numero " name="numero"
                                 value= "<?php echo (!empty($_POST['numero']) ? $_POST['numero']:''); ?>">
@@ -196,7 +196,7 @@ text-white-50"></i> Generate Report</a>-->
                             </div>
                         </div>
                         <div class="col-md-4 pt-4">
-                            <label for="validationServer04" class="form-label">Provincia</label>
+                            <label for="validationServer04" class="form-label"><b style="color: red;">*</b> Provincia</label>
                             <select class="form-select" id="validationServer04"
                                 aria-describedby="validationServer04Feedback" name="provincia" required>
                                 <option selected disabled value="">Selecciona una provincia...</option>
@@ -245,7 +245,7 @@ text-white-50"></i> Generate Report</a>-->
                             </div>
                         </div>
                         <div class="col-md-4 mt-4">
-                            <label for="validationServer03" class="form-label">Nombre de
+                            <label for="validationServer03" class="form-label"><b style="color: red;">*</b> Nombre de
                                 Ciudad</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
                                 placeholder="Nombre de Ciudad" name="ciudad"
@@ -255,7 +255,7 @@ text-white-50"></i> Generate Report</a>-->
                             </div>
                         </div>
                         <div class="col-md-4 pt-5">
-                            <label for="validationServer04" class="form-label">Bis</label>
+                            <label for="validationServer04" class="form-label"><b style="color: red;">*</b> Bis</label>
                             <select class="form-select" id="validationServer04"
                                 aria-describedby="validationServer04Feedback" name="bis" required>
                                 
@@ -282,7 +282,7 @@ text-white-50"></i> Generate Report</a>-->
                             <hr>
                         </div>
                         <div class="col-md-6">
-                            <label for="validationServer03" class="form-label">Email</label>
+                            <label for="validationServer03" class="form-label"><b style="color: red;">*</b> Email</label>
                             <input type="email" class="form-control" aria-describedby="validationServer03Feedback"
                                 placeholder="Email" name="mail"
                                 value= "<?php echo (!empty($_POST['mail']) ? $_POST['mail']:''); ?>">
@@ -291,7 +291,7 @@ text-white-50"></i> Generate Report</a>-->
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="validationServer03" class="form-label">Contraseña</label>
+                            <label for="validationServer03" class="form-label"><b style="color: red;">*</b> Contraseña</label>
                             <input type="password" class="form-control" aria-describedby="validationServer03Feedback"
                                 placeholder="Contraseña" name="contrasena"
                                 value= "<?php echo (!empty($_POST['contrasena']) ? $_POST['contrasena']:''); ?>">
@@ -300,7 +300,7 @@ text-white-50"></i> Generate Report</a>-->
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="validationServer03" class="form-label">Red
+                            <label for="validationServer03" class="form-label"><b style="color: red;">*</b> Red
                                 Social</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
                                 placeholder="Red Social" name="red"
@@ -310,7 +310,7 @@ text-white-50"></i> Generate Report</a>-->
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="validationServer03" class="form-label">Telefono</label>
+                            <label for="validationServer03" class="form-label"><b style="color: red;">*</b> Telefono</label>
                             <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
                                 placeholder="Telefono" name="telefono"
                                 value= "<?php echo (!empty($_POST['telefono']) ? $_POST['telefono']:''); ?>">
@@ -322,7 +322,7 @@ text-white-50"></i> Generate Report</a>-->
                             <hr>
                         </div>
                         <div class="col-md-12 pt-5 text-center">
-                            <label for="validationServer04" class="form-label">Estado</label>
+                            <label for="validationServer04" class="form-label"><b style="color: red;">*</b> Estado</label>
                             <select class="form-select" id="validationServer04"
                                 aria-describedby="validationServer04Feedback" name="estado" required>
                                 

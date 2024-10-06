@@ -124,18 +124,10 @@ text-white-50"></i> Generate Report</a>-->
 
                     <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal"method='post'>
                         <div class="col-md-12">
-                            <label for="validationServer03" class="form-label">Codigo de identificacion del animal</label>
+                            <label for="validationServer03" class="form-label">Codigo de Identificacion Animal</label>
                             <input type="number" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Codigo Animal" name="codigo">
-                            <div id="validationServer03Feedback" class="invalid-feedback">
-                                Please provide a valid city.
-                            </div>
-                        </div>
-                        <!--
-                        <div class="col-md-12 mt-4">
-                            <label for="validationServer03" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" aria-describedby="validationServer03Feedback"
-                                placeholder="Nombre">
+                                placeholder="Codigo Animal"
+                                name="codigo" value= "<?php echo (!empty($_POST['codigo']) ? $_POST['codigo']:''); ?>">
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
