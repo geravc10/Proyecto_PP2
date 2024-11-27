@@ -2,7 +2,7 @@
 function ConexionBD(
     $Host = 'localhost',
     $User = 'root',
-    $Password = 'root',
+    $Password = '',
     $BaseDeDatos = 'petsalud-v3.0'
 ) {
     $linkConexion = mysqli_connect(

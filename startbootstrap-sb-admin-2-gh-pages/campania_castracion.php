@@ -48,13 +48,13 @@ text-white-50"></i> Generate Report</a>-->
                             <div class="collapse navbar-collapse" id="navbarNav">
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="campaña_vacunacion.php">Campaña de Vacunacion</a>
+                                        <a class="nav-link" href="campania_vacunacion.php">Campaña de Vacunacion</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="campaña_castracion.php">Campaña Castracion</a>
+                                        <a class="nav-link" href="campania_castracion.php">Campaña Castracion</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="campaña_informacion.php">Informacion Municipal</a>
+                                        <a class="nav-link" href="campania_informacion.php">Informacion Municipal</a>
                                     </li>
                                 </ul>
                             </div>
