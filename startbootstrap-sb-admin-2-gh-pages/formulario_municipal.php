@@ -188,7 +188,7 @@ required><br>
                         <div class="col-md-12">
                             <label for="validationServer02" class="form-label"><b style="color: red;">*</b> Informacion Personal</label>
                             <input type="text" class="form-control" id="validationServer02"
-                                placeholder="Informacion Personal" name="informacion" required
+                                placeholder="Informacion Personal" name="informacion" 
                                 value= "<?php echo (!empty($_POST['informacion']) ? $_POST['informacion']:''); ?>">
                             <div class="valid-feedback">
                                 Looks good!

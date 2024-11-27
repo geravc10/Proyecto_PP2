@@ -146,8 +146,16 @@ function ValidarCreacionMuni(){
 
     if(empty($_POST['sexo'])){
         $vMensaje .= '-Sexo: Debes ingresar el sexo. <br />';
-    }    
+    }
     
+    
+    if (is_numeric($_POST['dni']) < 11) {
+        $vMensaje .= '-DNI: Debes ingresar el numero de documento. <br />';
+    }
+    if (strlen($_POST['dni']) != 8) {
+        $vMensaje .= '-DNI: El numero de documento debe tener 8 numeros. <br />';
+    }
+
     if(empty($_POST['nombre_calle'])){
         $vMensaje .= '-Nombre de calle: Debes ingresar el nombre de la calle. <br />';
     }elseif (preg_match('/[^a-zA-ZáéíóúÁÉÍÓÚñÑ0123456789\s]/', $_POST['nombre_calle'])) {
@@ -171,7 +179,7 @@ function ValidarCreacionMuni(){
     }
 
     if (strpos($_POST['mail'], "@gmail.com") != true) {
-        $vMensaje .= 'Debe ser un MAIL del tipo "@gmail.com" <br/>';
+        $vMensaje .= '-Email: Debe ser un correo del tipo "@gmail.com" <br/>';
     }
 
     if (empty($_POST['telefono'])) {
@@ -399,6 +407,13 @@ function ValidarCreacionDuenioAnimal(){
     if(empty($_POST['sexo'])){
         $vMensaje .= '-Sexo: Debes ingresar el sexo. <br />';
     }    
+
+    if (is_numeric($_POST['dni']) < 11) {
+        $vMensaje .= '-DNI: Debes ingresar el numero de documento. <br />';
+    }
+    if (strlen($_POST['dni']) != 8) {
+        $vMensaje .= '-DNI: El numero de documento debe tener 8 numeros. <br />';
+    }
     
     if(empty($_POST['calle'])){
         $vMensaje .= '-Nombre de calle: Debes ingresar el nombre de la calle. <br />';
@@ -423,7 +438,7 @@ function ValidarCreacionDuenioAnimal(){
     }
 
     if (strpos($_POST['mail'], "@gmail.com") != true) {
-        $vMensaje .= '-Debe ser un MAIL del tipo "@gmail.com" <br/>';
+        $vMensaje .= '-Email: Debe ser un correo del tipo "@gmail.com" <br/>';
     }
 
     if (empty($_POST['telefono'])) {
@@ -586,9 +601,12 @@ function ValidarIdAnimal(){
     $vMensaje = '';   
     
     if (empty($_POST['codigo'])) {
-        $vMensaje .= '-Numero de Identificacion del animal: Debes ingresar el numero de Identificacion del animal. <br />';
-    }elseif (preg_match('/[^1234567890\s]/', $_POST['codigo '])){
-        $vMensaje .= '-Numero de Identificacion del animal: Deben ser solo numeros. <br />';
+        $vMensaje .= '-Codigo de Identificacion del animal: Debes ingresar el numero de Identificacion del animal. <br />';
+    }elseif (preg_match('/[^1234567890\s]/', $_POST['codigo'])){
+        $vMensaje .= '-Codigo de Identificacion del animal: Deben ser solo numeros. <br />';
+    }
+    if (strlen($_POST['codigo']) != 5) {
+        $vMensaje .= ' -Codigo de Identificacion del animal: El codigo de identificacion del animal debe tener 5 numeros. <br />';
     }
     
     foreach ($_POST as $Id => $Valor) {
@@ -629,6 +647,14 @@ function ValidarModificacionAnimal(){
     return $vMensaje;
 
 
+}
+
+function ValidarCargaHistorial(){
+    $vMensaje="Hola";
+
+
+
+    return $vMensaje;
 }
 
 

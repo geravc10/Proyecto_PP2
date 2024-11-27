@@ -185,7 +185,27 @@ function TraerAnimal($vConexion,$codigo)
     }
 }
 
+function TraerEnfermedades($vConexion)
+{
 
+    $id_especie=$_SESSION['animal_Id_Especie'];
+
+    $Usuario = array();
+    $SQL = "SELECT * 
+            FROM enfermedades
+            WHERE ID_ESPECIE = $id_especie";
+
+    $rs = mysqli_query($vConexion, $SQL);
+    
+    $i=0;
+       while ($data = mysqli_fetch_array($rs)) {
+               $Usuario[$i]['id_enfermedad'] = $data['ID_ENFERMEDAD'];
+               $Usuario[$i]['nombre_enfermedad'] = $data['NOMBRE_ENFERMEDAD'];
+               $i++;
+       }
+
+    return $Usuario;
+}
 
 
 ?>
