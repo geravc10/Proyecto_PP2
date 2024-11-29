@@ -5,6 +5,8 @@ if (empty($_SESSION['usuario_nombre'])) {
     exit;
 }
 
+
+
 require_once 'funciones/conexion.php';
 $MiConexion = ConexionBD();
 
@@ -49,6 +51,7 @@ if (!empty($_POST['BotonTraer'])) {
             $_SESSION['animal_Descripcion_Familia'] = $AnimalEncontrado['Descripcion_Familia'];
             $_SESSION['animal_Id'] = $AnimalEncontrado['Id_Animal'];
 
+            
             //estado animal
             if($AnimalEncontrado['Estado_Animal']==0){
                 $_SESSION['animal_Estado_Animal'] = "no";
@@ -175,7 +178,7 @@ text-white-50"></i> Generate Report</a>-->
                             <label for="validationServer05" class="form-label">Nombre Animal</label>
                             <input type="text" class="form-control" id="validationServer05"
                                 aria-describedby="validationServer05Feedback" placeholder="" readonly
-                                value= "<?php echo (!empty($_SESSION['animal_Nombre_Animal']) && empty($Mensaje)? $_SESSION['animal_Nombre_Animal']:''); ?>">
+                                value= "<?php echo (!empty($_SESSION['animal_Nombre_Animal'])? $_SESSION['animal_Nombre_Animal']:''); ?>">
                             <div id="validationServer05Feedback" class="invalid-feedback">
                                 Please provide a valid zip.
                             </div>
@@ -259,7 +262,7 @@ text-white-50"></i> Generate Report</a>-->
                                     <?php
                                         foreach ($ListaEnfermedades as $enfermedad) {
                                             echo '<div class="form-check form-switch mb-3">';
-                                            echo '<input class="form-check-input" type="checkbox" role="switch" id="enfermedad' . $enfermedad['id_enfermedad'] . '">';
+                                            echo '<input class="form-check-input" type="checkbox" name="enfermedades[]" role="switch" id="enfermedad' . $enfermedad['id_enfermedad'] . '">';
                                             echo '<label class="form-check-label" for="enfermedad' . $enfermedad['id_enfermedad'] . '">' . htmlspecialchars($enfermedad['nombre_enfermedad']) . '</label>';
                                             echo '</div>';
                                         }
@@ -365,7 +368,14 @@ text-white-50"></i> Generate Report</a>-->
                                 <div id="flush-collapseGatos" class="accordion-collapse collapse"
                                     data-bs-parent="#accordionFlushExample">
 
-                                    
+                                    <?php
+                                        foreach ($ListaEnfermedades as $enfermedad) {
+                                            echo '<div class="form-check form-switch mb-3">';
+                                            echo '<input class="form-check-input" type="checkbox" name="enfermedades[]" role="switch" id="enfermedad' . $enfermedad['id_enfermedad'] . '">';
+                                            echo '<label class="form-check-label" for="enfermedad' . $enfermedad['id_enfermedad'] . '">' . htmlspecialchars($enfermedad['nombre_enfermedad']) . '</label>';
+                                            echo '</div>';
+                                        }
+                                    ?>
                                     <!--
                                     <div class="form-check form-switch mb-3">
                                         <input class="form-check-input" type="checkbox" role="switch" id="rabiaGato">
@@ -526,7 +536,7 @@ text-white-50"></i> Generate Report</a>-->
                                     <?php
                                         foreach ($ListaEnfermedades as $enfermedad) {
                                             echo '<div class="form-check form-switch mb-3">';
-                                            echo '<input class="form-check-input" type="checkbox" role="switch" id="enfermedad' . $enfermedad['id_enfermedad'] . '">';
+                                            echo '<input class="form-check-input" type="checkbox" name="enfermedades[]" role="switch" id="enfermedad' . $enfermedad['id_enfermedad'] . '">';
                                             echo '<label class="form-check-label" for="enfermedad' . $enfermedad['id_enfermedad'] . '">' . htmlspecialchars($enfermedad['nombre_enfermedad']) . '</label>';
                                             echo '</div>';
                                         }

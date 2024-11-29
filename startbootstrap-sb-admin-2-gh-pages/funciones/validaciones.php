@@ -650,10 +650,15 @@ function ValidarModificacionAnimal(){
 }
 
 function ValidarCargaHistorial(){
-    $vMensaje="Hola";
-
-
-
+    $vMensaje="";
+    /*
+    if (isset($_POST['enfermedades']) && count($_POST['enfermedades']) === 1) {
+        $idSeleccionado = $_POST['enfermedades'][0]; // ID del checkbox seleccionado
+        $vMensaje .= "Se seleccionó una enfermedad con ID: " . htmlspecialchars($idSeleccionado);
+    } else {
+        $vMensaje .= "Debes seleccionar una y solo una enfermedad.";
+    }*/
+   
     return $vMensaje;
 }
 
