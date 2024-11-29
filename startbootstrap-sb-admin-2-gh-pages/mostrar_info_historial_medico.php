@@ -30,95 +30,67 @@ require_once 'partes_Pagina/head.php';
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center
-justify-content-between mb-4">
-                        <h1 class="h3 mb-0
-text-gray-800">Bienvenidos</h1>
-                        <!--<a href="#" class="d-none d-sm-inline-block btn
-btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm
-text-white-50"></i> Generate Report</a>-->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Bienvenidos</h1>
                     </div>
-                    <!--FORMULARIO-->
-                    <h1 class="my-5 text-center fw-bold">Informacion de Historial Medico</h1>
-                    <form class="row g-3 m-4 my-5 p-3 mx-auto" width=100% id="formulario_E_Municipal">
-                        <!-- DataTales Example -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold
-text-primary">Datos de <?php echo $_SESSION['usuario_nombre'] . ' ' . $_SESSION['usuario_apellido']; ?> </h6>
+                    <!-- FORMULARIO -->
+                    <h1 class="my-5 text-center fw-bold">Información de Historial Médico</h1>
+                    <div class="container vh-90 d-flex justify-content-center align-items-center">
+                        <div class="row w-100 text-center">
+                            <div class="col-md-12 mb-4 text-center">
+                                <h4>Información del Animal y Dueño</h4>
+                                <hr>
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>Fecha Creacion</th>
-                                                <th>Nombre del Animal</th>
-                                                <th>DNI Dueño</th>
-                                                <th>Nombre y Apellido Dueño</th>
-                                                <th>DNI Veterinario</th>
-                                                <th>Nombre y Apellido Veterinario</th>
-                                                <th>Descripcion del Historial</th>
-                                            </tr>
-                                        </thead>
-                                        <!-- <tfoot>
-                                            <tr>
-                                                <th>DNI</th>
-                                                <th>Nombre y Apellido</th>
-                                                <th>Fecha de Nacimiento</th>
-                                                <th>Años</th>
-                                                <th>Nacionalidad</th>
-                                                <th>Sexo</th>
-                                                <th>Direccion</th>
-                                                <th>Provincia</th>
-                                                <th>Email</th>
-                                                <th>Red Social</th>
-                                                <th>Telefono</th>
-                                                <th>Area de Trabajo</th>
-                                                <th>Rol de Trabajo</th>
-                                                <th>Activo</th>
-                                            </tr>
-                                        </tfoot> -->
-                                        <tbody>
-                                            <!-- <tr>
-                                                <td><?php echo
-                                                    $_SESSION['municipal_nombre']; ?></td>
-                                                <td><?php echo
-                                                    $_SESSION['municipal_apellido']; ?></td>
-                                                <td><?php echo
-                                                    $_SESSION['municipal_dni']; ?></td>
-                                                <td><?php echo
-                                                    $_SESSION['municipal_fecha']; ?></td>
-                                                <td><?php echo
-                                                    $_SESSION['municipal_telefono'] . ' ' . $_SESSION['municipal_area'] . '
-' . $_SESSION['municipal_rol']; ?></td>
-                                                <td><?php echo
-                                                    $_SESSION['municipal_direccion'] . ' ' . $_SESSION['municipal_ciudad'] . '
-' . $_SESSION['municipal_provincia']; ?> </td>
-                                            </tr> -->
-                                            <tr>
-                                                <td>2024-07-18</td>
-                                                <td>Max</td>
-                                                <td>12345678</td>
-                                                <td>Juan Pérez</td>
-                                                <td>87654321</td>
-                                                <td>Dr. María López</td>
-                                                <td>Max ha recibido todas sus vacunas y se encuentra en excelente estado
-                                                    de salud. Última visita: revisión general y limpieza dental.</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div class="col-md-12 mb-4">
+                                <label for="dniDueño" class="form-label">DNI Dueño</label>
+                                <input type="number" class="form-control" id="dniDueño" placeholder="" readonly>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label for="idAnimal" class="form-label">ID Animal</label>
+                                <input type="number" class="form-control" id="idAnimal" placeholder="" readonly>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label for="nombreAnimal" class="form-label">Nombre Animal</label>
+                                <input type="text" class="form-control" id="nombreAnimal" placeholder="" readonly>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label for="especie" class="form-label">Especie</label>
+                                <input type="text" class="form-control" id="especie" placeholder="" readonly>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label for="raza" class="form-label">Raza</label>
+                                <input type="text" class="form-control" id="raza" placeholder="" readonly>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label for="rol" class="form-label">Rol</label>
+                                <input type="text" class="form-control" id="rol" placeholder="" readonly>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label for="estado" class="form-label">Estado</label>
+                                <input type="text" class="form-control" id="estado" placeholder="" readonly>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label for="castrado" class="form-label">¿Está castrado?</label>
+                                <input type="text" class="form-control" id="castrado" placeholder="" readonly>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label for="vacunado" class="form-label">¿Está vacunado?</label>
+                                <input type="text" class="form-control" id="vacunado" placeholder="" readonly>
+                            </div>
+                            <div class="col-md-12 mb-4 text-center">
+                                <hr>
+                                <h4>Enfermedad que presenta</h4>
+                            </div>
+                            <div class="col-md-12 mb-4">
+                                <label for="descripcionEnfermedades" class="form-label">Descripción de Enfermedades</label>
+                                <textarea class="form-control" id="descripcionEnfermedades" rows="4" disabled></textarea>
+                            </div>
+                            <div class="col-md-12 mb-4">
+                                <label for="descripcionHistorial" class="form-label">Descripción del Historial</label>
+                                <textarea class="form-control" id="descripcionHistorial" rows="4" disabled></textarea>
                             </div>
                         </div>
-                        <div class="col-12 text-center">
-                            <button type="button" class="btn
-btn-primary" data-toggle="modal" data-target="#modifyModal">Modificar</button>
-                            <button type="button" class="btn
-btn-danger" data-toggle="modal" data-target="#deleteModal">Eliminar</button>
-                        </div>
-                    </form>
-                    <!-- """""""""""""""""""""""""""""""""""""""""""""""""""" -->
+                    </div>
                 </div>
                 <!-- End of Main Content -->
                 <?php
@@ -128,76 +100,13 @@ btn-danger" data-toggle="modal" data-target="#deleteModal">Eliminar</button>
             <!-- End of Content Wrapper -->
         </div>
         <!-- End of Page Wrapper -->
-        <!-- Scroll to Top Button-->
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
-        <!-- Modificar Modal -->
-        <div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="modifyModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modifyModalLabel">Necesita Modificar?</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        ¿Está seguro que desea modificar los datos?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-danger" onclick="window.location.href='modificar_historial_medico.php'">Aceptar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Eliminar Modal -->
-        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModalLabel">Necesita Eliminar?</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        ¿Está seguro que desea eliminar este registro?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-danger" >Aceptar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">¿Ya
-                            te vas <?php echo $_SESSION['usuario_nombre']; ?>?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Selecciona "Cerrar Sesion" si
-                        queres cerrar esta sesion.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                        <a class="btn btn-primary" href="cerrar_sesion.php">Cerrar Sesion</a>
-                    </div>
-                </div>
-            </div>
-        </div>
         <?php
         require_once 'partes_Pagina/script.php';
         ?>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

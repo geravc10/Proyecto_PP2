@@ -132,7 +132,7 @@ text-white-50"></i> Generate Report</a>-->
                                 Please provide a valid city.
                             </div>
                         </div>
-                    -->
+                    
                         <div class="col-12 text-center mt-4">
                             <button class="btn btn-primary" type="submit"
                             value="Login" name="BotonConsultar">Consultar</button>
