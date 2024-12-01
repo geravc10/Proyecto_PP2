@@ -178,7 +178,7 @@ text-white-50"></i> Generate Report</a>-->
                         <div class="col-md-12 mt-4 text-center">
                             <label for="exampleFormControlTextarea1" class="form-label"><b style="color: red;"></b> Descripcion del
                                 Trtamiento</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="descripcion" ><?php echo $_SESSION['historial_medico_descripcion'] ?></textarea>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="descripcion" readonly><?php echo $_SESSION['historial_medico_descripcion'] ?></textarea>
                         </div>
                         <div class="col-12 mt-4 text-center">
                             <!--
