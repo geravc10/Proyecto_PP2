@@ -16,68 +16,19 @@ require_once 'funciones/validaciones.php';
 $Mensaje = "";
 
 
+if(!empty($_POST['BotonRegistrar'])){
 
-if (!empty($_POST['BotonTraer'])) {    
-    $Mensaje = ValidarIdAnimal();
-
-    if (empty($Mensaje)) {
-        require_once 'funciones/funcion_consulta_animal.php';
-        $AnimalEncontrado = DatosAnimal($MiConexion, $_POST['codigo']);
-
-        if (empty($AnimalEncontrado)) {
-            $Mensaje = "No se encontraron conincidencias. Verifique el número de Identificacion ingresado.";
-        } else{
-            $_SESSION['animal_apellido'] = $AnimalEncontrado['Apellido'];
-            $_SESSION['animal_dni'] = $AnimalEncontrado['dni'];
-            $_SESSION['animal_sexo'] = $AnimalEncontrado['Sexo'];
-            $_SESSION['animal_Id_Sexo'] = $AnimalEncontrado['SexoID'];
-            $_SESSION['animal_FechaNacimiento'] = $AnimalEncontrado['FechaNacimiento'];
-            $_SESSION['animal_Nacionalidad'] = $AnimalEncontrado['Nacionalidad'];
-            $_SESSION['animal_Informacion'] = $AnimalEncontrado['Informacion'];
-            $_SESSION['animal_Direccion'] = $AnimalEncontrado['Direccion'];
-            $_SESSION['animal_Bis'] = $AnimalEncontrado['Bis'];
-            $_SESSION['animal_Numero'] = $AnimalEncontrado['Numero'];
-            $_SESSION['animal_Id_Ciudad'] = $AnimalEncontrado['Id_Ciudad'];
-            $_SESSION['animal_Ciudad'] = $AnimalEncontrado['Ciudad'];
-            $_SESSION['animal_Id_Provincia'] = $AnimalEncontrado['Id_Provincia'];
-            $_SESSION['animal_Provincia'] = $AnimalEncontrado['Provincia'];
-            $_SESSION['animal_Telefono'] = $AnimalEncontrado['Telefono'];
-            $_SESSION['animal_Mail'] = $AnimalEncontrado['Mail'];
-            $_SESSION['animal_Estado_Dueno'] = $AnimalEncontrado['Estado_Dueno'];
-            $_SESSION['animal_Nombre_Animal'] = $AnimalEncontrado['Nombre_Animal'];
-           //$_SESSION['animal_Estado_Animal'] = $AnimalEncontrado['Estado_Animal'];
-            $_SESSION['animal_Id_Raza'] = $AnimalEncontrado['Id_Raza_Animal'];
-            $_SESSION['animal_Descripcion_Raza'] = $AnimalEncontrado['Descripcion_Raza_Animal'];
-            $_SESSION['animal_Id_Especie'] = $AnimalEncontrado['Id_Especie_Animal'];
-            $_SESSION['animal_Descripcion_Especie'] = $AnimalEncontrado['Descripcion_Especie_Animal'];
-            $_SESSION['animal_Id_Rol'] = $AnimalEncontrado['Id_Rol_Animal'];
-            $_SESSION['animal_Descripcion_Rol'] = $AnimalEncontrado['Descripcion_Rol_Animal'];
-            $_SESSION['animal_Descripcion_Familia'] = $AnimalEncontrado['Descripcion_Familia'];
-            $_SESSION['animal_Id'] = $AnimalEncontrado['Id_Animal'];
-
-            //estado animal
-            if($AnimalEncontrado['Estado_Animal']==0){
-                $_SESSION['animal_Estado_Animal'] = "no";
-            }else{
-                $_SESSION['animal_Estado_Animal'] = "si";
-            }
-            
-            // Calcular la edad del dueño de animal
-            $hoy = new DateTime();            
-            $nacimiento = new DateTime($AnimalEncontrado['FechaNacimiento']);            
-            $diferencia = $nacimiento->diff($hoy);            
-            $edad = $diferencia->y;
-            $_SESSION['animal_duenio_edad'] = $edad;
-
-            //traer todas las enfermeddes de la especie del animal
-            
-        }
-    }
-}
-
-if(empty($Mensaje) && !empty($_POST['BotonRegistrar'])){
+    $Mensaje= ValidarCargaHistorial();
+    if(empty($Mensaje)){
+        require_once 'funciones/funcion_crear_historial_medico.php';
+            $HistorialCreado = CrearHistorial($MiConexion);
     
-        $Mensaje= ValidarCargaHistorial();
+            if(empty($HistorialCreado)){
+                $Mensaje="Fallo la creacion del Historial.";
+            }else{
+                $Mensaje="Se creo el Historial.";
+            }
+    }
     
 }
 
@@ -130,50 +81,50 @@ text-white-50"></i> Generate Report</a>-->
                         </div>
                     <?php }
                     ?>
-
+                    <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_E_Municipal" method="post">
                         <p class="text-center">Informacion del Animal y Dueño</p>
                         <div class="container vh-90 d-flex justify-content-center align-items-center">
                             <div class="row w-100 text-center">
                                 <div class="col-md-12 mb-4 text-center">
                                     <label for="dniDueño" class="form-label">DNI Dueño</label>
                                     <input type="number" class="form-control" id="dniDueño" placeholder="" readonly
-                                        value="<?php echo (!empty($_SESSION['animal_dni']) && empty($Mensaje)) ? $_SESSION['animal_dni'] : ''; ?>">
+                                        value="<?php echo (!empty($_SESSION['animal_dni'])) ? $_SESSION['animal_dni'] : ''; ?>">
                                     <div class="invalid-feedback">Please provide a valid zip.</div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <label for="idAnimal" class="form-label">ID Animal</label>
                                     <input type="number" class="form-control" id="idAnimal" placeholder="" readonly
-                                        value="<?php echo (!empty($_SESSION['animal_Id']) && empty($Mensaje)) ? $_SESSION['animal_Id'] : ''; ?>">
+                                        value="<?php echo (!empty($_SESSION['animal_Id'])) ? $_SESSION['animal_Id'] : ''; ?>">
                                     <div class="invalid-feedback">Please provide a valid zip.</div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <label for="nombreAnimal" class="form-label">Nombre Animal</label>
                                     <input type="text" class="form-control" id="nombreAnimal" placeholder="" readonly
-                                        value="<?php echo (!empty($_SESSION['animal_Nombre_Animal']) && empty($Mensaje)) ? $_SESSION['animal_Nombre_Animal'] : ''; ?>">
+                                        value="<?php echo (!empty($_SESSION['animal_Nombre_Animal'])) ? $_SESSION['animal_Nombre_Animal'] : ''; ?>">
                                     <div class="invalid-feedback">Please provide a valid zip.</div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <label for="especie" class="form-label">Especie</label>
                                     <input type="text" class="form-control" id="especie" placeholder="" readonly
-                                        value="<?php echo (!empty($_SESSION['animal_Descripcion_Especie']) && empty($Mensaje)) ? $_SESSION['animal_Descripcion_Especie'] : ''; ?>">
+                                        value="<?php echo (!empty($_SESSION['animal_Descripcion_Especie'])) ? $_SESSION['animal_Descripcion_Especie'] : ''; ?>">
                                     <div class="invalid-feedback">Please provide a valid zip.</div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <label for="raza" class="form-label">Raza</label>
                                     <input type="text" class="form-control" id="raza" placeholder="" readonly
-                                        value="<?php echo (!empty($_SESSION['animal_Descripcion_Raza']) && empty($Mensaje)) ? $_SESSION['animal_Descripcion_Raza'] : ''; ?>">
+                                        value="<?php echo (!empty($_SESSION['animal_Descripcion_Raza'])) ? $_SESSION['animal_Descripcion_Raza'] : ''; ?>">
                                     <div class="invalid-feedback">Please provide a valid zip.</div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <label for="rol" class="form-label">Rol</label>
                                     <input type="text" class="form-control" id="rol" placeholder="" readonly
-                                        value="<?php echo (!empty($_SESSION['animal_Descripcion_Rol']) && empty($Mensaje)) ? $_SESSION['animal_Descripcion_Rol'] : ''; ?>">
+                                        value="<?php echo (!empty($_SESSION['animal_Descripcion_Rol'])) ? $_SESSION['animal_Descripcion_Rol'] : ''; ?>">
                                     <div class="invalid-feedback">Please provide a valid zip.</div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <label for="estadoActivo" class="form-label">¿Estado Activo?</label>
                                     <input type="text" class="form-control" id="estadoActivo" placeholder="" readonly
-                                        value="<?php echo (!empty($_SESSION['animal_Estado_Animal']) && empty($Mensaje)) ? $_SESSION['animal_Estado_Animal'] : ''; ?>">
+                                        value="<?php echo (!empty($_SESSION['animal_Estado_Animal'])) ? $_SESSION['animal_Estado_Animal'] : ''; ?>">
                                     <div class="invalid-feedback">Please provide a valid zip.</div>
                                 </div>
                                 
@@ -221,12 +172,11 @@ text-white-50"></i> Generate Report</a>-->
                                     <?php
                                         foreach ($ListaEnfermedades as $enfermedad) {
                                             echo '<div class="form-check form-switch mb-3">';
-                                            echo '<input class="form-check-input" type="checkbox" role="switch" id="enfermedad' . $enfermedad['id_enfermedad'] . '">';
+                                            echo '<input class="form-check-input" type="radio" role="switch" id="enfermedad' . $enfermedad['id_enfermedad'] . '" name="enfermedadSeleccionada" value="' . $enfermedad['id_enfermedad'] . '">';
                                             echo '<label class="form-check-label" for="enfermedad' . $enfermedad['id_enfermedad'] . '">' . htmlspecialchars($enfermedad['nombre_enfermedad']) . '</label>';
                                             echo '</div>';
                                         }
-                                    ?>
-
+                                        ?>
                                     <!--
                                     <div class="form-check form-switch mb-3">
                                         <input class="form-check-input" type="checkbox" role="switch"
@@ -326,6 +276,14 @@ text-white-50"></i> Generate Report</a>-->
                                 </h2>
                                 <div id="flush-collapseGatos" class="accordion-collapse collapse"
                                     data-bs-parent="#accordionFlushExample">
+                                    <?php
+                                        foreach ($ListaEnfermedades as $enfermedad) {
+                                            echo '<div class="form-check form-switch mb-3">';
+                                            echo '<input class="form-check-input" type="radio" role="switch" id="enfermedad' . $enfermedad['id_enfermedad'] . '" name="enfermedadSeleccionada" value="' . $enfermedad['id_enfermedad'] . '">';
+                                            echo '<label class="form-check-label" for="enfermedad' . $enfermedad['id_enfermedad'] . '">' . htmlspecialchars($enfermedad['nombre_enfermedad']) . '</label>';
+                                            echo '</div>';
+                                        }
+                                        ?>
 
                                     
                                     <!--
@@ -488,11 +446,11 @@ text-white-50"></i> Generate Report</a>-->
                                     <?php
                                         foreach ($ListaEnfermedades as $enfermedad) {
                                             echo '<div class="form-check form-switch mb-3">';
-                                            echo '<input class="form-check-input" type="checkbox" role="switch" id="enfermedad' . $enfermedad['id_enfermedad'] . '">';
+                                            echo '<input class="form-check-input" type="radio" role="switch" id="enfermedad' . $enfermedad['id_enfermedad'] . '" name="enfermedadSeleccionada" value="' . $enfermedad['id_enfermedad'] . '">';
                                             echo '<label class="form-check-label" for="enfermedad' . $enfermedad['id_enfermedad'] . '">' . htmlspecialchars($enfermedad['nombre_enfermedad']) . '</label>';
                                             echo '</div>';
                                         }
-                                    ?>
+                                        ?>
                                     <!--
                                     <div class="form-check form-switch mb-3">
                                         <input class="form-check-input" type="checkbox" role="switch"
@@ -648,7 +606,7 @@ text-white-50"></i> Generate Report</a>-->
                         <div class="col-md-12 mt-4 text-center">
                             <label for="exampleFormControlTextarea1" class="form-label"><b style="color: red;">*</b> Descripcion del
                                 Historial</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="descripcion" ></textarea>
                         </div>
                         <div class="col-12 mt-4 text-center">
                             <!--

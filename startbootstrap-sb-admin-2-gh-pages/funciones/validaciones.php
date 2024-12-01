@@ -651,16 +651,35 @@ function ValidarModificacionAnimal(){
 
 function ValidarCargaHistorial(){
     $vMensaje="";
-    /*
-    if (isset($_POST['enfermedades']) && count($_POST['enfermedades']) === 1) {
-        $idSeleccionado = $_POST['enfermedades'][0]; // ID del checkbox seleccionado
-        $vMensaje .= "Se seleccionó una enfermedad con ID: " . htmlspecialchars($idSeleccionado);
+    
+    
+    if (isset($_POST['enfermedadSeleccionada'])) {
+        $enfermedadSeleccionada = $_POST['enfermedadSeleccionada'];
+        $vMensaje.= "";
     } else {
-        $vMensaje .= "Debes seleccionar una y solo una enfermedad.";
-    }*/
+        $vMensaje.= "No se seleccionó ninguna enfermedad.";
+    }
+
    
     return $vMensaje;
 }
 
+function ValidarFechaHistorial(){
+    
+    $vMensaje = '';    
+    
+    if(empty($_POST['fecha'])){
+        $vMensaje .= '-Fecha: Debes seleccionar la fecha del historial medico que deseas revisar. <br />';
+    }     
+
+
+    foreach ($_POST as $Id => $Valor) {
+        $_POST[$Id] = trim($_POST[$Id]);
+        $_POST[$Id] = strip_tags($_POST[$Id]);
+    }
+    return $vMensaje;
+
+
+}
 
 ?>

@@ -207,5 +207,53 @@ function TraerEnfermedades($vConexion)
     return $Usuario;
 }
 
+function TraerVeterinarios($vidVeterinario, $vConexion)
+{
+    $idVeterinario= $vidVeterinario;
+    $Usuario = array();
+    $SQL = "SELECT *   
+            FROM veterinario as v, persona as p
+            WHERE 
+            v.ID_VETERINARIO= $idVeterinario
+            AND
+            v.DNI=p.DNI
+            ";
+
+    $rs = mysqli_query($vConexion, $SQL);
+    
+    $i=0;
+       while ($data = mysqli_fetch_array($rs)) {
+               $Usuario['id_veterinario'] = $data['ID_VETERINARIO'];
+               $Usuario['nombre_veterinario'] = $data['NOMBRE'];
+               $Usuario['apellido_veterinario'] = $data['APELLIDO'];
+               $i++;
+       }
+
+    return $Usuario;
+}
+
+function TraerHistorialMedico($vCodigo, $vConexion)
+{
+    
+    $Usuario = array();
+    $SQL = "SELECT * 
+            FROM historial_medico
+            WHERE ID_ANIMAL = $vCodigo";
+
+    $rs = mysqli_query($vConexion, $SQL);
+    
+    $i=0;
+       while ($data = mysqli_fetch_array($rs)) {
+               $Usuario[$i]['id_historial_medico'] = $data['ID_HISTORIAL_MEDICO'];
+               $Usuario[$i]['fecha_historial_medico'] = $data['FECHA_HISTORIAL'];
+               $Usuario[$i]['descripcion_historial_medico'] = $data['DESCRIPCION_HISTORIAL'];
+               $Usuario[$i]['vetrinario_historial_medico'] = $data['ID_VETERINARIO'];
+               $Usuario[$i]['enfermedad_historial_medico'] = $data['ID_ENFERMEDAD'];
+               $i++;
+       }
+
+    return $Usuario;
+}
+
 
 ?>
