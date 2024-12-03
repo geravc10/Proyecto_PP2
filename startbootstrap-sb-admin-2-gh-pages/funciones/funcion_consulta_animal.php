@@ -4,7 +4,7 @@ function DatosAnimal($vConexion,$vCodigo)
 {
 
     $Usuario = array();
-    $SQL = "SELECT p.*, d.*, c.*, pr.*,n.*, dc.*, da.*, se.*, a.*, f.*,ea.*,ra.*, r.*
+    $SQL = "SELECT p.*, d.*, c.*, pr.*,n.*, dc.*, da.*, se.*, a.*, f.*,ea.DESCRIPCION_TIPO_ANIMAL,ra.DESCRIPCION_RAZA_ANIMAL, ra.ID_RAZA_ANIMAL, r.ID_ROL_ANIMAL, r.DESCRIPCION_ROL_ANIMAL
         FROM
             persona as p,            
             direccion as d,
@@ -86,8 +86,9 @@ function DatosAnimal($vConexion,$vCodigo)
         $Usuario['Descripcion_Especie_Animal'] = $data['DESCRIPCION_TIPO_ANIMAL'];
         $Usuario['Id_Rol_Animal'] = $data['ID_ROL_ANIMAL'];
         $Usuario['Descripcion_Rol_Animal'] = $data['DESCRIPCION_ROL_ANIMAL'];
-        //$Usuario['Bis'] = $data['BIS'];
+        $Usuario['Codigo_animal'] = $data['CODIGO_ANIMAL'];
         $Usuario['Descripcion_Familia'] = $data['DESCRPCION_FAMILIA'];
+        $Usuario['Estado_Castracion'] = $data['ESTADO_CASTRACION'];
 
         if($data['BIS']==0){
             $Usuario['Bis'] = " ";

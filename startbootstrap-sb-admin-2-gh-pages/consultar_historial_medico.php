@@ -39,7 +39,7 @@ if (!empty($_POST['BotonConsultar'])) {
             $_SESSION['animal_Mail'] = $AnimalEncontrado['Mail'];
             $_SESSION['animal_Estado_Dueno'] = $AnimalEncontrado['Estado_Dueno'];
             $_SESSION['animal_Nombre_Animal'] = $AnimalEncontrado['Nombre_Animal'];
-           //$_SESSION['animal_Estado_Animal'] = $AnimalEncontrado['Estado_Animal'];
+            $_SESSION['animal_Estado_Castracion'] = $AnimalEncontrado['Estado_Castracion'];
             $_SESSION['animal_Id_Raza'] = $AnimalEncontrado['Id_Raza_Animal'];
             $_SESSION['animal_Descripcion_Raza'] = $AnimalEncontrado['Descripcion_Raza_Animal'];
             $_SESSION['animal_Id_Especie'] = $AnimalEncontrado['Id_Especie_Animal'];

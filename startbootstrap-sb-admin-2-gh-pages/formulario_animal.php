@@ -12,7 +12,7 @@ $MiConexion = ConexionBD();
 require_once 'funciones/funcion_consultas_generales.php';
 $ListaEspecies = TraerEspecieAnimal($MiConexion);
 $CantidadEspecies= count($ListaEspecies);
-
+/*
 require_once 'funciones/funcion_consultas_generales.php';
 $ListaRazas = TraerRazaAnimal($MiConexion);
 $CantidadRazas= count($ListaRazas);
@@ -20,7 +20,7 @@ $CantidadRazas= count($ListaRazas);
 require_once 'funciones/funcion_consultas_generales.php';
 $ListaRoles = TraerRolAnimal($MiConexion);
 $CantidadRoles= count($ListaRoles);
-
+*/
 
 
 
@@ -42,7 +42,8 @@ if (!empty($_POST['BotonRegistrar'])) {
             if(!empty($AnimalExiste)){
             $Mensaje = "El animal ya existe";
 
-            }else{            
+            }else{
+                /*            
                 require_once 'funciones/funcion_crear_animal.php';
                 $AnimalCreado = CrearAnimal($MiConexion,$id_dueno_animal);
         
@@ -54,7 +55,14 @@ if (!empty($_POST['BotonRegistrar'])) {
                         //$_SESSION['usuario_creado'] = $Mensaje;        
                         header('Location: index.php');
                         exit;
-                    }
+                    }*/
+                    $_SESSION['nombre_creacion_animal']=$_POST['nombre'];
+                    $_SESSION['dni_dueno_creacion_animal']=$_POST['dni'];
+                    $_SESSION['codigo_creacion_animal']=$_POST['codigo'];
+                    $_SESSION['especie_creacion_animal']=$_POST['especie'];
+                    header('Location: formulario_animal_2.php');
+                    exit;
+
                 }   
          }
     }
@@ -179,132 +187,12 @@ text-white-50"></i> Generate Report</a>-->
                                 Please select a valid species.
                             </div>
                         </div>
-                        <div class="col-md-4 mt-4">
-                            <label for="validationServer04" class="form-label"><b style="color: red;">*</b> Raza</label>
-                            <select class="form-select" id="validationServer04"
-                                aria-describedby="validationServer04Feedback" required name = "raza">
-                                <option selected disabled value="">Raza...</option>
 
-                                <?php 
-                                $selected='';                                
-                                for($i=0;$i<$CantidadRazas;$i++){                                     
-                                        if (!empty($_POST['raza']) && $_POST['raza'] ==  $ListaRazas[$i]['id_raza']) {
-                                            $selected = 'selected';
-                                        }else {
-                                            $selected='';
-                                        }
-                                    ?>
-                                    <option value="<?php echo $ListaRazas[$i]['id_raza']; ?>" <?php echo $selected; ?>>
-                                        <?php echo $ListaRazas[$i]['descripcion_raza']; ?></option>
-                                <?php }  ?>
-                                <!--
-                                <option>Raza 1</option>
-                                <option>Raza 2</option>
-                                <option>Raza 3</option>
-                                -->
-                            </select>
-                            <div id="validationServer04Feedback" class="invalid-feedback">
-                                Please select a valid state.
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="validationServer04" class="form-label"><b style="color: red;">*</b> Rol del Animal</label>
-                            <select class="form-select" id="validationServer04"
-                                aria-describedby="validationServer04Feedback" required name="rol">
-                                <option selected disabled value="">Rol del Animal...</option>
-
-                                <?php 
-                                $selected='';                                
-                                for($i=0;$i<$CantidadRoles;$i++){                                     
-                                        if (!empty($_POST['rol']) && $_POST['rol'] ==  $ListaRoles[$i]['id_rol']) {
-                                            $selected = 'selected';
-                                        }else {
-                                            $selected='';
-                                        }
-                                    ?>
-                                    <option value="<?php echo $ListaRoles[$i]['id_rol']; ?>" <?php echo $selected; ?>>
-                                        <?php echo $ListaRoles[$i]['descripcion_rol']; ?></option>
-                                <?php }  ?>
-
-                                <!--
-                                <option value="mascota">Mascota</option>
-                                <option value="trabajo">Animal de Trabajo</option>
-                                <option value="granja">Animal de Granja</option>
-                                <option value="salvaje">Animal Salvaje</option>
+<!--DESDE ACA!-->
+<!--
                                     -->
-                            </select>
-                            <div id="validationServer04Feedback" class="invalid-feedback">
-                                Please select a valid role.
-                            </div>
-                        </div>
-                        <div class="col-md-4 text-center mt-5">
-                            <label for="validationServer04" class="form-label"><b style="color: red;">*</b> Estado del Animal</label>
-                            <select class="form-select" id="validationServer04"
-                                aria-describedby="validationServer04Feedback" name="estado" required>
-                                
-                                <?php 
-                                    $selectedBis = isset($_POST['estado']) ? $_POST['estado'] : ''; // Verificar si se ha enviado el valor
-            
-                                    $s0 = $selectedBis === '' ? 'selected' : ''; // Selecciona 'Estado...' si no hay valor
-                                    $s1 = $selectedBis === 'si' ? 'selected' : ''; // Selecciona 'Inactivo' si se ha elegido 'no'
-                                    $s2 = $selectedBis === 'no' ? 'selected' : ''; // Selecciona 'Activo' si se ha elegido 'si'
-                                ?>                                
-                                <option <?php echo $s0; ?> disabled value="">Estado...</option>                                
-                                <option value="no" <?php echo $s2 ; ?>>Inactivo</option>
-                                <option value="si" <?php echo $s1 ; ?>>Activo</option>
-                                
-                                <!--
-                                <option>ACTIVO</option>
-                                <option>INACTIVO</option>
-                                -->
-                            </select>
-                            <div id="validationServer04Feedback" class="invalid-feedback">
-                                Please select a valid state.
-                            </div>
-                        </div>
-                        <div class="col-md-4 text-center mt-5">
-                            <label for="validationServer04" class="form-label"><b style="color: red;">*</b> Estado de vacunacion</label>
-                            <select class="form-select" id="validationServer04"
-                                aria-describedby="validationServer04Feedback" required>
-                                <option selected disabled value="">
-                                    Vacuna...</option>
-                                <option>SI</option>
-                                <option>NO</option>
-                            </select>
-                            <div id="validationServer04Feedback" class="invalid-feedback">
-                                Please select a valid state.
-                            </div>
-                        </div>
-                        <div class="col-md-4 text-center mt-5">
-                            <label for="validationServer04" class="form-label"><b style="color: red;">*</b> Estado de castracion</label>
-                            <select class="form-select" id="validationServer04"
-                                aria-describedby="validationServer04Feedback" required>
-                                <option selected disabled value="">
-                                    Castracion...</option>
-                                <option>SI</option>
-                                <option>NO</option>
-                            </select>
-                            <div id="validationServer04Feedback" class="invalid-feedback">
-                                Please select a valid state.
-                            </div>
-                        </div>
-                        <div class="col-md-12 mt-4">
-                            <label for="exampleFormControlTextarea1" class="form-label"><b style="color: red;">*</b> Descripcion de la Familia del animal</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
-                            name="descripcion"><?php echo (!empty($_POST['descripcion']) ? $_POST['descripcion']:''); ?></textarea>
-                        </div>
-                        <div class="col-12 mt-4 text-center">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="invalidCheck3"
-                                    aria-describedby="invalidCheck3Feedback" required>
-                                <label class="form-check-label" for="invalidCheck3">
-                                    Acepto los Terminos y Condiciones
-                                </label>
-                                <div id="invalidCheck3Feedback" class="invalid-feedback">
-                                    Enviar.
-                                </div>
-                            </div>
-                        </div>
+<!--HASTA ACA!!! -->
+
                         <div class="col-12 text-center mt-3">
                             <button class="btn btn-primary" type="submit" value="registrar" name="BotonRegistrar">
                                 Enviar</button>

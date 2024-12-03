@@ -16,6 +16,10 @@ require_once 'funciones/funcion_consultas_generales.php';
 $ListaEnfermedades = TraerEnfermedades($MiConexion);
 $CantidadEnfermedades= count($ListaEnfermedades);
 
+require_once 'funciones/funcion_consultas_generales.php';
+$ListaVacunas = TraerVacunas($_SESSION['animal_Id_Especie'], $MiConexion);
+$CantidadVacunas= count($ListaVacunas);
+
 require_once 'funciones/validaciones.php';
 $Mensaje = "";
 
@@ -35,6 +39,8 @@ if (!empty($_POST['BotonConsultar'])) {
                 $_SESSION['historial_medico_descripcion'] = $historial['descripcion_historial_medico'];
                 $_SESSION['historial_medico_veterinario'] = $historial['vetrinario_historial_medico'];
                 $_SESSION['historial_medico_enfermedad'] = $historial['enfermedad_historial_medico'];
+                $_SESSION['historial_medico_vacuna'] = $historial['vacuna_historial_medico'];
+                
     
                 break; // Detenemos el bucle tras encontrar el registro
             }else{

@@ -21,6 +21,19 @@ foreach($ListaEnfermedades as $enfermedades){
     }    
     
 }
+
+require_once 'funciones/funcion_consultas_generales.php';
+$ListaVacunas = TraerVacunas($_SESSION['animal_Id_Especie'], $MiConexion);
+$CantidadVacunas= count($ListaVacunas);
+
+$Vacuna="";
+
+foreach($ListaVacunas as $vacu){
+    if($vacu['id_vacuna'] == $_SESSION['historial_medico_vacuna'] ){
+        $Vacuna=$vacu['nombre_vacuna'];
+    }    
+    
+}
 /*
 if(!empty($ListaEnfermedades)){
     $Enfermedad=$_SESSION['historial_medico_enfermedad'];
@@ -32,9 +45,19 @@ $CantidadVeterinarios= count($ListaVeterinario);
 
 $_SESSION['vete'] = $ListaVeterinario['nombre_veterinario'] . ' ' . $ListaVeterinario['apellido_veterinario'];
 
+require_once 'funciones/funcion_consultas_generales.php';
+$ListaHistorial = TraerHistorialMedico($_SESSION['animal_Id'],$MiConexion);
+$CantidadHistorias= count($ListaHistorial);
 
 
-
+$FechaCastracion="";
+foreach ($ListaHistorial as $registro) {
+    // Verificar si el ID_ENFERMEDAD es 19, 20 o 21
+    if (in_array($registro['enfermedad_historial_medico'], [19, 20, 21])) {
+        // Retornar la fecha del historial
+        $FechaCastracion=$registro['fecha_historial_medico'];
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -171,6 +194,21 @@ text-white-50"></i> Generate Report</a>-->
                             value="<?php echo $_SESSION['vete'] ?>">
                             <div class="invalid-feedback">Please provide a valid zip.</div>
                         </div>
+
+                        <div class="col-md-6 mb-4">
+                            <label for="estadoActivo" class="form-label">Nombre de la Vacuna</label>
+                            <input type="text" class="form-control" id="estadoActivo" placeholder="" readonly
+                            value="<?php echo $Vacuna ?>">
+                            <div class="invalid-feedback">Please provide a valid zip.</div>
+                        </div>
+                        <?php if($_SESSION['animal_Estado_Castracion']==1) {?>
+                        <div class="col-md-6 mb-4">
+                            <label for="estadoActivo" class="form-label">Animal castrado. Fecha de la castracion:</label>
+                            <input type="text" class="form-control" id="estadoActivo" placeholder="" readonly
+                            value="<?php echo $FechaCastracion ?>">
+                            <div class="invalid-feedback">Please provide a valid zip.</div>
+                        </div>
+                        <?php }?>
                     <!-- Nuevo -->
 
                        
