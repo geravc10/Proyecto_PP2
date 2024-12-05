@@ -14,11 +14,11 @@ $ListaEspecies = TraerEspecieAnimal($MiConexion);
 $CantidadEspecies= count($ListaEspecies);
 
 require_once 'funciones/funcion_consultas_generales.php';
-$ListaRazas = TraerRazaAnimal($MiConexion);
+$ListaRazas = TraerRazaAnimal_2($MiConexion);
 $CantidadRazas= count($ListaRazas);
 
 require_once 'funciones/funcion_consultas_generales.php';
-$ListaRoles = TraerRolAnimal($MiConexion);
+$ListaRoles = TraerRolAnimal_2($MiConexion);
 $CantidadRoles= count($ListaRoles);
 
 require_once 'funciones/validaciones.php';

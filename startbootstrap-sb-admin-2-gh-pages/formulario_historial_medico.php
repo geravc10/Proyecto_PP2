@@ -13,7 +13,7 @@ $MiConexion = ConexionBD();
 require_once 'funciones/validaciones.php';
 $Mensaje = "";
 
-if (!empty($_POST['BotonTraer'])) {    
+if (!empty($_POST['BotonTraer']) || !empty($_POST['BotonTraer_vac'])) {    
     $Mensaje = ValidarIdAnimal();
 
     if (empty($Mensaje)) {
@@ -41,7 +41,7 @@ if (!empty($_POST['BotonTraer'])) {
             $_SESSION['animal_Mail'] = $AnimalEncontrado['Mail'];
             $_SESSION['animal_Estado_Dueno'] = $AnimalEncontrado['Estado_Dueno'];
             $_SESSION['animal_Nombre_Animal'] = $AnimalEncontrado['Nombre_Animal'];
-           //$_SESSION['animal_Estado_Animal'] = $AnimalEncontrado['Estado_Animal'];
+            $_SESSION['animal_Codigo_Animal'] = $AnimalEncontrado['Codigo_animal'];
             $_SESSION['animal_Id_Raza'] = $AnimalEncontrado['Id_Raza_Animal'];
             $_SESSION['animal_Descripcion_Raza'] = $AnimalEncontrado['Descripcion_Raza_Animal'];
             $_SESSION['animal_Id_Especie'] = $AnimalEncontrado['Id_Especie_Animal'];
@@ -50,6 +50,7 @@ if (!empty($_POST['BotonTraer'])) {
             $_SESSION['animal_Descripcion_Rol'] = $AnimalEncontrado['Descripcion_Rol_Animal'];
             $_SESSION['animal_Descripcion_Familia'] = $AnimalEncontrado['Descripcion_Familia'];
             $_SESSION['animal_Id'] = $AnimalEncontrado['Id_Animal'];
+            $_SESSION['animal_estado_castracion'] = $AnimalEncontrado['Estado_Castracion'];
 
             
             //estado animal
@@ -66,13 +67,20 @@ if (!empty($_POST['BotonTraer'])) {
             $edad = $diferencia->y;
             $_SESSION['animal_duenio_edad'] = $edad;
 
-            //traer todas las enfermeddes de la especie del animal
-            require_once 'funciones/funcion_consultas_generales.php';
-            $ListaEnfermedades = TraerEnfermedades($MiConexion);
-            $CantidadEnfermedades= count($ListaEnfermedades);
+            if(!empty($_POST['BotonTraer'])){
+                //traer todas las enfermeddes de la especie del animal
+                require_once 'funciones/funcion_consultas_generales.php';
+                $ListaEnfermedades = TraerEnfermedades($MiConexion);
+                $CantidadEnfermedades= count($ListaEnfermedades);
 
-            header('Location: formulario_historial_medico_2.php');
-            exit;
+                header('Location: formulario_historial_medico_2.php');
+                exit;
+            }else if(!empty($_POST['BotonTraer_vac'])){                
+
+                header('Location: formulario_historial_medico_3.php');
+                exit;
+            }
+            
 
 
         }
@@ -134,14 +142,18 @@ text-white-50"></i> Generate Report</a>-->
                             Codigo de Verificacion Animal</label>
                             <input type="number" min="0"  class="form-control" id="validationServer05"
                                 aria-describedby="validationServer05Feedback" placeholder="Codigo Animal"
-                                name="codigo" value= "<?php echo (!empty($_POST['codigo']) ? $_POST['codigo']:''); ?>">
+                                name="codigo" value= "">
                             <div id="validationServer05Feedback" class="invalid-feedback">
                                 Please provide a valid zip.
                             </div>
                         </div>
                         <div class="col-6 text-center mt-5">
                             <button class="btn btn-primary" type="submit" value="traer" 
-                            name="BotonTraer">Traer Informacion</button>
+                            name="BotonTraer">Traer Informacion: cargar enfermedad</button>
+                        </div>
+                        <div class="col-6 text-center mt-5">
+                            <button class="btn btn-primary" type="submit" value="traer" 
+                            name="BotonTraer_vac">Traer Informacion: cargar vacunacion / castracion</button>
                         </div>
                         
                     <!-- """""""""""""""""""""""""""""""""""""""""""""""""""" -->

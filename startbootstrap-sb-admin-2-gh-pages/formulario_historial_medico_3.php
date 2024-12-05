@@ -9,11 +9,11 @@ require_once 'funciones/conexion.php';
 $MiConexion = ConexionBD();
 
 require_once 'funciones/funcion_consultas_generales.php';
-$ListaEnfermedades = TraerEnfermedades($MiConexion);
-$CantidadEnfermedades= count($ListaEnfermedades);
+$ListaVacunas = TraerVacunas($_SESSION['animal_Id_Especie'], $MiConexion);
+$CantidadVacunas= count($ListaVacunas);
 
 require_once 'funciones/validaciones.php';
-$Mensaje ="";
+$Mensaje = "";
 
 
 if(!empty($_POST['BotonRegistrar'])){
@@ -21,7 +21,7 @@ if(!empty($_POST['BotonRegistrar'])){
     $Mensaje= ValidarCargaHistorial();
     if(empty($Mensaje)){
         require_once 'funciones/funcion_crear_historial_medico.php';
-            $HistorialCreado = CrearHistorial($MiConexion);
+            $HistorialCreado = CrearHistorial_vac($MiConexion);
     
             if(empty($HistorialCreado)){
                 $Mensaje="Fallo la creacion del Historial.";
@@ -151,7 +151,7 @@ text-white-50"></i> Generate Report</a>-->
                     -->
                         <div class="col-md-12 mt-5 mb-1 text-center">
                             <hr>
-                            <h3>Enfermedad que presenta</h3>
+                            <h3>Vacuna que se aplico.</h3>
                         </div>
 
                         
@@ -170,10 +170,10 @@ text-white-50"></i> Generate Report</a>-->
                                     data-bs-parent="#accordionFlushExample">
 
                                     <?php
-                                        foreach ($ListaEnfermedades as $enfermedad) {
+                                        foreach ($ListaVacunas as $enfermedad) {
                                             echo '<div class="form-check form-switch mb-3">';
-                                            echo '<input class="form-check-input" type="radio" role="switch" id="enfermedad' . $enfermedad['id_enfermedad'] . '" name="enfermedadSeleccionada" value="' . $enfermedad['id_enfermedad'] . '">';
-                                            echo '<label class="form-check-label" for="enfermedad' . $enfermedad['id_enfermedad'] . '">' . htmlspecialchars($enfermedad['nombre_enfermedad']) . '</label>';
+                                            echo '<input class="form-check-input" type="radio" role="switch" id="enfermedad' . $enfermedad['id_vacuna'] . '" name="enfermedadSeleccionada" value="' . $enfermedad['id_vacuna'] . '">';
+                                            echo '<label class="form-check-label" for="enfermedad' . $enfermedad['id_vacuna'] . '">' . htmlspecialchars($enfermedad['nombre_vacuna']) . '</label>';
                                             echo '</div>';
                                         }
                                         ?>
@@ -277,10 +277,10 @@ text-white-50"></i> Generate Report</a>-->
                                 <div id="flush-collapseGatos" class="accordion-collapse collapse"
                                     data-bs-parent="#accordionFlushExample">
                                     <?php
-                                        foreach ($ListaEnfermedades as $enfermedad) {
+                                        foreach ($ListaVacunas as $enfermedad) {
                                             echo '<div class="form-check form-switch mb-3">';
-                                            echo '<input class="form-check-input" type="radio" role="switch" id="enfermedad' . $enfermedad['id_enfermedad'] . '" name="enfermedadSeleccionada" value="' . $enfermedad['id_enfermedad'] . '">';
-                                            echo '<label class="form-check-label" for="enfermedad' . $enfermedad['id_enfermedad'] . '">' . htmlspecialchars($enfermedad['nombre_enfermedad']) . '</label>';
+                                            echo '<input class="form-check-input" type="radio" role="switch" id="enfermedad' . $enfermedad['id_vacuna'] . '" name="enfermedadSeleccionada" value="' . $enfermedad['id_vacuna'] . '">';
+                                            echo '<label class="form-check-label" for="enfermedad' . $enfermedad['id_vacuna'] . '">' . htmlspecialchars($enfermedad['nombre_vacuna']) . '</label>';
                                             echo '</div>';
                                         }
                                         ?>
@@ -444,10 +444,10 @@ text-white-50"></i> Generate Report</a>-->
                                 <div id="flush-collapseCaballos" class="accordion-collapse collapse"
                                     data-bs-parent="#accordionFlushExample">
                                     <?php
-                                        foreach ($ListaEnfermedades as $enfermedad) {
+                                        foreach ($ListaVacunas as $enfermedad) {
                                             echo '<div class="form-check form-switch mb-3">';
-                                            echo '<input class="form-check-input" type="radio" role="switch" id="enfermedad' . $enfermedad['id_enfermedad'] . '" name="enfermedadSeleccionada" value="' . $enfermedad['id_enfermedad'] . '">';
-                                            echo '<label class="form-check-label" for="enfermedad' . $enfermedad['id_enfermedad'] . '">' . htmlspecialchars($enfermedad['nombre_enfermedad']) . '</label>';
+                                            echo '<input class="form-check-input" type="radio" role="switch" id="enfermedad' . $enfermedad['id_vacuna'] . '" name="enfermedadSeleccionada" value="' . $enfermedad['id_vacuna'] . '">';
+                                            echo '<label class="form-check-label" for="enfermedad' . $enfermedad['id_vacuna'] . '">' . htmlspecialchars($enfermedad['nombre_vacuna']) . '</label>';
                                             echo '</div>';
                                         }
                                         ?>
@@ -600,7 +600,19 @@ text-white-50"></i> Generate Report</a>-->
                             <?php }
                             ?>
                         </div>
-                        
+
+                        <?php if($_SESSION['animal_estado_castracion']==0){ ?>
+                        <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="invalidCheck3"
+                                    aria-describedby="invalidCheck3Feedback" required name="castracion">
+                                <label class="form-check-label" for="invalidCheck3">
+                                    ¿Se le realizo la castracion al animal?
+                                </label>
+                                <div id="invalidCheck3Feedback" class="invalid-feedback">
+                                    Enviar.
+                                </div>
+                        </div>
+                        <?php } ?>
                         
 
                         <div class="col-md-12 mt-4 text-center">
@@ -662,7 +674,6 @@ text-white-50"></i> Generate Report</a>-->
         </div>
         <?php
         require_once 'partes_Pagina/script.php';
-        require_once 'partes_Pagina/footer.php';
         ?>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -115,11 +115,13 @@ function TraerEspecieAnimal($vConexion)
     return $Usuario;
 }
 
-function TraerRazaAnimal($vConexion)
+function TraerRazaAnimal($vEspecie, $vConexion)
 {
 
     $Usuario = array();
-    $SQL = "SELECT * FROM raza_animal ";
+    $SQL = "SELECT * 
+            FROM raza_animal 
+            WHERE $vEspecie = ID_TIPO_ANIMAL";
 
     $rs = mysqli_query($vConexion, $SQL);
    
@@ -134,11 +136,55 @@ function TraerRazaAnimal($vConexion)
     return $Usuario;
 }
 
-function TraerRolAnimal($vConexion)
+function TraerRazaAnimal_2($vConexion)
 {
 
     $Usuario = array();
-    $SQL = "SELECT * FROM rol_animal ";
+    $SQL = "SELECT * 
+            FROM raza_animal 
+           ";
+
+    $rs = mysqli_query($vConexion, $SQL);
+   
+
+    $i=0;
+       while ($data = mysqli_fetch_array($rs)) {
+               $Usuario[$i]['id_raza'] = $data['ID_RAZA_ANIMAL'];
+               $Usuario[$i]['descripcion_raza'] = $data['DESCRIPCION_RAZA_ANIMAL'];
+               $i++;
+       }
+
+    return $Usuario;
+}
+
+function TraerRolAnimal($vEspecie, $vConexion)
+{
+
+    $Usuario = array();
+    $SQL = "SELECT * 
+            FROM rol_animal 
+            WHERE $vEspecie = ID_TIPO_ANIMAL";
+
+    $rs = mysqli_query($vConexion, $SQL);
+   
+
+    $i=0;
+       while ($data = mysqli_fetch_array($rs)) {
+               $Usuario[$i]['id_rol'] = $data['ID_ROL_ANIMAL'];
+               $Usuario[$i]['descripcion_rol'] = $data['DESCRIPCION_ROL_ANIMAL'];
+               $i++;
+       }
+
+    return $Usuario;
+}
+
+function TraerRolAnimal_2($vConexion)
+{
+
+    $Usuario = array();
+    $SQL = "SELECT * 
+            FROM rol_animal 
+            ";
 
     $rs = mysqli_query($vConexion, $SQL);
    
@@ -249,11 +295,35 @@ function TraerHistorialMedico($vCodigo, $vConexion)
                $Usuario[$i]['descripcion_historial_medico'] = $data['DESCRIPCION_HISTORIAL'];
                $Usuario[$i]['vetrinario_historial_medico'] = $data['ID_VETERINARIO'];
                $Usuario[$i]['enfermedad_historial_medico'] = $data['ID_ENFERMEDAD'];
+               $Usuario[$i]['vacuna_historial_medico'] = $data['ID_VACUNA'];
+               $Usuario[$i]['animal_historial_medico'] = $data['ID_ANIMAL'];
+               
+
                $i++;
        }
 
     return $Usuario;
 }
 
+function TraerVacunas($vEspecie, $vConexion)
+{
+
+    $Usuario = array();
+    $SQL = "SELECT * 
+            FROM vacunas 
+            WHERE $vEspecie = ID_ESPECIE";
+
+    $rs = mysqli_query($vConexion, $SQL);
+   
+
+    $i=0;
+       while ($data = mysqli_fetch_array($rs)) {
+               $Usuario[$i]['id_vacuna'] = $data['ID_VACUNA'];
+               $Usuario[$i]['nombre_vacuna'] = $data['NOMBRE_VACUNA'];
+               $i++;
+       }
+
+    return $Usuario;
+}
 
 ?>

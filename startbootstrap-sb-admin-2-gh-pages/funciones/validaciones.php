@@ -585,6 +585,49 @@ function ValidarCreacionAnimal(){
         $vMensaje .= '-Código del Animal: Deben ser 5 numeros. <br/>';
     }
 
+      
+
+
+    foreach ($_POST as $Id => $Valor) {
+        $_POST[$Id] = trim($_POST[$Id]);
+        $_POST[$Id] = strip_tags($_POST[$Id]);
+    }
+    return $vMensaje;
+
+}
+
+function ValidarCreacionAnimal_2(){
+
+    $vMensaje = '';   
+
+    if(empty($_POST['nombre'])){
+        $vMensaje .= '-Nombre: Debes ingresar el nombre. <br />';
+    }elseif (preg_match('/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/', $_POST['nombre'])) {
+        $vMensaje .= '-Nombre: El nombre debe ser solo letras y espacios. <br />';
+    }    
+
+    if (empty($_POST['dni'])) {
+        $vMensaje .= '-Numero de Documento del dueño: Debes ingresar el numero de Documento del dueño. <br />';
+    }elseif (preg_match('/[^1234567890\s]/', $_POST['dni'])){
+        $vMensaje .= '-Numero de Documento del dueño: Deben ser solo numeros. <br />';
+    }
+    if (strlen($_POST['dni']) < 8 || strlen($_POST['dni']) > 8) {
+        $vMensaje .= '-Numero de Documento del dueño: Deben ser 8 numeros. <br/>';
+    }
+
+    if (empty($_POST['codigo'])) {
+        $vMensaje .= '-Código del Animal: Debes ingresar el Código del Animal. <br />';
+    }elseif (preg_match('/[^1234567890\s]/', $_POST['codigo'])){
+        $vMensaje .= '-Código del Animal: Deben ser solo numeros. <br />';
+    }
+    if (strlen($_POST['codigo']) < 5 || strlen($_POST['codigo']) > 5) {
+        $vMensaje .= '-Código del Animal: Deben ser 5 numeros. <br/>';
+    }
+    
+    /*if($_POST['vac1'] == $_POST['vac2']){
+        $vMensaje .= '-Vacunas: Seleccione dos vacunas diferentes. <br />';
+    }*/
+
    
 
 
@@ -652,13 +695,17 @@ function ValidarModificacionAnimal(){
 function ValidarCargaHistorial(){
     $vMensaje="";
     
-    
-    if (isset($_POST['enfermedadSeleccionada'])) {
-        $enfermedadSeleccionada = $_POST['enfermedadSeleccionada'];
-        $vMensaje.= "";
-    } else {
-        $vMensaje.= "No se seleccionó ninguna enfermedad.";
+    if(isset($_POST['castracion'])){
+        $vMensaje="";
+    }else{
+        if (isset($_POST['enfermedadSeleccionada'])) {
+            $enfermedadSeleccionada = $_POST['enfermedadSeleccionada'];
+            $vMensaje.= "";
+        } else {
+            $vMensaje.= "No se seleccionó ninguna enfermedad.";
+        }
     }
+    
 
    
     return $vMensaje;
