@@ -293,6 +293,7 @@ text-white-50"></i> Generate Report</a>-->
         </div>
         <?php
         require_once 'partes_Pagina/script.php';
+        require_once 'partes_Pagina/footer.php';
         ?>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

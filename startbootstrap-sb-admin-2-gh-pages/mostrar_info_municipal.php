@@ -193,6 +193,7 @@ btn-danger">Aceptar</button>
         </div>
         <?php
         require_once 'partes_Pagina/script.php';
+        require_once 'partes_Pagina/footer.php';
         ?>
 </body>
 

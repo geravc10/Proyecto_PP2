@@ -158,7 +158,7 @@ text-center pt-5 fw-bold" id="principal">
                 <!-- NOTICIAS O CAMPAÑA DE VACUNACION -->
                 <div class="container-fluid text-center">
                     <h1 class="fw-bold p-2 fs-2 border-top border-3 w-50 mx-auto
-text-center pt-5 fw-bold" id="principal">NOTICIAS</h1>
+text-center pt-5 fw-bold" id="principal">NOTICIAS Y NUEVAS CAMPAÑAS</h1>
                     <div class="container mt-5">
                         <div class="row">
                             <div class="col-12">
@@ -230,7 +230,9 @@ text-center pt-5 fw-bold" id="principal">NOTICIAS</h1>
     </div>
     <?php
     require_once 'partes_Pagina/script.php';
+    require_once 'partes_Pagina/footer.php';
     ?>
+    
 </body>
 
 </html>

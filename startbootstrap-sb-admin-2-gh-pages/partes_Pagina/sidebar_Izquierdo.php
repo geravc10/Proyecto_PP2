@@ -143,8 +143,8 @@ justify-content-center" href="index.php">
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="#">Nueva Campaña</a>
-                    <a class="collapse-item" href="#">Nueva Noticia</a>
+                    <a class="collapse-item" href="formulario_campania.php">Nueva Campaña</a>
+                    <a class="collapse-item" href="formulario_noticia.php">Nueva Noticia</a>
                     <!--
 <h6 class="collapse-header">Login Screens:</h6>
 <a class="collapse-item" href="login.php">Login</a>

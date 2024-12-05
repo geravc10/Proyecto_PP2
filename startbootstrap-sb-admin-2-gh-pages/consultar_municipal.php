@@ -161,6 +161,7 @@ bi-exclamation-triangle me-1"></i>
         </div>
         <?php
         require_once 'partes_Pagina/script.php';
+        require_once 'partes_Pagina/footer.php';
         ?>
         <script>
             function preventDecimal(event) {

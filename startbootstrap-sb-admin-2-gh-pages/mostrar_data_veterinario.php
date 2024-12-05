@@ -254,6 +254,7 @@ text-center pt-5 fw-bold" id="principal">
     </div>
     <?php
     require_once 'partes_Pagina/script.php';
+    require_once 'partes_Pagina/footer.php';
     ?>
 </body>
 
