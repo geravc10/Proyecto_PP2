@@ -19,6 +19,25 @@ function TraerSexo($vConexion)
     return $Usuario;
 }
 
+function TraerNaciones($vConexion)
+{
+
+    $Usuario = array();
+    $SQL = "SELECT * FROM nacionalidad ";
+
+    $rs = mysqli_query($vConexion, $SQL);
+    
+    //$data = mysqli_fetch_array($rs);
+
+    $i=0;
+       while ($data = mysqli_fetch_array($rs)) {
+               $Usuario[$i]['id_nacion'] = $data['ID_NACIONALIDAD'];
+               $Usuario[$i]['nombre_nacion'] = $data['PAIS'];
+               $i++;
+       }
+
+    return $Usuario;
+}
 
 function TraerProvincia($vConexion)
 {
@@ -667,5 +686,7 @@ function TraerTurnosReservadosCastEsteAnimal($vConexion, $vCodigo)
 
     return $Usuario;
 }
+
+
 
 ?>

@@ -139,9 +139,7 @@ function ValidarCreacionMuni(){
     }
 
     if(empty($_POST['nacionalidad'])){
-        $vMensaje .= '-Nacionalidad: Debes ingresar la nacionalidad. <br />';
-    }elseif (preg_match('/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/', $_POST['nacionalidad'])) {
-        $vMensaje .= '-Nacionalidad: La nacionalidad debe ser solo letras y espacios. <br />';
+        $vMensaje .= '-Nacionalidad: Debes seleccionar una nacionalidad. <br />';
     } 
 
     if(empty($_POST['sexo'])){
@@ -159,7 +157,7 @@ function ValidarCreacionMuni(){
     if(empty($_POST['nombre_calle'])){
         $vMensaje .= '-Nombre de calle: Debes ingresar el nombre de la calle. <br />';
     }elseif (preg_match('/[^a-zA-ZáéíóúÁÉÍÓÚñÑ0123456789\s]/', $_POST['nombre_calle'])) {
-        $vMensaje .= '-Nombre de calle: El nombre de la calle debe ser solo letras y espacios. <br />';
+        $vMensaje .= '-Nombre de calle: El nombre de la calle debe ser solo letras, numeros y espacios. <br />';
     } 
     
     if (empty($_POST['numero'])) {
@@ -167,6 +165,16 @@ function ValidarCreacionMuni(){
     }elseif (preg_match('/[^1234567890\s]/', $_POST['numero'])){
         $vMensaje .= '-Numero de calle: Deben ser solo numeros. <br />';
     }
+
+    if(empty($_POST['provincia'])){
+        $vMensaje .= '-Provincia: Debes seleccionar una provincia. <br />';
+    }
+
+    if(empty($_POST['nombre_ciudad'])){
+        $vMensaje .= '-Ciudad: Debes ingresar el nombre de una ciudad<br />';
+    }elseif (preg_match('/[^a-zA-ZáéíóúÁÉÍÓÚñÑ0123456789\s]/', $_POST['nombre_calle'])) {
+        $vMensaje .= '-Ciudad: El nombre de la ciudad debe ser solo letras, numeros y espacios. <br />';
+    } 
 
     if (empty($_POST['contrasena'])) {
         $vMensaje .= '-Contraseña: Debes ingresar una contraseña. <br />';
@@ -400,8 +408,6 @@ function ValidarCreacionDuenioAnimal(){
 
     if(empty($_POST['nacionalidad'])){
         $vMensaje .= '-Nacionalidad: Debes ingresar la nacionalidad. <br />';
-    }elseif (preg_match('/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/', $_POST['nacionalidad'])) {
-        $vMensaje .= '-Nacionalidad: La nacionalidad debe ser solo letras y espacios. <br />';
     } 
 
     if(empty($_POST['sexo'])){
