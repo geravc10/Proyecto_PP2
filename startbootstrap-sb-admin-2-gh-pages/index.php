@@ -54,7 +54,7 @@ text-white-50"></i> Generate Report</a>-->
                                         <a class="nav-link" href="campania_vacunacion.php">Campaña de Vacunacion</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="campania_castracion.php">Campaña Castracion</a>
+                                        <a class="nav-link" href="campania_castracion_2.php">Campaña Castracion</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#">Informacion Municipal</a>

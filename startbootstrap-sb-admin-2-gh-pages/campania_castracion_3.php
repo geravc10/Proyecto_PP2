@@ -9,79 +9,44 @@ require_once 'funciones/conexion.php';
 $MiConexion = ConexionBD();
 
 require_once 'funciones/funcion_consultas_generales.php';
-$ListaTurnosVacu = TraerTurnosVacunacion($MiConexion);
+$ListaTurnosVacu = TraerTurnosCastracion($MiConexion);
 $CantidadTurnosVacu= count($ListaTurnosVacu);
 
 require_once 'funciones/validaciones.php';
 $Mensaje = "";
 $Apto="";
 $puede="";
-$estadoAnimal="";
-if(!empty($_POST['BotonRegistrar'])){
-
-    $Mensaje= ValidarAnimalApto();
-    if(empty($Mensaje)){
-        require_once 'funciones/funcion_consultas_generales.php';
-        $datosDuenoAnimal = TraerIdDuenoAnimal($MiConexion, $_SESSION['usuario_dni']);
-
-        require_once 'funciones/funcion_consultas_generales.php';
-        $datosFamilia = TraerFamilia($MiConexion, $_POST['codigo'],$datosDuenoAnimal);
-        
-        if(empty($datosFamilia)){
-            $Mensaje = "No estas registrado como Dueño de animal. Solo el dueño puede reservar turnos en las campañas de vacunacion o castracion.";
-        }else{
-            require_once 'funciones/funcion_consultas_generales.php';
-            $datosAnimal = TraerAnimalCompleto($MiConexion, $_POST['codigo']);
-
-            require_once 'funciones/funcion_consultas_generales.php';
-            $ListaTurnosReservados = TraerTurnosReservadosVacu($MiConexion, $_POST['codigo']);
-
-            if ($datosAnimal !== null && empty($ListaTurnosReservados)) { // Verificar si se encontró el animal
-                foreach ($ListaTurnosVacu as $turno) {
-                    if ($turno['estado_campana'] == 1 &&
-                        $turno['especie_campana'] == $datosAnimal['id_especie_animal'] &&
-                        $datosAnimal['estado_animal'] ==1) {
-                        $Apto = "¡Sí, puedes inscribir a tu animal en la campaña de vacunación!";
-                        $puede=1;
-                        break;
-                    }
-                }
-            }
-
-        
-            if(!empty($puede)){
-                $_SESSION['apto_vacuna_codigo']=$datosAnimal['codigo_animal'];
-                $_SESSION['apto_vacuna_especie']=$datosAnimal['id_especie_animal'];
-                $_SESSION['apto_vacuna_raza']=$datosAnimal['id_raza_animal'];
-                $_SESSION['apto_vacuna_rol']=$datosAnimal['id_rol_animal'];
-                $_SESSION['apto_vacuna_nombre']=$datosAnimal['nombre_animal'];
-                $_SESSION['apto_vacuna_estado']=$datosAnimal['estado_animal'];
-                header('Location: campania_vacunacion_2.php');
-                exit;
-            }
-
-            if (empty($Apto)) {
-                if(!empty($ListaTurnosReservados)){                    
-                    $t=TraerTurnosReservadosVacuEsteAnimal($MiConexion, $_POST['codigo']);
-                    $fecha=$t[0]['fecha_turno'];
-                    $hora= $t[0]['hora_turno'];
-                    $Mensaje = "Tu animal ya tiene un turno asignado. <br> 
-                                El dia: ". $fecha ."<br> A la hora: ".$hora;
-                }else{
-                    $Mensaje = "No hay campaña de vacunacion disponible para tu animal.";
-                }                
-            }else {
-                $Mensaje = "Animal no encontrado. Verifica el código ingresado.";
-
-            }
-        }
-    }
-}
 
 if(!empty($_POST['BotonTurno'])){
     $Mensaje= ValidarTurno();
     if(empty($Mensaje)){
-        $Mensaje="bien";
+        
+        if($_POST['pass'] == $_SESSION['usuario_contrasena']){
+            require_once 'funciones/funcion_consultas_generales.php';
+            $ListaTurnosReservados = TraerTurnosReservadosCast($MiConexion, $_SESSION['apto_castracion_codigo']);
+            if(empty($ListaTurnosReservados)){ 
+
+                require_once 'funciones/funcion_consultas_generales.php';
+                $idDuenoAnimal = TraerIdDuenoAnimal($MiConexion, $_SESSION['usuario_dni']);
+                $_POST['id_dueno_animal']=$idDuenoAnimal;                
+                $_POST['id_campana']=$ListaTurnosVacu['0']['id_campana'];
+                
+                
+                require_once 'funciones/funcion_reservar_turnos.php';
+                $turnoReservado= ReservarTurno($MiConexion);
+
+                if(!empty($turnoReservado)){
+                    header('Location: index.php');
+                    exit;
+                    $Mensaje="RESERVADO!";
+                }
+
+            }else{
+                $Mensaje="no puede reservar";
+            }
+        }else{
+            $Mensaje="Contraseña incorrecta";
+        }
     }
 }
 
@@ -152,7 +117,7 @@ text-white-50"></i> Generate Report</a>-->
                         <div class="container mt-5">
                             <div class="row">
                                 <div class="col-12">
-                                    <h1 class="text-center">Campaña de Vacunación</h1>
+                                    <h1 class="text-center">Campaña de Castración</h1>
 
                                     <?php
                                         if (!empty($Mensaje)) { ?>
@@ -166,14 +131,14 @@ text-white-50"></i> Generate Report</a>-->
                                     <div class="container mt-5">
                                         <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_campania" method="post">
                                             <h4 class="text-center mb-4">Consulta si tu animal es apto para esta
-                                                vacunacion:</h4>
+                                                Castracion:</h4>
 
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col-6">
                                                     <label for="nombre" class="form-label">ID Animal</label>
                                                     <input type="number" class="form-control" id="nombre"
                                                         placeholder="ID Animal" name="codigo" required
-                                                        value= "<?php echo (!empty($_POST['codigo']) ? $_POST['codigo']:''); ?>">
+                                                        value= "<?php echo $_SESSION['apto_castracion_codigo']; ?>">
                                                 </div>
                                                 <div class="text-center mt-4">
                                                     <button class="btn btn-primary" type="submit" value="registrar" name="BotonRegistrar">Consultar</button>
@@ -185,7 +150,7 @@ text-white-50"></i> Generate Report</a>-->
                                                     apto?</label>
                                                 <input type="text" class="form-control" id="validationServer05"
                                                     aria-describedby="validationServer05Feedback" placeholder=""
-                                                    readonly name="apto" value= "<?php echo $Apto; ?>">
+                                                    readonly name="apto" value= "Sí, es apto. Selecciona un turno.">
                                                 <div id="validationServer05Feedback" class="invalid-feedback">
                                                     Please provide a valid zip.
                                                 </div>
@@ -193,9 +158,8 @@ text-white-50"></i> Generate Report</a>-->
 
                                         </form>
 
-                                        <?php 
-                                        if(!empty($puede)){ ?>
-                                            <form form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_campania_2" method="post">
+                                                                             
+                                        <form form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_campania_2" method="post">
                                             <div class="col-md-12 mt-5 mb-1 text-center">
                                                 <hr>
                                             </div>
@@ -251,7 +215,7 @@ text-white-50"></i> Generate Report</a>-->
                                                 <button class="btn btn-primary" type="submit" value="turno" name="BotonTurno">Reservar Turno</button>
                                             </div>
                                         </form>
-                                        <?php } ?>
+                                                                
                                         
                                     </div>
                                 </div>

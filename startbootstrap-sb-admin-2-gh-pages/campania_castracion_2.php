@@ -9,7 +9,7 @@ require_once 'funciones/conexion.php';
 $MiConexion = ConexionBD();
 
 require_once 'funciones/funcion_consultas_generales.php';
-$ListaTurnosVacu = TraerTurnosVacunacion($MiConexion);
+$ListaTurnosVacu = TraerTurnosCastracion($MiConexion);
 $CantidadTurnosVacu= count($ListaTurnosVacu);
 
 require_once 'funciones/validaciones.php';
@@ -34,14 +34,15 @@ if(!empty($_POST['BotonRegistrar'])){
             $datosAnimal = TraerAnimalCompleto($MiConexion, $_POST['codigo']);
 
             require_once 'funciones/funcion_consultas_generales.php';
-            $ListaTurnosReservados = TraerTurnosReservadosVacu($MiConexion, $_POST['codigo']);
+            $ListaTurnosReservados = TraerTurnosReservadosCast($MiConexion, $_POST['codigo']);
 
             if ($datosAnimal !== null && empty($ListaTurnosReservados)) { // Verificar si se encontró el animal
                 foreach ($ListaTurnosVacu as $turno) {
                     if ($turno['estado_campana'] == 1 &&
                         $turno['especie_campana'] == $datosAnimal['id_especie_animal'] &&
-                        $datosAnimal['estado_animal'] ==1) {
-                        $Apto = "¡Sí, puedes inscribir a tu animal en la campaña de vacunación!";
+                        $datosAnimal['estado_animal'] ==1 &&
+                        $datosAnimal['estado_castracion_animal'] ==0) {
+                        $Apto = "¡Sí, puedes inscribir a tu animal en la campaña de Castracion!";
                         $puede=1;
                         break;
                     }
@@ -50,25 +51,26 @@ if(!empty($_POST['BotonRegistrar'])){
 
         
             if(!empty($puede)){
-                $_SESSION['apto_vacuna_codigo']=$datosAnimal['codigo_animal'];
-                $_SESSION['apto_vacuna_especie']=$datosAnimal['id_especie_animal'];
-                $_SESSION['apto_vacuna_raza']=$datosAnimal['id_raza_animal'];
-                $_SESSION['apto_vacuna_rol']=$datosAnimal['id_rol_animal'];
-                $_SESSION['apto_vacuna_nombre']=$datosAnimal['nombre_animal'];
-                $_SESSION['apto_vacuna_estado']=$datosAnimal['estado_animal'];
-                header('Location: campania_vacunacion_2.php');
+                $_SESSION['apto_castracion_codigo']=$datosAnimal['codigo_animal'];
+                $_SESSION['apto_castracion_especie']=$datosAnimal['id_especie_animal'];
+                $_SESSION['apto_castracion_raza']=$datosAnimal['id_raza_animal'];
+                $_SESSION['apto_castracion_rol']=$datosAnimal['id_rol_animal'];
+                $_SESSION['apto_castracion_nombre']=$datosAnimal['nombre_animal'];
+                $_SESSION['apto_castracion_estado']=$datosAnimal['estado_animal'];
+                $_SESSION['apto_castracion_estado']=$datosAnimal['estadestado_castracion_animalo_animal'];
+                header('Location: campania_castracion_3.php');
                 exit;
             }
 
             if (empty($Apto)) {
                 if(!empty($ListaTurnosReservados)){                    
-                    $t=TraerTurnosReservadosVacuEsteAnimal($MiConexion, $_POST['codigo']);
+                    $t=TraerTurnosReservadosCastEsteAnimal($MiConexion, $_POST['codigo']);
                     $fecha=$t[0]['fecha_turno'];
                     $hora= $t[0]['hora_turno'];
                     $Mensaje = "Tu animal ya tiene un turno asignado. <br> 
                                 El dia: ". $fecha ."<br> A la hora: ".$hora;
                 }else{
-                    $Mensaje = "No hay campaña de vacunacion disponible para tu animal.";
+                    $Mensaje = "No hay campaña de Castracion disponible para tu animal.";
                 }                
             }else {
                 $Mensaje = "Animal no encontrado. Verifica el código ingresado.";
@@ -152,7 +154,7 @@ text-white-50"></i> Generate Report</a>-->
                         <div class="container mt-5">
                             <div class="row">
                                 <div class="col-12">
-                                    <h1 class="text-center">Campaña de Vacunación</h1>
+                                    <h1 class="text-center">Campaña de Castracion</h1>
 
                                     <?php
                                         if (!empty($Mensaje)) { ?>
@@ -166,7 +168,7 @@ text-white-50"></i> Generate Report</a>-->
                                     <div class="container mt-5">
                                         <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_campania" method="post">
                                             <h4 class="text-center mb-4">Consulta si tu animal es apto para esta
-                                                vacunacion:</h4>
+                                                Castracion:</h4>
 
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col-6">

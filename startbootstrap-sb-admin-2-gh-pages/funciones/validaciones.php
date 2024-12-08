@@ -729,4 +729,131 @@ function ValidarFechaHistorial(){
 
 }
 
+function ValidarCreacionCampana(){
+
+    $vMensaje = '';
+
+    $hoy = new DateTime();            
+    $inicio = new DateTime($_POST['fecha_inicio']);
+    $fin = new DateTime($_POST['fecha_fin']);
+    $maxInicio = new DateTime($hoy->format('Y-m-d H:i:s'));
+    $maxInicio->modify('+6 months');
+    $maxFin = new DateTime($inicio->format('Y-m-d H:i:s'));
+    $maxFin->modify('+1 week');
+
+
+    if(empty($_POST['nombre_campana'])){
+        $vMensaje .= '-Nombre: Debes ingresar el nombre de la campaña. <br />';
+    }elseif (preg_match('/[^a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s]/', $_POST['nombre_campana'])) {
+        $vMensaje .= '-Nombre: El nombre debe ser solo letras, espacios y numeros. <br />';
+    }    
+    
+
+   if(empty($_POST['fecha_inicio'])){
+        $vMensaje .= '-Fecha de Inicio de campaña: Debes ingresar la fecha de Inicio de campaña. <br />';
+    }else{
+        if($inicio<$hoy){
+            $vMensaje .= '-Fecha de Inicio de campaña: La fecha de Inicio de campaña no puede ser anterior al dia de hoy. <br />';
+        }elseif ($inicio > $maxInicio) {
+            $vMensaje .= '-Fecha de Inicio de campaña: La fecha de Inicio de campaña no puede ser a mas de 6 meses desde hoy. <br />';  
+        }
+    }
+
+    if(empty($_POST['fecha_fin'])){
+        $vMensaje .= '-Fecha de Final de campaña: Debes ingresar la fecha de Final de campaña. <br />';
+    }else{
+        if($fin<$inicio){
+            $vMensaje .= '-Fecha de Final de campaña: La fecha de Final de campaña no puede ser anterior a la fecha de Inicio de campaña. <br />';
+        }elseif($fin > $maxFin){
+            $vMensaje .= '-Fecha de Final de campaña: La fecha de Final de campaña no puede ser mayor a una semana. <br />';
+        }
+    }
+
+    if(empty($_POST['tipo_campana'])){
+        $vMensaje .= '-Tipo de Campaña: Debes ingresar un tipo de Campaña. <br />';
+    }
+
+    if(empty($_POST['especie'])){
+        $vMensaje .= '-Especie: Debes ingresar una Especie de animal. <br />';
+    }
+
+    if(empty($_POST['veterinario'])){
+        $vMensaje .= '-Veterinario: Debes ingresar un Veterinario. <br />';
+    }
+
+    if(empty($_POST['horario'])){
+        $vMensaje .= '-Horario del primer turno: Debes ingresar un Horario entre las 07:00 hs. y las 19:00 hs. <br />';
+    }
+
+    if(empty($_POST['cantidad'])){
+        $vMensaje .= '-Cantidad de turnos por dia: Debes ingresar la cantidad de turnos por dia. <br />';
+    }
+
+    if(empty($_POST['intervalo'])){
+        $vMensaje .= '-Intervalo: Debes ingresar un Intervalo entre turnos. entre 0 y 60 minutos. <br />';
+    }
+
+    if(empty($_POST['duracion'])){
+        $vMensaje .= '-Duracion: Debes ingresar la Duracin de cada turno. entre 0 y 180 minutos. <br />';
+    }
+    /*
+    if(empty($_POST['estado'])){
+        $vMensaje .= '-Estado: Debes ingresar el estado de la campaña. <br />';
+    } 
+    */
+
+    foreach ($_POST as $Id => $Valor) {
+        $_POST[$Id] = trim($_POST[$Id]);
+        $_POST[$Id] = strip_tags($_POST[$Id]);
+    }
+    return $vMensaje;
+
+}
+
+function ValidarAnimalApto(){
+    
+    $vMensaje = '';    
+    
+    if(empty($_POST['codigo'])){
+        $vMensaje .= '-Codigo: Debes ingresar el codigo de tu animal. <br />';
+    }
+    if (strlen($_POST['codigo']) < 5 || strlen($_POST['codigo']) > 5) {
+        $vMensaje .= '-Código: Deben ser 5 numeros. <br/>';
+    }
+
+
+
+    foreach ($_POST as $Id => $Valor) {
+        $_POST[$Id] = trim($_POST[$Id]);
+        $_POST[$Id] = strip_tags($_POST[$Id]);
+    }
+    return $vMensaje;
+
+
+}
+
+function ValidarTurno(){
+    
+    $vMensaje = '';    
+    
+    if(empty($_POST['turno'])){
+        $vMensaje .= '-Turno: Debes seleccionar un Turno. <br />';
+    }
+
+    if(empty($_POST['pass'])){
+        $vMensaje .= '-Constraseña: Debes ingresar tu contraseña para confirmar el turno. <br />';
+    }
+    
+
+
+
+    foreach ($_POST as $Id => $Valor) {
+        $_POST[$Id] = trim($_POST[$Id]);
+        $_POST[$Id] = strip_tags($_POST[$Id]);
+    }
+    return $vMensaje;
+
+
+}
+
 ?>

@@ -28,7 +28,7 @@ if (!empty($_POST['BotonLogin'])) {
             $_SESSION['usuario_nivel'] = $UsuarioLogueado['Nivel'];
             $_SESSION['usuario_dni'] = $UsuarioLogueado['Dni'];
             $_SESSION['usuario_descripcion_nivel'] = $UsuarioLogueado['Descripcion_nivel'];
-
+            $_SESSION['usuario_contrasena'] = $UsuarioLogueado['contrasena'];
 
             header('Location: index.php');
             exit;
