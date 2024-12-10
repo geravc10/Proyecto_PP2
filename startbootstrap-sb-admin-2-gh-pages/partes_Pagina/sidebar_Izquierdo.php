@@ -134,31 +134,64 @@ justify-content-center" href="index.php">
         <div class="sidebar-heading">
             CAMPAÑAS / INFO
         </div>
+
+
+
+
+
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
-                aria-controls="collapsePages">
+            <!-- Enlace para "Cargar Nueva" -->
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCargarNueva" aria-expanded="false" aria-controls="collapseCargarNueva">
                 <i class="fas fa-fw fa-folder"></i>
                 <span>Cargar Nueva</span>
             </a>
-            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div id="collapseCargarNueva" class="collapse" aria-labelledby="headingCargarNueva" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="formulario_campania.php">Nueva Campaña</a>
                     <a class="collapse-item" href="formulario_noticia.php">Nueva Noticia</a>
-                    <!--
-<h6 class="collapse-header">Login Screens:</h6>
-<a class="collapse-item" href="login.php">Login</a>
-<a class="collapse-item" href="register.php">Register</a>
-<a class="collapse-item"
-href="forgot-password.html">Forgot Password</a>
-<div class="collapse-divider"></div>
-<h6 class="collapse-header">Other Pages:</h6>
-<a class="collapse-item" href="404.html">404 Page</a>
-<a class="collapse-item" href="blank.html">Blank Page</a>
--->
                 </div>
             </div>
         </li>
+
+        <li class="nav-item">
+            <!-- Enlace para "Consultar" -->
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseConsultar" aria-expanded="false" aria-controls="collapseConsultar">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Consultar</span>
+            </a>
+            <div id="collapseConsultar" class="collapse" aria-labelledby="headingConsultar" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="consultar_campania.php">Campaña</a>
+                    <a class="collapse-item" href="formulario_noticia.php">Noticia</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            INFORMES
+        </div>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <!-- Enlace para "Cargar Nueva" -->
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInforme" aria-expanded="false" aria-controls="collapseInforme">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Consultar</span>
+            </a>
+            <div id="collapseInforme" class="collapse" aria-labelledby="headingCargarNueva" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="informes.php">Informe Completo</a>
+                </div>
+            </div>
+        </li>
+
+
+
+
+
     <?php } ?>
     <!-- Nav Item - Charts -->
     <!--<li class="nav-item">

@@ -168,8 +168,8 @@ text-white-50"></i> Generate Report</a>-->
                                             <h4 class="text-center mb-4">Consulta si tu animal es apto para esta
                                                 vacunacion:</h4>
 
-                                            <div class="row d-flex justify-content-center">
-                                                <div class="col-6">
+                                            <div class="row d-flex justify-content-center col-12">
+                                                <div class="col-12">
                                                     <label for="nombre" class="form-label">ID Animal</label>
                                                     <input type="number" class="form-control" id="nombre"
                                                         placeholder="ID Animal" name="codigo" required
@@ -190,8 +190,19 @@ text-white-50"></i> Generate Report</a>-->
                                                     Please provide a valid zip.
                                                 </div>
                                             </div>
-
+                                            <hr><div class="col-md-12 mt-3 mb-1">
+                                            <hr>
+                                            </div>
+                                            
+                                            <!--
+                                            <h4 class="text-center mt-4 mb-2">Si queres modificar tu turno ingresa aqui</h4>
+                                            <div class="row d-flex justify-content-center col-12">
+                                                <div class="text-center mt-4">
+                                                    <button class="btn btn-primary" type="button" onclick="location.href='consultar_campania.php'">Modificar</button>
+                                                </div>
+                                            </div>
                                         </form>
+                                        -->
 
                                         <?php 
                                         if(!empty($puede)){ ?>
