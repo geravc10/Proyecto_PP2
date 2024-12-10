@@ -56,9 +56,7 @@ function ValidarModificacionMuni(){
 
     if(empty($_POST['nacionalidad'])){
         $vMensaje .= '-Nacionalidad: Debes ingresar la nacionalidad. <br />';
-    }elseif (preg_match('/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/', $_POST['nacionalidad'])) {
-        $vMensaje .= '-Nacionalidad: La nacionalidad debe ser solo letras y espacios. <br />';
-    } 
+    }
 
     if(empty($_POST['sexo'])){
         $vMensaje .= '-Sexo: Debes ingresar el sexo. <br />';
@@ -231,9 +229,7 @@ function ValidarCreacionVeterinario(){
 
     if(empty($_POST['nacionalidad'])){
         $vMensaje .= '-Nacionalidad: Debes ingresar la nacionalidad. <br />';
-    }elseif (preg_match('/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/', $_POST['nacionalidad'])) {
-        $vMensaje .= '-Nacionalidad: La nacionalidad debe ser solo letras y espacios. <br />';
-    } 
+    }
 
     if(empty($_POST['sexo'])){
         $vMensaje .= '-Sexo: Debes ingresar el sexo. <br />';
@@ -315,9 +311,7 @@ function ValidarModificacionVeterinario(){
 
     if(empty($_POST['nacionalidad'])){
         $vMensaje .= '-Nacionalidad: Debes ingresar la nacionalidad. <br />';
-    }elseif (preg_match('/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/', $_POST['nacionalidad'])) {
-        $vMensaje .= '-Nacionalidad: La nacionalidad debe ser solo letras y espacios. <br />';
-    } 
+    }
 
     if(empty($_POST['sexo'])){
         $vMensaje .= '-Sexo: Debes ingresar el sexo. <br />';
@@ -504,9 +498,7 @@ function ValidarModificacionDuenioAnimal(){
 
     if(empty($_POST['nacionalidad'])){
         $vMensaje .= '-Nacionalidad: Debes ingresar la nacionalidad. <br />';
-    }elseif (preg_match('/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/', $_POST['nacionalidad'])) {
-        $vMensaje .= '-Nacionalidad: La nacionalidad debe ser solo letras y espacios. <br />';
-    } 
+    }
 
     if(empty($_POST['sexo'])){
         $vMensaje .= '-Sexo: Debes ingresar el sexo. <br />';

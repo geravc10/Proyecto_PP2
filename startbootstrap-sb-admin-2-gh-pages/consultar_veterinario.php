@@ -9,6 +9,7 @@ require_once 'funciones/conexion.php';
 $MiConexion = ConexionBD();
 require_once 'funciones/validaciones.php';
 
+
 $Mensaje = "";
 
 if (!empty($_POST['BotonConsultar'])) {
@@ -30,6 +31,7 @@ if (!empty($_POST['BotonConsultar'])) {
             $_SESSION['veterinario_dni'] = $VeterinarioEncontrado['dni'];
             $_SESSION['veterinario_fecha'] = $VeterinarioEncontrado['FechaNacimiento'];
             $_SESSION['veterinario_nacionalidad'] = $VeterinarioEncontrado['Nacionalidad'];
+            $_SESSION['veterinario_id_nacionalidad'] = $VeterinarioEncontrado['Id_Nacionalidad'];
             $_SESSION['veterinario_informacion'] = $VeterinarioEncontrado['Informacion'];
             $_SESSION['veterinario_direccion'] = $VeterinarioEncontrado['Direccion'];
             $_SESSION['veterinario_numero'] = $VeterinarioEncontrado['Numero'];

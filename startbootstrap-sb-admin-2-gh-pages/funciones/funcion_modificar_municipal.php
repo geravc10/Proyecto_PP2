@@ -36,7 +36,7 @@ $estado = $_POST['estado'];
                     persona p, direccion d, ciudad c, provincia pr, datos_de_contacto dc,
                     area_municipal am, rol_municipal rm, trabajador_municipal tm
 
-                SET p.FECHA_DE_NACIMIENTO = '$fecha_nacimiento', p.NACIONALIDAD = '$nacionalidad', 
+                SET p.FECHA_DE_NACIMIENTO = '$fecha_nacimiento', p.ID_NACIONALIDAD = '$nacionalidad', 
                     p.INFORMACION_PERSONAL = '$informacion_personal', p.NOMBRE = '$nombre', 
                     p.APELLIDO = '$apellido',p.SEXO= '$sexo', p.CONTRASENA = '$contrasena', d.NOMBRE_CALLE ='$calle', 
                     d.NUMERO = $numero, d.BIS = $bis, c.NOMBRE_CIUDAD = '$ciudad', c.ID_PROVINCIA = '$provincia',

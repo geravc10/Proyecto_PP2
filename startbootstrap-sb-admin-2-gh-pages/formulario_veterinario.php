@@ -14,6 +14,10 @@ $ListaSexo = TraerSexo($MiConexion);
 $CantidadSexo= count($ListaSexo);
 
 require_once 'funciones/funcion_consultas_generales.php';
+$ListaNaciones = TraerNaciones($MiConexion);
+$CantidadNaciones= count($ListaNaciones);
+
+require_once 'funciones/funcion_consultas_generales.php';
 $ListaProvincia = TraerProvincia($MiConexion);
 $CantidadProvincia= count($ListaProvincia);
 
@@ -139,27 +143,21 @@ text-white-50"></i> Generate Report</a>-->
                         <div class="col-md-6 pt-5">
                             <label for="validationServer04" class="form-label"><b style="color: red;">*</b>Nacionalidad</label>
                             <select class="form-select" id="validationServer04"
-                                aria-describedby="validationServer04Feedback" name="nacionalidad" required>
+                                aria-describedby="validationServer04Feedback" name="nacionalidad" >
                                 <option selected disabled value="">Nacionalidad...</option>
 
                                 <?php 
                                 $selected='';                                
-                                for($i=0;$i<$CantidadSexo;$i++){
-                                    if(!empty($_POST['sexo'])){ 
-                                    if ( $_POST['sexo'] ==  $ListaSexo[$i]['id_sexo']) {
+                                for($i=0;$i<$CantidadNaciones;$i++){
+                                    if(!empty($_POST['nacionalidad']) && $_POST['nacionalidad'] ==  $ListaNaciones[$i]['id_nacion']){ 
                                         $selected = 'selected';
-                                    }else {
+                                    }else{
                                         $selected='';
-                                    }} else{
-                                        if ( $_SESSION['municipal_sexo'] ==  $ListaSexo[$i]['descripcion_sexo']) {
-                                            $selected = 'selected';
-                                        }else {
-                                            $selected='';
-                                        }
                                     }
+                                 
                                     ?>
-                                    <option value="<?php echo $ListaSexo[$i]['id_sexo']; ?>" <?php echo $selected; ?>>
-                                        <?php echo $ListaSexo[$i]['descripcion_sexo']; ?></option>
+                                    <option value="<?php echo $ListaNaciones[$i]['id_nacion']; ?>" <?php echo $selected; ?>>
+                                        <?php echo $ListaNaciones[$i]['nombre_nacion']; ?></option>
                                 <?php }  ?>
                                     <!--
                                 <option value="M">Masculino</option>

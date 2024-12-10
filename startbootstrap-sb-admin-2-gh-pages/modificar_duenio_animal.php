@@ -13,6 +13,10 @@ $ListaSexo = TraerSexo($MiConexion);
 $CantidadSexo= count($ListaSexo);
 
 require_once 'funciones/funcion_consultas_generales.php';
+$ListaNaciones = TraerNaciones($MiConexion);
+$CantidadNaciones= count($ListaNaciones);
+
+require_once 'funciones/funcion_consultas_generales.php';
 $ListaProvincia = TraerProvincia($MiConexion);
 $CantidadProvinvia= count($ListaProvincia);
 
@@ -120,13 +124,37 @@ text-white-50"></i> Generate Report</a>-->
                                 Looks good!
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <label for="validationServer02" class="form-label">Nacionalidad</label>
-                            <input type="text" class="form-control" id="validationServer02" placeholder="Nacionalidad"
-                                name="nacionalidad" required
-                                value="<?php echo (empty($_POST['nacionalidad'])) ? $_SESSION['duenio_nacionalidad'] : $_POST['nacionalidad']; ?>">
-                            <div class="valid-feedback">
-                                Looks good!
+                        <div class="col-md-6 pt-5">
+                            <label for="validationServer04" class="form-label"><b style="color: red;">*</b>Nacionalidad</label>
+                            <select class="form-select" id="validationServer04"
+                                aria-describedby="validationServer04Feedback" name="nacionalidad" >
+                                <option selected disabled value="">Nacionalidad...</option>
+
+                                <?php 
+                                    $selected = ''; 
+
+                                    // Determina el valor a seleccionar
+                                    $valorSeleccionado = !empty($_POST['nacionalidad'])
+                                                        ? $_POST['nacionalidad'] 
+                                                        : (isset($_SESSION['duenio_id_nacionalidad']) 
+                                                            ? $_SESSION['duenio_id_nacionalidad'] 
+                                                            : '');
+
+                                    // Genera las opciones del select
+                                    for ($i = 0; $i < $CantidadNaciones; $i++) {
+                                        $selected = ($valorSeleccionado == $ListaNaciones[$i]['id_nacion']) ? 'selected' : '';
+                                        ?>
+                                        <option value="<?php echo $ListaNaciones[$i]['id_nacion']; ?>" <?php echo $selected; ?>>
+                                            <?php echo $ListaNaciones[$i]['nombre_nacion']; ?>
+                                        </option>
+                                <?php } ?>
+                                    <!--
+                                <option value="M">Masculino</option>
+                                <option value="F">Femenino</option>
+                                <option value="O">Otro</option> -->
+                            </select>
+                            <div id="validationServer04Feedback" class="invalid-feedback">
+                                Please select a valid state.
                             </div>
                         </div>
                         <div class="col-md-12 mt-4 text-center">

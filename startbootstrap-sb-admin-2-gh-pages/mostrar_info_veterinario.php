@@ -5,6 +5,23 @@ if (empty($_SESSION['usuario_nombre'])) {
     header('Location: cerrar_sesion.php');
     exit;
 }
+require_once 'funciones/conexion.php';
+$MiConexion = ConexionBD();
+
+require_once 'funciones/funcion_consultas_generales.php';
+$ListaNaciones = TraerNaciones($MiConexion);
+$CantidadNaciones= count($ListaNaciones);
+
+$pais = "No definido"; // Valor predeterminado para evitar el error
+if (!empty($_SESSION['veterinario_id_nacionalidad'])) {
+    for ($i = 0; $i < $CantidadNaciones; $i++) {
+        if ($ListaNaciones[$i]['id_nacion'] == $_SESSION['veterinario_id_nacionalidad']) {
+            $pais = $ListaNaciones[$i]['nombre_nacion'];
+            break; // Salimos del bucle una vez encontrada la coincidencia
+        }
+    }
+}
+
 
 
 
@@ -40,8 +57,10 @@ require_once 'partes_Pagina/head.php';
 btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm
 text-white-50"></i> Generate Report</a>-->
                     </div>
+                    
                     <!--FORMULARIO-->
                     <h1 class="my-5 text-center fw-bold">Informacion del Veterinario</h1>
+                    
                     <form class="row g-3 m-4 my-5 p-3 mx-auto width=100% id="formulario_E_Municipal">
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
@@ -111,7 +130,7 @@ text-white-50"></i> Generate Report</a>-->
                                                 <td><?php echo $_SESSION['veterinario_nombre'].' '.$_SESSION['veterinario_apellido'] ; ?></td>
                                                 <td><?php echo $_SESSION['veterinario_fecha']; ?></td>
                                                 <td><?php echo $_SESSION['veterinario_edad']; ?></td>
-                                                <td><?php echo $_SESSION['veterinario_nacionalidad']; ?></td>
+                                                <td><?php echo $pais ?></td>
                                                 <td><?php echo $_SESSION['veterinario_sexo']; ?></td>
                                                 <td><?php echo $_SESSION['veterinario_direccion'].' '.$_SESSION['veterinario_numero'].' '.$_SESSION['veterinario_bis'].', '.$_SESSION['veterinario_ciudad']; ?></td>
                                                 <td><?php echo $_SESSION['veterinario_provincia']; ?></td>

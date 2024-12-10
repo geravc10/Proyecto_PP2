@@ -33,7 +33,7 @@ if(!empty($_POST['BotonTurno'])){
                 
                 
                 require_once 'funciones/funcion_reservar_turnos.php';
-                $turnoReservado= ReservarTurno($MiConexion);
+                $turnoReservado= ReservarTurnoCast($MiConexion);
 
                 if(!empty($turnoReservado)){
                     header('Location: index.php');

@@ -10,6 +10,25 @@ if($_SESSION['municipal_bis']==0){
 }else{
     $bis = "bis";
 }
+
+
+require_once 'funciones/conexion.php';
+$MiConexion = ConexionBD();
+
+require_once 'funciones/funcion_consultas_generales.php';
+$ListaNaciones = TraerNaciones($MiConexion);
+$CantidadNaciones= count($ListaNaciones);
+
+$pais = "No definido"; // Valor predeterminado para evitar el error
+if (!empty($_SESSION['municipal_id_nacionalidad'])) {
+    for ($i = 0; $i < $CantidadNaciones; $i++) {
+        if ($ListaNaciones[$i]['id_nacion'] == $_SESSION['municipal_id_nacionalidad']) {
+            $pais = $ListaNaciones[$i]['nombre_nacion'];
+            break; // Salimos del bucle una vez encontrada la coincidencia
+        }
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ES">
@@ -79,7 +98,7 @@ text-white-50"></i> Generate Report</a>-->
                                                 <td><?php echo $_SESSION['municipal_nombre'].' '.$_SESSION['municipal_apellido']; ?></td>
                                                 <td><?php echo $_SESSION['municipal_fecha']; ?></td>
                                                 <td><?php echo $_SESSION['municipal_edad']; ?></td>
-                                                <td><?php echo $_SESSION['municipal_nacionalidad'];?></td>
+                                                <td><?php echo $pais;?></td>
                                                 <td><?php echo $_SESSION['municipal_sexo'];?></td>
                                                 <td><?php echo $_SESSION['municipal_direccion']. ' ' . $_SESSION['municipal_numero'] . ' ' . $bis; ?></td>
                                                 <td><?php echo $_SESSION['municipal_provincia']; ?></td>

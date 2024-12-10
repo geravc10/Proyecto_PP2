@@ -43,7 +43,7 @@ if($_POST['estado']==2){
                     veterinario v
                     
 
-                SET p.FECHA_DE_NACIMIENTO = '$fecha_nacimiento', p.NACIONALIDAD = '$nacionalidad', 
+                SET p.FECHA_DE_NACIMIENTO = '$fecha_nacimiento', p.ID_NACIONALIDAD = '$nacionalidad', 
                     p.INFORMACION_PERSONAL = '$informacion_personal', p.NOMBRE = '$nombre', 
                     p.APELLIDO = '$apellido',p.SEXO= '$sexo', p.CONTRASENA = '$contrasena', d.NOMBRE_CALLE ='$calle', 
                     d.NUMERO = $numero, d.BIS = $bis, c.NOMBRE_CIUDAD = '$ciudad', c.ID_PROVINCIA = '$provincia',

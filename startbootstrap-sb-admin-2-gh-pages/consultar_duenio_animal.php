@@ -29,6 +29,7 @@ if (!empty($_POST['BotonConsultar'])) {
             $_SESSION['duenio_dni'] = $DuenioEncontrado['dni'];
             $_SESSION['duenio_fecha'] = $DuenioEncontrado['FechaNacimiento'];
             $_SESSION['duenio_nacionalidad'] = $DuenioEncontrado['Nacionalidad'];
+            $_SESSION['duenio_id_nacionalidad'] = $DuenioEncontrado['Id_Nacionalidad'];
             $_SESSION['duenio_informacion'] = $DuenioEncontrado['Informacion'];
             $_SESSION['duenio_direccion'] = $DuenioEncontrado['Direccion'];
             $_SESSION['duenio_numero'] = $DuenioEncontrado['Numero'];

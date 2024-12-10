@@ -94,7 +94,7 @@ seccion direccion
 
     //inserto en la tabla persona
     $SQL_Insert_Persona="INSERT INTO 
-        persona (FECHA_DE_NACIMIENTO, NACIONALIDAD, INFORMACION_PERSONAL, NOMBRE, APELLIDO,
+        persona (FECHA_DE_NACIMIENTO, ID_NACIONALIDAD, INFORMACION_PERSONAL, NOMBRE, APELLIDO,
         SEXO, DNI, ID_DIRECCION, ESTADO_PERSONA, ID_DATOS_DE_CONTACTO, CONTRASENA, ID_NIVEL) 
         VALUES
         ('$fecha_nacimiento','$nacionalidad','$informacion_personal', '$nombre', '$apellido', 

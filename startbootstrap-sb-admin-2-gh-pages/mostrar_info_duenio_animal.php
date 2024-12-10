@@ -11,6 +11,23 @@ if($_SESSION['duenio_bis']==0){
     $bis = "bis";
 }
 
+require_once 'funciones/conexion.php';
+$MiConexion = ConexionBD();
+
+require_once 'funciones/funcion_consultas_generales.php';
+$ListaNaciones = TraerNaciones($MiConexion);
+$CantidadNaciones= count($ListaNaciones);
+
+$pais = "No definido"; // Valor predeterminado para evitar el error
+if (!empty($_SESSION['duenio_id_nacionalidad'])) {
+    for ($i = 0; $i < $CantidadNaciones; $i++) {
+        if ($ListaNaciones[$i]['id_nacion'] == $_SESSION['duenio_id_nacionalidad']) {
+            $pais = $ListaNaciones[$i]['nombre_nacion'];
+            break; // Salimos del bucle una vez encontrada la coincidencia
+        }
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ES">
@@ -78,7 +95,7 @@ text-white-50"></i> Generate Report</a>-->
                                                 <td><?php echo $_SESSION['duenio_nombre'].' '.$_SESSION['duenio_apellido'] ; ?></td>
                                                 <td><?php echo $_SESSION['duenio_fecha'] ; ?></td>
                                                 <td><?php echo $_SESSION['duenio_edad'] ; ?></td>
-                                                <td><?php echo $_SESSION['duenio_nacionalidad'] ; ?></td>
+                                                <td><?php echo $pais ; ?></td>
                                                 <td><?php echo $_SESSION['duenio_sexo'] ; ?></td>
                                                 <td><?php echo $_SESSION['duenio_direccion']. ' ' . $_SESSION['duenio_numero'] . ' ' . $bis; ?></td>
                                                 <td><?php echo $_SESSION['duenio_provincia'] ; ?></td>
