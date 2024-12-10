@@ -27,7 +27,7 @@ p.CONTRASENA= '$vClave'
         $Usuario['Estado'] = $data['ESTADO_PERSONA'];
         $Usuario['Nivel'] = $data['ID_NIVEL'];
         $Usuario['Descripcion_nivel'] = $data['DESCRIPCION_NIVEL'];
-        
+        $Usuario['contrasena'] = $data['CONTRASENA'];
     }
 
 

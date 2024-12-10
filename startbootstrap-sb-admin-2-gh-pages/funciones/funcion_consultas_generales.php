@@ -19,6 +19,25 @@ function TraerSexo($vConexion)
     return $Usuario;
 }
 
+function TraerNaciones($vConexion)
+{
+
+    $Usuario = array();
+    $SQL = "SELECT * FROM nacionalidad ";
+
+    $rs = mysqli_query($vConexion, $SQL);
+    
+    //$data = mysqli_fetch_array($rs);
+
+    $i=0;
+       while ($data = mysqli_fetch_array($rs)) {
+               $Usuario[$i]['id_nacion'] = $data['ID_NACIONALIDAD'];
+               $Usuario[$i]['nombre_nacion'] = $data['PAIS'];
+               $i++;
+       }
+
+    return $Usuario;
+}
 
 function TraerProvincia($vConexion)
 {
@@ -215,6 +234,42 @@ function TraerIdDuenoAnimal($vConexion,$dni)
     }
 }
 
+function TraerFamilia($vConexion,$codAnimal, $idDueno)
+{
+        // Consulta para obtener el ID_ANIMAL a partir del CODIGO_ANIMAL
+        $SQL_Verificar_Dueno = "SELECT ID_ANIMAL FROM animal WHERE CODIGO_ANIMAL = '$codAnimal';";
+        $result = mysqli_query($vConexion, $SQL_Verificar_Dueno);
+
+        // Si se encuentra el dueño, se devuelve su ID como string
+        if (mysqli_num_rows($result) > 0) {
+                $row = mysqli_fetch_assoc($result);
+
+                $idAnimal = $row['ID_ANIMAL'];
+
+
+                // Consulta para obtener ID_FAMILIA a partir del id_dueño animal
+                $SQL_Verificar_familia = "SELECT 
+                                                        ID_FAMILIA 
+                                                FROM 
+                                                        familia
+                                                WHERE 
+                                                        ID_ANIMAL = '$idAnimal'
+                                                AND
+                                                        ID_DUENO_ANIMAL='$idDueno'
+                                                ;";
+                $result = mysqli_query($vConexion, $SQL_Verificar_familia);
+
+                // Si se encuentra el dueño, se devuelve su ID como string
+                if (mysqli_num_rows($result) > 0) {
+                        $row = mysqli_fetch_assoc($result);
+                        return $row['ID_FAMILIA'];
+                } else {
+                        // Si no se encuentra, devolver un valor nulo o un mensaje de error
+                        return null;
+                }
+        }
+}
+
 function TraerAnimal($vConexion,$codigo)
 {
     // Consulta para obtener el ID_ANIMAL a partir del CODIGO_ANIMAL
@@ -229,6 +284,32 @@ function TraerAnimal($vConexion,$codigo)
         // Si no se encuentra, devolver un valor nulo o un mensaje de error
         return null;
     }
+}
+
+function TraerAnimalCompleto($vConexion,$codigo)
+{
+        // Consulta para obtener el ID_ANIMAL a partir del CODIGO_ANIMAL
+    $SQL_Verificar_Animal = "SELECT * 
+    FROM animal 
+    WHERE CODIGO_ANIMAL = '$codigo';";
+
+$rs = mysqli_query($vConexion, $SQL_Verificar_Animal);
+
+// Retornar el primer resultado directamente
+if ($data = mysqli_fetch_array($rs)) {
+return [
+        'codigo_animal' => $data['CODIGO_ANIMAL'],
+        'id_especie_animal' => $data['ID_TIPO_ANIMAL'],
+        'id_raza_animal' => $data['ID_RAZA_ANIMAL'],
+        'id_rol_animal' => $data['ID_ROL_ANIMAL'],
+        'nombre_animal' => $data['NOMBRE_ANIMAL'],
+        'estado_animal' => $data['ESTADO_ANIMAL'], 
+        'estado_castracion_animal' => $data['ESTADO_CASTRACION']
+        ];
+}
+
+// Si no se encuentra el animal, retornar null
+return null;
 }
 
 function TraerEnfermedades($vConexion)
@@ -272,6 +353,28 @@ function TraerVeterinarios($vidVeterinario, $vConexion)
                $Usuario['id_veterinario'] = $data['ID_VETERINARIO'];
                $Usuario['nombre_veterinario'] = $data['NOMBRE'];
                $Usuario['apellido_veterinario'] = $data['APELLIDO'];
+               $i++;
+       }
+
+    return $Usuario;
+}
+
+function TraerVeterinarios_2($vConexion)
+{
+    $Usuario = array();
+    $SQL = "SELECT *   
+            FROM veterinario as v, persona as p
+            WHERE             
+            v.DNI=p.DNI
+            ";
+
+    $rs = mysqli_query($vConexion, $SQL);
+    
+    $i=0;
+       while ($data = mysqli_fetch_array($rs)) {
+               $Usuario[$i]['id_veterinario'] = $data['ID_VETERINARIO'];
+               $Usuario[$i]['nombre_veterinario'] = $data['NOMBRE'];
+               $Usuario[$i]['apellido_veterinario'] = $data['APELLIDO'];
                $i++;
        }
 
@@ -325,5 +428,265 @@ function TraerVacunas($vEspecie, $vConexion)
 
     return $Usuario;
 }
+
+function TraerCampanias($vConexion)
+{
+
+    $Usuario = array();
+    $SQL = "SELECT * FROM tipo_de_campana ";
+
+    $rs = mysqli_query($vConexion, $SQL);
+    
+    //$data = mysqli_fetch_array($rs);
+
+    $i=0;
+       while ($data = mysqli_fetch_array($rs)) {
+               $Usuario[$i]['id_campana'] = $data['ID_TIPO_DE_CAMPANA'];
+               $Usuario[$i]['descripcion_campana'] = $data['DESCRIPCION_TIPO_CAMPANA'];
+               $i++;
+       }
+
+    return $Usuario;
+}
+
+function TraerTurnosVacunacion($vConexion)
+{
+
+    $Usuario = array();
+    $SQL = "SELECT * 
+                FROM turnos as t, campana as c
+                WHERE t.ID_CAMPANA_TURNO = c.ID_CAMPANA
+                AND
+                c.ID_TIPO_DE_CAMPANA=1
+                AND
+                c.ESTADO_CAMPANA=1
+                AND
+                t.ESTADO_TURNO=0
+                ";
+
+    $rs = mysqli_query($vConexion, $SQL);
+    
+    //$data = mysqli_fetch_array($rs);
+
+    $i=0;
+       while ($data = mysqli_fetch_array($rs)) {
+                $Usuario[$i]['id_campana'] = $data['ID_CAMPANA'];
+                $Usuario[$i]['tipo_campana'] = $data['ID_TIPO_DE_CAMPANA'];
+                $Usuario[$i]['descripcion_tipo_campana'] = $data['DESCRIPCION_CAMPANA'];
+                $Usuario[$i]['estado_campana'] = $data['ESTADO_CAMPANA'];
+                $Usuario[$i]['especie_campana'] = $data['ID_ESPECIE'];
+
+
+                $Usuario[$i]['id_turno'] = $data['ID_TURNO'];
+                $Usuario[$i]['id_campana_turno'] = $data['ID_CAMPANA_TURNO'];
+                $Usuario[$i]['fecha_turno'] = $data['FECHA_TURNO'];
+                $Usuario[$i]['hora_inicio_turno'] = $data['HORA_INICIO_TURNO'];
+                $Usuario[$i]['hora_fin_turno'] = $data['HORA_FIN_TURNO'];
+                $Usuario[$i]['estado_turno'] = $data['ESTADO_TURNO'];
+
+               $i++;
+       }
+
+    return $Usuario;
+}
+
+function TraerTurnosReservadosVacu($vConexion, $vCodigo)
+{
+
+    $Usuario = array();
+    $SQL = "SELECT * 
+                FROM 
+                        turnos_reservados as tr, campana as c
+                WHERE 
+                        c.ESTADO_CAMPANA=1
+                AND
+                        c.ID_TIPO_DE_CAMPANA= 1
+                AND
+                        tr.ID_CAMPANA= c.ID_CAMPANA
+                AND
+                        tr.ID_ANIMAL='$vCodigo'
+                ";
+
+    $rs = mysqli_query($vConexion, $SQL);
+    
+    //$data = mysqli_fetch_array($rs);
+
+    $i=0;
+       while ($data = mysqli_fetch_array($rs)) {
+                $Usuario[$i]['id_turno_reservado'] = $data['ID_TURNO_RESERVADO'];
+               $Usuario[$i]['id_turno'] = $data['ID_TURNO'];
+               $Usuario[$i]['id_animal'] = $data['ID_ANIMAL'];
+               $Usuario[$i]['id_dueno_animal'] = $data['ID_DUENO_ANIMAL'];
+               $Usuario[$i]['id_campana'] = $data['ID_CAMPANA'];           
+               $Usuario[$i]['estado_turno_reservado'] = $data['ESTADO_TURNO_RESERVADO'];    
+
+               $i++;
+       }
+
+    return $Usuario;
+}
+
+function TraerTurnosReservadosVacuEsteAnimal($vConexion, $vCodigo)
+{
+
+    $Usuario = array();
+    $SQL = "SELECT * 
+                FROM 
+                        turnos_reservados as tr, campana as c, turnos as t
+                WHERE 
+                        c.ESTADO_CAMPANA=1
+                AND
+                        c.ID_TIPO_DE_CAMPANA= 1
+                AND
+                        tr.ID_CAMPANA= c.ID_CAMPANA
+                AND
+                        tr.ID_TURNO= t.ID_TURNO
+                AND
+                        tr.ID_ANIMAL='$vCodigo'
+                
+                ";
+
+    $rs = mysqli_query($vConexion, $SQL);
+    
+    //$data = mysqli_fetch_array($rs);
+
+    $i=0;
+       while ($data = mysqli_fetch_array($rs)) {
+                $Usuario[$i]['id_turno_reservado'] = $data['ID_TURNO_RESERVADO'];
+               $Usuario[$i]['id_turno'] = $data['ID_TURNO'];
+               $Usuario[$i]['id_animal'] = $data['ID_ANIMAL'];
+               $Usuario[$i]['id_dueno_animal'] = $data['ID_DUENO_ANIMAL'];
+               $Usuario[$i]['id_campana'] = $data['ID_CAMPANA'];           
+               $Usuario[$i]['estado_turno_reservado'] = $data['ESTADO_TURNO_RESERVADO'];
+               
+               $Usuario[$i]['fecha_turno'] = $data['FECHA_TURNO'];
+               $Usuario[$i]['hora_turno'] = $data['HORA_INICIO_TURNO'];
+
+               $i++;
+       }
+
+    return $Usuario;
+}
+
+function TraerTurnosCastracion($vConexion)
+{
+
+    $Usuario = array();
+    $SQL = "SELECT * 
+                FROM turnos as t, campana as c
+                WHERE t.ID_CAMPANA_TURNO = c.ID_CAMPANA
+                AND
+                c.ID_TIPO_DE_CAMPANA=2
+                AND
+                c.ESTADO_CAMPANA=1
+                AND
+                t.ESTADO_TURNO=0
+                ";
+
+    $rs = mysqli_query($vConexion, $SQL);
+    
+    //$data = mysqli_fetch_array($rs);
+
+    $i=0;
+       while ($data = mysqli_fetch_array($rs)) {
+                $Usuario[$i]['id_campana'] = $data['ID_CAMPANA'];
+                $Usuario[$i]['tipo_campana'] = $data['ID_TIPO_DE_CAMPANA'];
+                $Usuario[$i]['descripcion_tipo_campana'] = $data['DESCRIPCION_CAMPANA'];
+                $Usuario[$i]['estado_campana'] = $data['ESTADO_CAMPANA'];
+                $Usuario[$i]['especie_campana'] = $data['ID_ESPECIE'];
+
+
+                $Usuario[$i]['id_turno'] = $data['ID_TURNO'];
+                $Usuario[$i]['id_campana_turno'] = $data['ID_CAMPANA_TURNO'];
+                $Usuario[$i]['fecha_turno'] = $data['FECHA_TURNO'];
+                $Usuario[$i]['hora_inicio_turno'] = $data['HORA_INICIO_TURNO'];
+                $Usuario[$i]['hora_fin_turno'] = $data['HORA_FIN_TURNO'];
+                $Usuario[$i]['estado_turno'] = $data['ESTADO_TURNO'];
+
+               $i++;
+       }
+
+    return $Usuario;
+}
+
+function TraerTurnosReservadosCast($vConexion, $vCodigo)
+{
+
+    $Usuario = array();
+    $SQL = "SELECT * 
+                FROM 
+                        turnos_reservados as tr, campana as c
+                WHERE 
+                        c.ESTADO_CAMPANA=1
+                AND
+                        c.ID_TIPO_DE_CAMPANA=2
+                AND
+                        tr.ID_CAMPANA= c.ID_CAMPANA
+                AND
+                        tr.ID_ANIMAL='$vCodigo'
+                ";
+
+    $rs = mysqli_query($vConexion, $SQL);
+    
+    //$data = mysqli_fetch_array($rs);
+
+    $i=0;
+       while ($data = mysqli_fetch_array($rs)) {
+                $Usuario[$i]['id_turno_reservado'] = $data['ID_TURNO_RESERVADO'];
+               $Usuario[$i]['id_turno'] = $data['ID_TURNO'];
+               $Usuario[$i]['id_animal'] = $data['ID_ANIMAL'];
+               $Usuario[$i]['id_dueno_animal'] = $data['ID_DUENO_ANIMAL'];
+               $Usuario[$i]['id_campana'] = $data['ID_CAMPANA'];           
+               $Usuario[$i]['estado_turno_reservado'] = $data['ESTADO_TURNO_RESERVADO'];    
+
+               $i++;
+       }
+
+    return $Usuario;
+}
+
+function TraerTurnosReservadosCastEsteAnimal($vConexion, $vCodigo)
+{
+
+    $Usuario = array();
+    $SQL = "SELECT * 
+                FROM 
+                        turnos_reservados as tr, campana as c, turnos as t
+                WHERE 
+                        c.ESTADO_CAMPANA=1
+                AND
+                        c.ID_TIPO_DE_CAMPANA= 2
+                AND
+                        tr.ID_CAMPANA= c.ID_CAMPANA
+                AND
+                        tr.ID_TURNO= t.ID_TURNO
+                AND
+                        tr.ID_ANIMAL='$vCodigo'
+                
+                ";
+
+    $rs = mysqli_query($vConexion, $SQL);
+    
+    //$data = mysqli_fetch_array($rs);
+
+    $i=0;
+       while ($data = mysqli_fetch_array($rs)) {
+                $Usuario[$i]['id_turno_reservado'] = $data['ID_TURNO_RESERVADO'];
+               $Usuario[$i]['id_turno'] = $data['ID_TURNO'];
+               $Usuario[$i]['id_animal'] = $data['ID_ANIMAL'];
+               $Usuario[$i]['id_dueno_animal'] = $data['ID_DUENO_ANIMAL'];
+               $Usuario[$i]['id_campana'] = $data['ID_CAMPANA'];           
+               $Usuario[$i]['estado_turno_reservado'] = $data['ESTADO_TURNO_RESERVADO'];
+               
+               $Usuario[$i]['fecha_turno'] = $data['FECHA_TURNO'];
+               $Usuario[$i]['hora_turno'] = $data['HORA_INICIO_TURNO'];
+
+               $i++;
+       }
+
+    return $Usuario;
+}
+
+
 
 ?>

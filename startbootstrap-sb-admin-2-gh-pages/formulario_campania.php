@@ -1,11 +1,54 @@
-<!DOCTYPE html>
-<html lang="ES">
 <?php
 session_start();
 if (empty($_SESSION['usuario_nombre'])) {
     header('Location: cerrar_sesion.php');
     exit;
 }
+
+require_once 'funciones/conexion.php';
+$MiConexion = ConexionBD();
+
+require_once 'funciones/funcion_consultas_generales.php';
+$ListaCampanas = TraerCampanias($MiConexion);
+$CantidadCampanas= count($ListaCampanas);
+
+require_once 'funciones/funcion_consultas_generales.php';
+$ListaEspecies = TraerEspecieAnimal($MiConexion);
+$CantidadEspecies= count($ListaEspecies);
+
+require_once 'funciones/funcion_consultas_generales.php';
+$ListaVeterinarios = TraerVeterinarios_2($MiConexion);
+$CantidadVeterinarios= count($ListaVeterinarios);
+
+require_once 'funciones/validaciones.php';
+$Mensaje = "";
+
+if(!empty($_POST['BotonRegistrar'])){
+
+    $Mensaje= ValidarCreacionCampana();
+    if(empty($Mensaje)){
+        
+        require_once 'funciones/funcion_crear_campania.php';
+        $HistorialCreado = CrearCampana($MiConexion);
+
+        if(empty($HistorialCreado)){
+            $Mensaje="Fallo la creacion del Historial.";
+        }else{
+            header('Location: index.php');
+            exit;
+        }
+    }
+}
+
+
+
+
+?>
+
+<!DOCTYPE html>
+<html lang="ES">
+
+<?php
 require_once 'partes_Pagina/head.php';
 ?>
 
@@ -54,18 +97,157 @@ text-white-50"></i> Generate Report</a>-->
                         <div class="col-md-6">
                             <label for="validationServer01" class="form-label"><b style="color: red;">*</b>Nombre de la Campaña</label>
                             <input type="text" class="form-control" id="validationServer01" placeholder="Nombre"
-                                name="nombre" required value= "<?php echo (!empty($_POST['nombre']) ? $_POST['nombre']:''); ?>">
+                                name="nombre_campana"  value= "<?php echo (!empty($_POST['nombre_campana']) ? $_POST['nombre_campana']:''); ?>">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 pt-5 text-center">
+                            <label for="validationServer04" class="form-label"><b style="color: red;">*</b>Tipo de Campaña</label>
+                            <select class="form-select" id="validationServer04"
+                                aria-describedby="validationServer04Feedback" name="tipo_campana" >
+                                <option selected disabled value="">Seleccione Campaña</option>
+
+                                <?php 
+                                $selected='';                                
+                                for($i=0;$i<$CantidadCampanas;$i++){
+                                    if(!empty($_POST['tipo_campana'])){ 
+                                    if ( $_POST['tipo_campana'] ==  $ListaCampanas[$i]['id_campana']) {
+                                        $selected = 'selected';
+                                    }else {
+                                        $selected='';
+                                    }} 
+                                    ?>
+                                    <option value="<?php echo $ListaCampanas[$i]['id_campana']; ?>" <?php echo $selected; ?>>
+                                        <?php echo $ListaCampanas[$i]['descripcion_campana']; ?></option>
+                                <?php }  ?>
+                                    <!--
+                                <option value="M">Masculino</option>
+                                <option value="F">Femenino</option>
+                                <option value="O">Otro</option> -->
+                            </select>
+                            <div id="validationServer04Feedback" class="invalid-feedback">
+                                Please select a valid state.
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 pt-5 text-center">
+                            <label for="validationServer04" class="form-label"><b style="color: red;">*</b>Especie objetivo de la campaña</label>
+                            <select class="form-select" id="validationServer04"
+                                aria-describedby="validationServer04Feedback" name="especie" >
+                                <option selected disabled value="">Seleccione Especie</option>
+
+                                <?php 
+                                $selected='';                                
+                                for($i=0;$i<$CantidadEspecies;$i++){                                     
+                                        if (!empty($_POST['especie']) && $_POST['especie'] ==  $ListaEspecies[$i]['id_especie']) {
+                                            $selected = 'selected';
+                                        }else {
+                                            $selected='';
+                                        }
+                                    ?>
+                                    <option value="<?php echo $ListaEspecies[$i]['id_especie']; ?>" <?php echo $selected; ?>>
+                                        <?php echo $ListaEspecies[$i]['descripcion_especie']; ?></option>
+                                <?php }  ?>
+                                    
+                            </select>
+                            <div id="validationServer04Feedback" class="invalid-feedback">
+                                Please select a valid state.
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 pt-5 text-center">
+                            <label for="validationServer04" class="form-label"><b style="color: red;">*</b>Veterinario a cargo</label>
+                            <select class="form-select" id="validationServer04"
+                                aria-describedby="validationServer04Feedback" name="veterinario" >
+                                <option selected disabled value="">Seleccione Veterinario</option>
+
+                                <?php 
+                                $selected='';                                
+                                for($i=0;$i<$CantidadVeterinarios;$i++){                                     
+                                        if (!empty( $_POST['veterinario']) && $_POST['veterinario'] ==  $ListaVeterinarios[$i]['id_veterinario']) {
+                                            $selected = 'selected';
+                                        }else {
+                                            $selected='';
+                                        }
+                                    ?>
+                                    <option value="<?php echo $ListaVeterinarios[$i]['id_veterinario']; ?>" <?php echo $selected; ?>>
+                                        <?php echo $ListaVeterinarios[$i]['nombre_veterinario'].' '.$ListaVeterinarios[$i]['apellido_veterinario'] ; ?></option>
+                                <?php }  ?>
+                                    
+                            </select>
+                            <div id="validationServer04Feedback" class="invalid-feedback">
+                                Please select a valid state.
+                            </div>
+                        </div>
+
+                        
+                        <div class="col-md-6">
+                            <label for="validationServer02" class="form-label"><b style="color: red;">*</b> Fecha de
+                                Inicio</label>
+                            <input type="date" class="form-control" id="validationServer02"
+                                placeholder="Fecha de Inicio" name="fecha_inicio"  
+                                value= "<?php echo (!empty($_POST['fecha_inicio']) ? $_POST['fecha_inicio']:''); ?>">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationServer02" class="form-label"><b style="color: red;">*</b> Fecha de
+                                fin</label>
+                            <input type="date" class="form-control" id="validationServer02"
+                                placeholder="Fecha de Inicio" name="fecha_fin"  
+                                value= "<?php echo (!empty($_POST['fecha_fin']) ? $_POST['fecha_fin']:''); ?>">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="validationServer02" class="form-label">
+                                <b style="color: red;">*</b> Horario del primer turno
+                            </label>
+                            <input type="time" class="form-control" id="validationServer02"
+                                placeholder="horario" name="horario"
+                                min="07:00" max="19:00"
+                                value="<?php echo (!empty($_POST['horario']) ? $_POST['horario'] : ''); ?>">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="validationServer02" class="form-label"><b style="color: red;">*</b> Cantidad de turnos por dia</label>
+                            <input type="number" class="form-control" id="validationServer02"
+                                placeholder="cantidad" name="cantidad"  
+                                value= "<?php echo (!empty($_POST['cantidad']) ? $_POST['cantidad']:''); ?>">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="validationServer02" class="form-label">
+                                <b style="color: red;">*</b> duracion del turno (en minutos)
+                            </label>
+                            <input type="number" class="form-control" id="validationServer02"
+                                placeholder="duracion" name="duracion"
+                                min="0" max="180" step="1"
+                                value="<?php echo (!empty($_POST['duracion']) ? $_POST['duracion'] : ''); ?>">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
                         </div>
                         
                         <div class="col-md-6">
-                            <label for="validationServer02" class="form-label"><b style="color: red;">*</b> Fecha de
-                                Inicio</label>
-                            <input type="date" class="form-control" id="validationServer02"
-                                placeholder="Fecha de Inicio" name="fecha" required 
-                                value= "<?php echo (!empty($_POST['fecha']) ? $_POST['fecha']:''); ?>">
+                            <label for="validationServer02" class="form-label">
+                                <b style="color: red;">*</b> Intervalo entre turnos (en minutos)
+                            </label>
+                            <input type="number" class="form-control" id="validationServer02"
+                                placeholder="Intervalo" name="intervalo"
+                                min="0" max="60" step="1"
+                                value="<?php echo (!empty($_POST['intervalo']) ? $_POST['intervalo'] : ''); ?>">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -81,107 +263,36 @@ text-white-50"></i> Generate Report</a>-->
                         </div>
                         -->
 
-                        <div class="col-md-6 pt-5 text-center">
-                            <label for="validationServer04" class="form-label"><b style="color: red;">*</b>Tipo de Campaña</label>
-                            <select class="form-select" id="validationServer04"
-                                aria-describedby="validationServer04Feedback" name="tipo_campania" required>
-                                <option selected disabled value="">Seleccione Campaña</option>
-
-                                <?php 
-                                $selected='';                                
-                                for($i=0;$i<$CantidadSexo;$i++){
-                                    if(!empty($_POST['sexo'])){ 
-                                    if ( $_POST['sexo'] ==  $ListaSexo[$i]['id_sexo']) {
-                                        $selected = 'selected';
-                                    }else {
-                                        $selected='';
-                                    }} else{
-                                        if ( $_SESSION['municipal_sexo'] ==  $ListaSexo[$i]['descripcion_sexo']) {
-                                            $selected = 'selected';
-                                        }else {
-                                            $selected='';
-                                        }
-                                    }
-                                    ?>
-                                    <option value="<?php echo $ListaSexo[$i]['id_sexo']; ?>" <?php echo $selected; ?>>
-                                        <?php echo $ListaSexo[$i]['descripcion_sexo']; ?></option>
-                                <?php }  ?>
-                                    <!--
-                                <option value="M">Masculino</option>
-                                <option value="F">Femenino</option>
-                                <option value="O">Otro</option> -->
-                            </select>
-                            <div id="validationServer04Feedback" class="invalid-feedback">
-                                Please select a valid state.
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 pt-5 text-center">
-                            <label for="validationServer04" class="form-label"><b style="color: red;">*</b>Trabajador Municipal</label>
-                            <select class="form-select" id="validationServer04"
-                                aria-describedby="validationServer04Feedback" name="trabajador_municipal" required>
-                                <option selected disabled value="">Seleccione Trabajador</option>
-
-                                <?php 
-                                $selected='';                                
-                                for($i=0;$i<$CantidadSexo;$i++){
-                                    if(!empty($_POST['sexo'])){ 
-                                    if ( $_POST['sexo'] ==  $ListaSexo[$i]['id_sexo']) {
-                                        $selected = 'selected';
-                                    }else {
-                                        $selected='';
-                                    }} else{
-                                        if ( $_SESSION['municipal_sexo'] ==  $ListaSexo[$i]['descripcion_sexo']) {
-                                            $selected = 'selected';
-                                        }else {
-                                            $selected='';
-                                        }
-                                    }
-                                    ?>
-                                    <option value="<?php echo $ListaSexo[$i]['id_sexo']; ?>" <?php echo $selected; ?>>
-                                        <?php echo $ListaSexo[$i]['descripcion_sexo']; ?></option>
-                                <?php }  ?>
-                                    <!--
-                                <option value="M">Masculino</option>
-                                <option value="F">Femenino</option>
-                                <option value="O">Otro</option> -->
-                            </select>
-                            <div id="validationServer04Feedback" class="invalid-feedback">
-                                Please select a valid state.
-                            </div>
-                        </div>
+                       
 
 
 
-                        
+                        <!-- ATENCION: NO PUSE ESTADO PORQUE PASA A ACTIVA CUANDO LLEGA A LA FECHA.
+                                    EN LA MODIFICACION SI SE VA A PODER PASAR MANUALMENTE EL ESTADO.
+
                         <div class="col-md-12 pt-5 text-center">
                             <label for="validationServer04" class="form-label"><b style="color: red;">*</b> Estado</label>
                             <select class="form-select" id="validationServer04"
-                                aria-describedby="validationServer04Feedback" name="estado" required>
-                                <option selected disabled value="">Estado...</option>
+                                aria-describedby="validationServer04Feedback" name="estado" >
+                                
                                 
                                 <?php 
-                                    $s1="";
-                                    $s2="";
-                                    if(!empty($_POST['estado']) && $_POST['estado']=="1"){                                        
-                                        $s1="selected";
-                                    } else{
-                                        $s2="selected";
-                                    }                    
-                                    ?>
-
-                                <option value="0" <?php echo $s2 ; ?>>Inactivo</option>
-                                <option value="1" <?php echo $s1 ; ?>>Activo</option>
+                                    $selectedBis = isset($_POST['estado']) ? $_POST['estado'] : ''; // Verificar si se ha enviado el valor
+            
+                                    $s0 = $selectedBis === '' ? 'selected' : ''; // Selecciona 'Estado...' si no hay valor
+                                    $s1 = $selectedBis === 'si' ? 'selected' : ''; // Selecciona 'Inactivo' si se ha elegido 'no'
+                                    $s2 = $selectedBis === 'no' ? 'selected' : ''; // Selecciona 'Activo' si se ha elegido 'si'
+                                ?>                                
+                                <option <?php echo $s0; ?> disabled value="">Estado de Campaña</option>                                
+                                <option value="si" <?php echo $s2 ; ?>>Activa</option>
+                                <option value="no" <?php echo $s1 ; ?>>Inactiva</option>
                                 
-                                <!--
-                                <option value="0">Inactivo</option>
-                                <option value="1">Activo</option> -->
                             </select>
                             <div id="validationServer04Feedback" class="invalid-feedback">
                                 Please select a valid state.
                             </div>
                         </div>
-                        
+                                -->
                         <div class="col-12 text-center">
                             <div class="form-check mt-4">
                                 <input class="form-check-input" type="checkbox"  id="invalidCheck3"

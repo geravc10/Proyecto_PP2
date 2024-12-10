@@ -1,15 +1,24 @@
-<!DOCTYPE html>
-<html lang="ES">
 <?php
 session_start();
 if (empty($_SESSION['usuario_nombre'])) {
     header('Location: cerrar_sesion.php');
     exit;
 }
-require_once 'partes_Pagina/head.php';
+
 ?>
 
+
+
+
+<!DOCTYPE html>
+<html lang="ES">
 <body id="page-top">
+
+<?php
+    require_once 'partes_Pagina/head.php';
+?>
+
+
     <?php
     require_once 'partes_Pagina/header.php';
     ?>
