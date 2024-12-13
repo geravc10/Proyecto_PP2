@@ -43,6 +43,16 @@ justify-content-between mb-4">
 btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm
 text-white-50"></i> Generate Report</a>-->
                     </div>
+
+
+                    <?php
+                    if (!empty($_SESSION['mensaje'])) { ?>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <i class="bi bi-exclamation-triangle me-1"></i>
+                            <?php echo $_SESSION['mensaje']; ?>
+                        </div>
+                    <?php }
+                    ?>
                     <!-- nav index -->
 
                     <nav class="navbar navbar-expand-lg navbar-light bg-light">

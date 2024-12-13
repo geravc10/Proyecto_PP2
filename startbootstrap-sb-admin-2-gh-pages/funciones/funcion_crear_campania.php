@@ -29,12 +29,16 @@ $estado="1";
 $idEspecie=$_POST['especie'];
 $idVeterinario= $_POST['veterinario'];
 
+$PrimerTurno=$_POST['horario'];
+$Canturnos=$_POST['cantidad'];
+$DuraTurno=$_POST['duracion'];
+$InterTurno=$_POST['intervalo'];
 
 //inserto en la tabla campana
 $SQL_Insert_historial_medico="INSERT INTO 
-                campana (ID_TIPO_DE_CAMPANA, ID_TRABAJADOR_MUNICIPAL, DESCRIPCION_CAMPANA, FECHA_DE_CREACION, FECHA_DE_INICIO, FECHA_DE_FIN, ESTADO_CAMPANA, ID_ESPECIE, ID_VETERINARIO) 
+                campana (ID_TIPO_DE_CAMPANA, ID_TRABAJADOR_MUNICIPAL, DESCRIPCION_CAMPANA, FECHA_DE_CREACION, FECHA_DE_INICIO, FECHA_DE_FIN, ESTADO_CAMPANA, ID_ESPECIE, ID_VETERINARIO, HORA_PRIMER_TURNO,CANTIDAD_TURNOS_DIAS, DURACION_TURNO, INTERVALO_ENTRE_TURNOS ) 
             VALUES
-                ('$idTipoCampana',$idTrabajadorMuni, '$nombreCampana', CURDATE(), '$fechaInicio', '$fechaFin', '$estado', '$idEspecie', '$idVeterinario')                
+                ('$idTipoCampana',$idTrabajadorMuni, '$nombreCampana', CURDATE(), '$fechaInicio', '$fechaFin', '$estado', '$idEspecie', '$idVeterinario','$PrimerTurno','$Canturnos','$DuraTurno','$InterTurno' )                
             ;";
 
 if (!mysqli_query($vConexion, $SQL_Insert_historial_medico)) {

@@ -8,6 +8,19 @@ if (empty($_SESSION['usuario_nombre'])) {
 require_once 'funciones/conexion.php';
 $MiConexion = ConexionBD();
 
+
+$id=$_SESSION['id_campana_elegida'];
+$nombre=$_SESSION['nombre_campana_elegida'];
+$tipo=$_SESSION['id_tipo_campana_elegida'];
+$especie=$_SESSION['id_especie_campana_elegida'];
+$veteriario=$_SESSION['id_veterinario_campana_elegida'];
+$fechaInicio=$_SESSION['fecha_inicio_campana_elegida'];
+$fechaFin=$_SESSION['fecha_fin_campana_elegida'];
+$primerTurno=$_SESSION['primer_turno_campana_elegida'];
+$cantidadTurnos=$_SESSION['cant_turno_campana_elegida'];
+$duracion=$_SESSION['duracion_turno_campana_elegida'];
+$intervalo=$_SESSION['intervalo_turno_campana_elegida'];
+
 require_once 'funciones/funcion_consultas_generales.php';
 $ListaCampanas = TraerCampanias($MiConexion);
 $CantidadCampanas= count($ListaCampanas);
@@ -20,14 +33,41 @@ require_once 'funciones/funcion_consultas_generales.php';
 $ListaVeterinarios = TraerVeterinarios_2($MiConexion);
 $CantidadVeterinarios= count($ListaVeterinarios);
 
+$hoy = new DateTime();            
+$inicio = new DateTime($fechaInicio);
+$fin = new DateTime($fechaFin);
+$maxInicio = new DateTime($hoy->format('Y-m-d H:i:s'));
+$maxInicio->modify('+6 months');
+$maxFin = new DateTime($inicio->format('Y-m-d H:i:s'));
+$maxFin->modify('+1 week');
+$soloLectura="";
+if($inicio<$hoy){
+    $soloLectura="readonly";
+    $_POST['soloLectura']= $soloLectura;
+}
+
 require_once 'funciones/validaciones.php';
 $Mensaje = "";
 
-if(!empty($_POST['BotonRegistrar'])){
+if(!empty($_POST['BotonModificar'])){
 
-    $Mensaje= ValidarCreacionCampana();
+    $Mensaje= ValidarmodificacionCampana();
     if(empty($Mensaje)){
-        
+
+        $Mensaje="Modiffff!";
+
+        require_once 'funciones/funcion_modificar_campana.php';
+            $CampanaModificada = ModificarCampana( $MiConexion, $id);
+    
+            if(empty($CampanaModificada)){
+                $Mensaje="Fallo la modificacion de la campaña.";
+            }else{                
+                $_SESSION['mensaje']="Se modifico la campaña.";
+                header('Location: index.php');
+                exit;
+    
+            }
+        /*
         require_once 'funciones/funcion_crear_campania.php';
         $HistorialCreado = CrearCampana($MiConexion);
 
@@ -36,7 +76,7 @@ if(!empty($_POST['BotonRegistrar'])){
         }else{
             header('Location: index.php');
             exit;
-        }
+        }*/
     }
 }
 
@@ -97,7 +137,7 @@ text-white-50"></i> Generate Report</a>-->
                         <div class="col-md-6">
                             <label for="validationServer01" class="form-label">Nombre de la Campaña</label>
                             <input type="text" class="form-control" id="validationServer01" placeholder="Nombre"
-                                name="nombre_campana"  value= "<?php echo (!empty($_POST['nombre_campana']) ? $_POST['nombre_campana']:''); ?>">
+                                name="nombre_campana"  value= "<?php echo (!empty($_POST['nombre_campana']) ? $_POST['nombre_campana']:$nombre); ?>">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -113,11 +153,14 @@ text-white-50"></i> Generate Report</a>-->
                                 $selected='';                                
                                 for($i=0;$i<$CantidadCampanas;$i++){
                                     if(!empty($_POST['tipo_campana'])){ 
-                                    if ( $_POST['tipo_campana'] ==  $ListaCampanas[$i]['id_campana']) {
-                                        $selected = 'selected';
-                                    }else {
-                                        $selected='';
-                                    }} 
+                                        if ( $_POST['tipo_campana'] ==  $ListaCampanas[$i]['id_campana']) {
+                                            $selected = 'selected';
+                                        }else {
+                                            $selected='';
+                                        }
+                                    } else{
+                                        $selected = ($tipo == $ListaCampanas[$i]['id_campana']) ? 'selected' : '';
+                                    }
                                     ?>
                                     <option value="<?php echo $ListaCampanas[$i]['id_campana']; ?>" <?php echo $selected; ?>>
                                         <?php echo $ListaCampanas[$i]['descripcion_campana']; ?></option>
@@ -141,11 +184,17 @@ text-white-50"></i> Generate Report</a>-->
                                 <?php 
                                 $selected='';                                
                                 for($i=0;$i<$CantidadEspecies;$i++){                                     
-                                        if (!empty($_POST['especie']) && $_POST['especie'] ==  $ListaEspecies[$i]['id_especie']) {
+                                    if (!empty($_POST['especie'])){
+                                        if($_POST['especie'] ==  $ListaEspecies[$i]['id_especie']){
                                             $selected = 'selected';
                                         }else {
                                             $selected='';
                                         }
+                                        
+                                    }else{
+                                        $selected = ($especie == $ListaEspecies[$i]['id_especie']) ? 'selected' : '';
+                                    }
+                                
                                     ?>
                                     <option value="<?php echo $ListaEspecies[$i]['id_especie']; ?>" <?php echo $selected; ?>>
                                         <?php echo $ListaEspecies[$i]['descripcion_especie']; ?></option>
@@ -166,11 +215,17 @@ text-white-50"></i> Generate Report</a>-->
                                 <?php 
                                 $selected='';                                
                                 for($i=0;$i<$CantidadVeterinarios;$i++){                                     
-                                        if (!empty( $_POST['veterinario']) && $_POST['veterinario'] ==  $ListaVeterinarios[$i]['id_veterinario']) {
-                                            $selected = 'selected';
-                                        }else {
-                                            $selected='';
+                                        if (!empty( $_POST['veterinario'])){
+                                            if($_POST['veterinario'] ==  $ListaVeterinarios[$i]['id_veterinario']){
+                                                $selected = 'selected';
+                                            }else {
+                                                $selected='';
+                                            }
+                                        }else{
+                                            $selected = ($veteriario == $ListaVeterinarios[$i]['id_veterinario']) ? 'selected' : '';
                                         }
+                                        
+                                            
                                     ?>
                                     <option value="<?php echo $ListaVeterinarios[$i]['id_veterinario']; ?>" <?php echo $selected; ?>>
                                         <?php echo $ListaVeterinarios[$i]['nombre_veterinario'].' '.$ListaVeterinarios[$i]['apellido_veterinario'] ; ?></option>
@@ -187,8 +242,8 @@ text-white-50"></i> Generate Report</a>-->
                             <label for="validationServer02" class="form-label">Fecha de
                                 Inicio</label>
                             <input type="date" class="form-control" id="validationServer02"
-                                placeholder="Fecha de Inicio" name="fecha_inicio"  
-                                value= "<?php echo (!empty($_POST['fecha_inicio']) ? $_POST['fecha_inicio']:''); ?>">
+                                placeholder="Fecha de Inicio" name="fecha_inicio"  <?php echo $soloLectura;?>
+                                value= "<?php echo (!empty($_POST['fecha_inicio']) ? $_POST['fecha_inicio']:$fechaInicio); ?>">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -197,7 +252,7 @@ text-white-50"></i> Generate Report</a>-->
                             <label for="validationServer02" class="form-label">Fecha de fin</label>
                             <input type="date" class="form-control" id="validationServer02"
                                 placeholder="Fecha de Inicio" name="fecha_fin"  
-                                value= "<?php echo (!empty($_POST['fecha_fin']) ? $_POST['fecha_fin']:''); ?>">
+                                value= "<?php echo (!empty($_POST['fecha_fin']) ? $_POST['fecha_fin']:$fechaFin); ?>">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -210,7 +265,7 @@ text-white-50"></i> Generate Report</a>-->
                             <input type="time" class="form-control" id="validationServer02"
                                 placeholder="horario" name="horario"
                                 min="07:00" max="19:00"
-                                value="<?php echo (!empty($_POST['horario']) ? $_POST['horario'] : ''); ?>">
+                                value="<?php echo (!empty($_POST['horario']) ? $_POST['horario'] : $primerTurno); ?>">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -220,7 +275,7 @@ text-white-50"></i> Generate Report</a>-->
                             <label for="validationServer02" class="form-label">Cantidad de turnos por dia</label>
                             <input type="number" class="form-control" id="validationServer02"
                                 placeholder="cantidad" name="cantidad"  
-                                value= "<?php echo (!empty($_POST['cantidad']) ? $_POST['cantidad']:''); ?>">
+                                value= "<?php echo (!empty($_POST['cantidad']) ? $_POST['cantidad']:$cantidadTurnos); ?>">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -233,7 +288,7 @@ text-white-50"></i> Generate Report</a>-->
                             <input type="number" class="form-control" id="validationServer02"
                                 placeholder="duracion" name="duracion"
                                 min="0" max="180" step="1"
-                                value="<?php echo (!empty($_POST['duracion']) ? $_POST['duracion'] : ''); ?>">
+                                value="<?php echo (!empty($_POST['duracion']) ? $_POST['duracion'] : $duracion); ?>">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -246,7 +301,7 @@ text-white-50"></i> Generate Report</a>-->
                             <input type="number" class="form-control" id="validationServer02"
                                 placeholder="Intervalo" name="intervalo"
                                 min="0" max="60" step="1"
-                                value="<?php echo (!empty($_POST['intervalo']) ? $_POST['intervalo'] : ''); ?>">
+                                value="<?php echo (!empty($_POST['intervalo']) ? $_POST['intervalo'] : $intervalo); ?>">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>

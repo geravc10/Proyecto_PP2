@@ -7,54 +7,18 @@ if (empty($_SESSION['usuario_nombre'])) {
 
 require_once 'funciones/conexion.php';
 $MiConexion = ConexionBD();
-require_once 'funciones/validaciones.php';
+
+
+
+
+
 
 $Mensaje = "";
 
-if (!empty($_POST['BotonConsultar'])) {
 
-    $Mensaje = ValidarDniConsulta();
 
-    if (empty($Mensaje)) {
 
-        require_once 'funciones/funcion_consulta_veterinario.php';
-        $VeterinarioEncontrado = DatosVeterinario($_POST['dni'], $MiConexion);
 
-        if (empty($VeterinarioEncontrado)) {
-            $Mensaje = "No se encontraron conincidencias. Verifique el número de DNI ingresado";
-        } else {
-            $_SESSION['veterinario_nombre'] = $VeterinarioEncontrado['Nombre'];
-            $_SESSION['veterinario_apellido'] = $VeterinarioEncontrado['Apellido'];
-            $_SESSION['veterinario_sexo'] = $VeterinarioEncontrado['Sexo'];
-            $_SESSION['veterinario_sexo_id'] = $VeterinarioEncontrado['SexoId'];
-            $_SESSION['veterinario_dni'] = $VeterinarioEncontrado['dni'];
-            $_SESSION['veterinario_fecha'] = $VeterinarioEncontrado['FechaNacimiento'];
-            $_SESSION['veterinario_nacionalidad'] = $VeterinarioEncontrado['Nacionalidad'];
-            $_SESSION['veterinario_informacion'] = $VeterinarioEncontrado['Informacion'];
-            $_SESSION['veterinario_direccion'] = $VeterinarioEncontrado['Direccion'];
-            $_SESSION['veterinario_numero'] = $VeterinarioEncontrado['Numero'];
-            $_SESSION['veterinario_bis'] = $VeterinarioEncontrado['Bis'];
-            $_SESSION['veterinario_ciudad'] = $VeterinarioEncontrado['Ciudad'];
-            $_SESSION['veterinario_provincia'] = $VeterinarioEncontrado['Provincia'];
-            $_SESSION['veterinario_telefono'] = $VeterinarioEncontrado['Telefono'];
-            $_SESSION['veterinario_mail'] = $VeterinarioEncontrado['Mail'];
-            $_SESSION['veterinario_pass'] = $VeterinarioEncontrado['Pass'];
-            $_SESSION['veterinario_red'] = $VeterinarioEncontrado['Red'];
-            $_SESSION['veterinario_estado'] = $VeterinarioEncontrado['Estado'];
-            $_SESSION['veterinario_matricula'] = $VeterinarioEncontrado['Matricula'];
-            $_SESSION['veterinario_especialidad'] = $VeterinarioEncontrado['Espcialidad'];
-            
-            // Calcular la edad del municipal
-            $hoy = new DateTime();            
-            $nacimiento = new DateTime($VeterinarioEncontrado['FechaNacimiento']);            
-            $diferencia = $nacimiento->diff($hoy);            
-            $edad = $diferencia->y;
-            $_SESSION['veterinario_edad'] = $edad;
-            header('Location: mostrar_info_veterinario.php');
-            exit;
-        }
-    }
-}
 
 
 ?>

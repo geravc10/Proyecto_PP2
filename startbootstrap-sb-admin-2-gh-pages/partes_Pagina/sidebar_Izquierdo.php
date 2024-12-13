@@ -162,7 +162,7 @@ justify-content-center" href="index.php">
             </a>
             <div id="collapseConsultar" class="collapse" aria-labelledby="headingConsultar" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="consultar_campania.php">Campaña</a>
+                    <a class="collapse-item" href="mostrar_info_campania.php">Campaña</a>
                     <a class="collapse-item" href="formulario_noticia.php">Noticia</a>
                 </div>
             </div>

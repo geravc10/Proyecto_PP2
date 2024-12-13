@@ -6,6 +6,61 @@ if (empty($_SESSION['usuario_nombre'])) {
     exit;
 }
 
+require_once 'funciones/conexion.php';
+$MiConexion = ConexionBD();
+
+require_once 'funciones/funcion_consultar_campania.php';
+$campanias=DatosCampanias($MiConexion);
+$CantidadCampanas= count($campanias);
+
+require_once 'funciones/funcion_consultas_generales.php';
+$TipoCamp=TraerCampanias($MiConexion);
+$CantidadTipoCamp= count($TipoCamp);
+
+require_once 'funciones/funcion_consultas_generales.php';
+$Especies=TraerEspecieAnimal($MiConexion);
+$CantidadEspecies= count($Especies);
+
+require_once 'funciones/funcion_consultas_generales.php';
+$Vete=TraerVeterinarios_2($MiConexion);
+$CantidadVete= count($Vete);
+
+require_once 'funciones/validaciones.php';
+
+$Mensaje="";
+
+if(!empty($_POST['BotonConsultar'])){
+    $Mensaje= ValidarBuscarCampana();
+    if(empty($Mensaje) && !empty($_POST['id'])){
+
+        require_once 'funciones/funcion_consultar_campania.php';
+        $CampaniaElegida=DatosCampanias_3($MiConexion, $_POST['id']);
+        
+        if(!empty($CampaniaElegida)){
+            $_SESSION['id_campana_elegida']=$CampaniaElegida['0']['id_campana'];
+            $_SESSION['id_tipo_campana_elegida']=$CampaniaElegida['0']['id_tipo_campana'];
+            $_SESSION['id_municipal_campana_elegida']=$CampaniaElegida['0']['id_municipal_campana'];
+            $_SESSION['nombre_campana_elegida']=$CampaniaElegida['0']['descripcion_campana'];
+            $_SESSION['fecha_creacion_campana_elegida']=$CampaniaElegida['0']['fecha_creacion_campana'];
+            $_SESSION['fecha_inicio_campana_elegida']=$CampaniaElegida['0']['fecha_inicio_campana'];
+            $_SESSION['fecha_fin_campana_elegida']=$CampaniaElegida['0']['fecha_fin_campana'];
+            $_SESSION['estado_campana_elegida']=$CampaniaElegida['0']['estado_campana'];
+            $_SESSION['id_especie_campana_elegida']=$CampaniaElegida['0']['id_especie_campana'];
+            $_SESSION['id_veterinario_campana_elegida']=$CampaniaElegida['0']['id_veterinario_campana'];
+            $_SESSION['primer_turno_campana_elegida']=$CampaniaElegida['0']['primer_turno_campana'];
+            $_SESSION['cant_turno_campana_elegida']=$CampaniaElegida['0']['canitdad_turno_campana'];
+            $_SESSION['duracion_turno_campana_elegida']=$CampaniaElegida['0']['duracion_turno_campana'];
+            $_SESSION['intervalo_turno_campana_elegida']=$CampaniaElegida['0']['intervalo_turno_campana'];
+
+            header('Location: modificar_campania.php');
+            exit;
+        }else{
+            $Mensaje=$_POST['id'] . "No se encontro la campaña que indicaste. Verifica que hayas cargado el Id de campaña correctamente";
+        }
+    }
+}
+
+
 
 
 ?>
@@ -41,20 +96,33 @@ btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm
 text-white-50"></i> Generate Report</a>-->
                     </div>
                     <!--FORMULARIO-->
-                    <h1 class="my-5 text-center fw-bold">Informacion de Campaña</h1>
-                    <form class="row g-3 m-4 my-5 p-3 mx-auto width=100% id="formulario_E_Municipal">
-                        <!-- DataTales Example -->
+                    <h1 class="my-5 text-center fw-bold">Informacion de Campañas</h1>
+
+                    <?php
+                    if (!empty($Mensaje)) { ?>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <i class="bi bi-exclamation-triangle me-1"></i>
+                            <?php echo $Mensaje; ?>
+                        </div>
+                    <?php }
+                    ?>
+
+                    <form class="row g-3 m-4 my-5 p-3 mx-auto width=100% id="formulario_E_Municipal" method="post">
+                        
+                    <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary">
-                                    Datos de <?php echo $_SESSION['veterinario_nombre']; ?></h6>
+                                    Datos de Campañas Activas</h6>
                             </div>
                             
                             <div class="card-body" >
                                 <div class="table-responsive">
+                                
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
+                                                <th>Id Campaña</th>
                                                 <th>Nombre de Campaña</th>
                                                 <th>Tipo de Campaña</th>
                                                 <th>Especie objetivo de la Campaña</th>
@@ -86,34 +154,46 @@ text-white-50"></i> Generate Report</a>-->
                                             </tr>
                                         </tfoot> -->
                                         <tbody>
-                                            <!-- <tr>
-                                                <td><?php echo
-                                                    $_SESSION['municipal_nombre']; ?></td>
-                                                <td><?php echo
-                                                    $_SESSION['municipal_apellido']; ?></td>
-                                                <td><?php echo
-                                                    $_SESSION['municipal_dni']; ?></td>
-                                                <td><?php echo
-                                                    $_SESSION['municipal_fecha']; ?></td>
-                                                <td><?php echo
-                                                    $_SESSION['municipal_telefono'] . ' ' . $_SESSION['municipal_area'] . '
-' . $_SESSION['municipal_rol']; ?></td>
-                                                <td><?php echo
-                                                    $_SESSION['municipal_direccion'] . ' ' . $_SESSION['municipal_ciudad'] . '
-' . $_SESSION['municipal_provincia']; ?> </td>
-                                            </tr> -->
-                                            <tr>    
-                                                <td><?php echo $_SESSION['veterinario_dni']; ?></td>
-                                                <td><?php echo $_SESSION['veterinario_nombre'].' '.$_SESSION['veterinario_apellido'] ; ?></td>
-                                                <td><?php echo $_SESSION['veterinario_fecha']; ?></td>
-                                                <td><?php echo $_SESSION['veterinario_edad']; ?></td>
-                                                <td><?php echo $_SESSION['veterinario_nacionalidad']; ?></td>
-                                                <td><?php echo $_SESSION['veterinario_sexo']; ?></td>
-                                                <td><?php echo $_SESSION['veterinario_direccion'].' '.$_SESSION['veterinario_numero'].' '.$_SESSION['veterinario_bis'].', '.$_SESSION['veterinario_ciudad']; ?></td>
-                                                <td><?php echo $_SESSION['veterinario_provincia']; ?></td>
-                                                <td><?php echo $_SESSION['veterinario_mail']; ?></td>
-                                                <td><?php echo $_SESSION['veterinario_red']; ?></td>
-                                            </tr>
+                                        <?php
+                                            if (!empty($campanias)) {
+                                                foreach ($campanias as $campania) {
+                                                    echo "<tr>";
+                                                    // Agregar un checkbox por cada fila, con el valor del id_campana
+                                                    echo "<td>". $campania['id_campana'] . "</td>";
+                                                    echo "<td>" . $campania['descripcion_campana'] . "</td>";
+                                                    $c = "";
+                                                    foreach ($TipoCamp as $tipo) {
+                                                        if ($tipo['id_campana'] == $campania['id_tipo_campana']) {
+                                                            $c = $tipo['descripcion_campana'];
+                                                        }
+                                                    }
+                                                    echo "<td>" . $c . "</td>";
+                                                    $e = "";
+                                                    foreach ($Especies as $esp) {
+                                                        if ($esp['id_especie'] == $campania['id_especie_campana']) {
+                                                            $e = $esp['descripcion_especie'];
+                                                        }
+                                                    }
+                                                    echo "<td>" . $e . "</td>";
+                                                    $v = "";
+                                                    foreach ($Vete as $vet) {
+                                                        if ($vet['id_veterinario'] == $campania['id_veterinario_campana']) {
+                                                            $v = $vet['nombre_veterinario'] . ' ' . $vet['apellido_veterinario'];
+                                                        }
+                                                    }
+                                                    echo "<td>" . $v . "</td>";
+                                                    echo "<td>" . $campania['fecha_inicio_campana'] . "</td>";
+                                                    echo "<td>" . $campania['fecha_fin_campana'] . "</td>";
+                                                    echo "<td>" . $campania['primer_turno_campana'] . "</td>";
+                                                    echo "<td>" . $campania['canitdad_turno_campana'] . "</td>";
+                                                    echo "<td>" . $campania['duracion_turno_campana'] . " minutos</td>";
+                                                    echo "<td>" . $campania['intervalo_turno_campana'] . " minutos</td>";
+                                                    echo "</tr>";
+                                                }
+                                            } else {
+                                                echo "<tr><td colspan='10'>No hay campañas activas disponibles.</td></tr>";
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -124,11 +204,23 @@ text-white-50"></i> Generate Report</a>-->
                         $_SESSION['usuario_nivel'] == 1 ||
                         $_SESSION['usuario_nivel'] == 2
                     ) { ?>
+                        <div class="col-md-12">
+                            <label for="validationServer03" class="form-label">ingrese el Id de la Campaña que desea modificar:</label>
+                            <input type="number" class="form-control" aria-describedby="validationServer03Feedback"
+                                placeholder="ID" name="id">
+                            <div id="validationServer03Feedback" class="invalid-feedback">
+                                Please provide a valid city.
+                            </div>
+                        </div>
                         <div class="col-12 text-center">
-                            <button type="button" class="btn
-btn-primary" data-toggle="modal" data-target="#modifyModal">Modificar</button>
-                            <button type="button" class="btn
-btn-danger" data-toggle="modal" data-target="#deleteModal">Eliminar</button>
+                        <div class="col-12 text-center mt-4">
+                            <button class="btn btn-primary" type="submit" value="Login"
+                            name="BotonConsultar">Modificar</button>
+                        </div>
+                            <!--
+                            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#modifyModal" name="modificar">Modificar</button>
+                            <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Eliminar</button>
+                            -->
                         </div>
                         <?php } ?>
                     </form>
