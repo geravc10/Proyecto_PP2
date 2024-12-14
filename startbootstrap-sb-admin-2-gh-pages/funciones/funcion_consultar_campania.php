@@ -134,4 +134,6 @@ function DatosCampanias_3($vConexion, $vId)
 
     return $Usuario;
 }
+
+
 ?>

@@ -871,6 +871,23 @@ function ValidarBuscarCampana(){
 
 }
 
+function ValidarBuscarCampana_2(){
+    
+    $vMensaje = '';    
+    
+    if(empty($_POST['id_turno'])){
+        $vMensaje .= '-Id Turno: Debes ingresar un Id de Turno. <br />';
+    }
+
+    foreach ($_POST as $Id => $Valor) {
+        $_POST[$Id] = trim($_POST[$Id]);
+        $_POST[$Id] = strip_tags($_POST[$Id]);
+    }
+    return $vMensaje;
+
+
+}
+
 function ValidarmodificacionCampana(){
 
     $vMensaje = '';

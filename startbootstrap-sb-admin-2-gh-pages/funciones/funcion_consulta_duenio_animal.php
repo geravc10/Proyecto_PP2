@@ -77,5 +77,81 @@ function DatosDuenioAnimal($vDNI, $vConexion)
     return $Usuario;
 }
 
+function DatosDuenioAnimal_2($vConexion){   
+
+    $Usuario = array();
+    $SQL = "SELECT
+    -- Contar los dueños activos (directamente desde la tabla dueno_animal)
+    (SELECT COUNT(DISTINCT da.ID_DUENO_ANIMAL)
+     FROM dueno_animal da
+     WHERE da.ESTADO_DUENO_ANIMAL = 1) AS cantidad_duenos_animales,
+
+    -- Contar las familias con más de un animal activo
+    COUNT(DISTINCT CASE WHEN family_animal_count.cantidad > 1 THEN f1.ID_FAMILIA END) AS cantidad_familias_con_mas_de_un_animal,
+
+    -- Contar las familias con perros activos
+    COUNT(DISTINCT CASE WHEN ea.DESCRIPCION_TIPO_ANIMAL = 'Perro' AND a.ESTADO_ANIMAL = 1 THEN f1.ID_FAMILIA END) AS cantidad_familias_con_perros,
+
+    -- Contar las familias con gatos activos
+    COUNT(DISTINCT CASE WHEN ea.DESCRIPCION_TIPO_ANIMAL = 'Gato' AND a.ESTADO_ANIMAL = 1 THEN f1.ID_FAMILIA END) AS cantidad_familias_con_gatos,
+
+    -- Contar las familias con caballos activos
+    COUNT(DISTINCT CASE WHEN ea.DESCRIPCION_TIPO_ANIMAL = 'Caballo' AND a.ESTADO_ANIMAL = 1 THEN f1.ID_FAMILIA END) AS cantidad_familias_con_caballos,
+
+    -- Contar los dueños con más de un animal activo
+    (SELECT COUNT(*) 
+     FROM (
+         SELECT f.ID_DUENO_ANIMAL
+         FROM familia f
+         JOIN animal a ON f.ID_ANIMAL = a.ID_ANIMAL
+         WHERE a.ESTADO_ANIMAL = 1
+         GROUP BY f.ID_DUENO_ANIMAL
+         HAVING COUNT(a.ID_ANIMAL) > 1
+     ) AS duenios_con_multiples_animales) AS cantidad_duenos_mas_de_un_animal
+
+FROM 
+    familia f1
+LEFT JOIN animal a ON f1.ID_ANIMAL = a.ID_ANIMAL
+LEFT JOIN especie_animal ea ON a.ID_TIPO_ANIMAL = ea.ID_TIPO_ANIMAL
+LEFT JOIN dueno_animal da ON f1.ID_DUENO_ANIMAL = da.ID_DUENO_ANIMAL
+
+-- Subconsulta para contar los animales activos por familia
+LEFT JOIN (
+    SELECT f.ID_FAMILIA, COUNT(f.ID_ANIMAL) AS cantidad
+    FROM familia f
+    JOIN animal a ON f.ID_ANIMAL = a.ID_ANIMAL
+    WHERE a.ESTADO_ANIMAL = 1 -- Solo contar animales activos
+    GROUP BY f.ID_FAMILIA
+) AS family_animal_count ON family_animal_count.ID_FAMILIA = f1.ID_FAMILIA
+
+WHERE 
+    a.ESTADO_ANIMAL = 1 -- Solo animales activos
+    AND da.ESTADO_DUENO_ANIMAL = 1 -- Solo dueños activos
+      
+    ";
+
+    // Ejecutar la consulta
+    $rs = mysqli_query($vConexion, $SQL);
+
+    // Verificar si la consulta se ejecutó correctamente
+    if (!$rs) {
+        die('Error en la consulta: ' . mysqli_error($vConexion)); // Mostrar error si la consulta falla
+    }
+
+    // Obtener los resultados
+    $data = mysqli_fetch_array($rs);
+
+    if (!empty($data)) {
+        $Usuario['cantidad_duenos_animales'] = $data['cantidad_duenos_animales'];
+        $Usuario['cantidad_familias_con_perros'] = $data['cantidad_familias_con_perros'];
+        $Usuario['cantidad_familias_con_gatos'] = $data['cantidad_familias_con_gatos'];
+        $Usuario['cantidad_familias_con_caballos'] = $data['cantidad_familias_con_caballos'];
+        $Usuario['cantidad_duenos_mas_de_un_animal'] = $data['cantidad_duenos_mas_de_un_animal'];            
+    }
+
+    return $Usuario;
+}
+
+
 ?>
 

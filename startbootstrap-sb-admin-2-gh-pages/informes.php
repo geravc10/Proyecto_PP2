@@ -13,6 +13,9 @@ $MiConexion = ConexionBD();
 require_once 'funciones/validaciones.php';
 $Mensaje = "";
 
+
+
+/*
 if (!empty($_POST['BotonTraer']) || !empty($_POST['BotonTraer_vac'])) {    
     $Mensaje = ValidarIdAnimal();
 
@@ -85,7 +88,7 @@ if (!empty($_POST['BotonTraer']) || !empty($_POST['BotonTraer_vac'])) {
 
         }
     }
-}
+}*/
 
 ?>
 <!DOCTYPE html>

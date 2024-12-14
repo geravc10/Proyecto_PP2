@@ -104,5 +104,30 @@ function BajaTurnoVacu($vConexion,$vTurnoViejo){
  
 }
 
+function TurnoAtendido($vConexion,$vTurnoViejo){
+
+    
+    //cambio el estado del turno en la tabla turnos.
+    $SQL_Update="UPDATE 
+                    turnos_reservados as tr
+                SET 
+                    tr.ESTADO_TURNO_RESERVADO = 2                     
+                WHERE 
+                    tr.ID_TURNO_RESERVADO = '$vTurnoViejo' 
+                                                    
+                ;";
+ 
+    if (!mysqli_query($vConexion, $SQL_Update)) {
+    //si surge un error, finalizo la ejecucion del script con un mensaje
+    die('<h4>Error al intentar modificar el Turno. dar de baja</h4>');
+    }
+ 
+    
+  
+    
+    return true;
+ 
+}
+
 ?>
 

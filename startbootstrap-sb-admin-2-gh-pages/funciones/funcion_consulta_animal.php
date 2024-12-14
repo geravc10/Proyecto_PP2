@@ -103,4 +103,68 @@ function DatosAnimal($vConexion,$vCodigo)
     return $Usuario;
 }
 
+function DatosAnimal_2($vConexion)
+{
+
+    $Usuario = array();
+    $SQL = "SELECT 
+    -- Cantidad total de animales activos
+    COUNT(a.ID_ANIMAL) AS total_animales_activos,
+    
+    -- Cantidad de animales castrados (activos)
+    SUM(CASE WHEN a.ESTADO_CASTRACION = 1 THEN 1 ELSE 0 END) AS cantidad_castrados, 
+    
+    -- Cantidad de animales no castrados (activos)
+    SUM(CASE WHEN a.ESTADO_CASTRACION = 0 THEN 1 ELSE 0 END) AS cantidad_no_castrados,
+
+    -- Cantidad de animales activos de cada especie
+    SUM(CASE WHEN ea.DESCRIPCION_TIPO_ANIMAL = 'Caballo' THEN 1 ELSE 0 END) AS cantidad_caballos,
+    SUM(CASE WHEN ea.DESCRIPCION_TIPO_ANIMAL = 'Gato' THEN 1 ELSE 0 END) AS cantidad_gatos,
+    SUM(CASE WHEN ea.DESCRIPCION_TIPO_ANIMAL = 'Perro' THEN 1 ELSE 0 END) AS cantidad_perros,
+
+    -- Cantidad de animales activos por rol
+    SUM(CASE WHEN ra.DESCRIPCION_ROL_ANIMAL = 'Carreras' THEN 1 ELSE 0 END) AS cantidad_carreras,
+    SUM(CASE WHEN ra.DESCRIPCION_ROL_ANIMAL = 'Mascota' THEN 1 ELSE 0 END) AS cantidad_mascota,
+    SUM(CASE WHEN ra.DESCRIPCION_ROL_ANIMAL = 'Terapia' THEN 1 ELSE 0 END) AS cantidad_terapia,
+    SUM(CASE WHEN ra.DESCRIPCION_ROL_ANIMAL = 'Lazarillo' THEN 1 ELSE 0 END) AS cantidad_lazarillo
+
+FROM 
+    animal a
+LEFT JOIN especie_animal ea ON a.ID_TIPO_ANIMAL = ea.ID_TIPO_ANIMAL
+LEFT JOIN rol_animal ra ON a.ID_ROL_ANIMAL = ra.ID_ROL_ANIMAL
+
+WHERE 
+    a.ESTADO_ANIMAL = 1 -- Solo animales activos
+
+GROUP BY
+    a.ESTADO_ANIMAL;
+
+            
+        
+    ";
+
+
+    $rs = mysqli_query($vConexion, $SQL);
+
+
+    $data = mysqli_fetch_array($rs);
+
+
+    if (!empty($data)) {
+        $Usuario['total_animales_activos'] = $data['total_animales_activos'];
+        $Usuario['cantidad_castrados'] = $data['cantidad_castrados'];
+        $Usuario['cantidad_caballos'] = $data['cantidad_caballos'];
+        $Usuario['cantidad_gatos'] = $data['cantidad_gatos'];
+        $Usuario['cantidad_perros'] = $data['cantidad_perros'];        
+        $Usuario['cantidad_carreras'] = $data['cantidad_carreras'];
+        $Usuario['cantidad_mascota'] = $data['cantidad_mascota'];
+        $Usuario['cantidad_terapia'] = $data['cantidad_terapia'];
+        $Usuario['cantidad_lazarillo'] = $data['cantidad_lazarillo'];
+        
+
+        
+    }
+    return $Usuario;
+}
+
 ?>

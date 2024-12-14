@@ -85,7 +85,8 @@ justify-content-center" href="index.php">
                     <!--<h6 class="collapse-header">Custom Components:</h6>-->
                     <?php if (
                         $_SESSION['usuario_nivel'] == 1 ||
-                        $_SESSION['usuario_nivel'] == 2
+                        $_SESSION['usuario_nivel'] == 2 
+                        
                     ) { ?>
                         <a class="collapse-item" href="formulario_municipal.php">Municipal</a>
                         <a class="collapse-item" href="formulario_veterinario.php">Veterinario</a>
@@ -98,7 +99,7 @@ justify-content-center" href="index.php">
                     ) { ?>
                         <a class="collapse-item" href="formulario_historial_medico.php">Historial Medico</a>
                         <a class="collapse-item" href="formulario_duenio_animal.php">Dueño de Animal</a>
-                        <a class="collapse-item" href="formulario_animal.php">Animal</a>
+                        <a class="collapse-item" href="formulario_animal.php">Animal</a> 
                     <?php } ?>
                 </div>
             </div>
@@ -121,12 +122,16 @@ justify-content-center" href="index.php">
                 <a class="collapse-item" href="consultar_animal.php">Animal</a>
                 <a class="collapse-item" href="consultar_municipal.php">Municipal</a>
                 <a class="collapse-item" href="consultar_historial_medico.php">Historial Medico</a>
+                <?php if ($_SESSION['usuario_nivel'] == 3) { ?>
+                <a class="collapse-item" href="consultar_turnos.php">Turnos</a>
+                <?php } ?>
             </div>
         </div>
     </li>
     <?php if (
         $_SESSION['usuario_nivel'] == 1 ||
-        $_SESSION['usuario_nivel'] == 2
+        $_SESSION['usuario_nivel'] == 2 
+        
     ) { ?>
         <!-- Divider -->
         <hr class="sidebar-divider">
@@ -183,7 +188,7 @@ justify-content-center" href="index.php">
             </a>
             <div id="collapseInforme" class="collapse" aria-labelledby="headingCargarNueva" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="informes.php">Informe Completo</a>
+                    <a class="collapse-item" href="informe_seleccion.php">Informe Completo</a>
                 </div>
             </div>
         </li>

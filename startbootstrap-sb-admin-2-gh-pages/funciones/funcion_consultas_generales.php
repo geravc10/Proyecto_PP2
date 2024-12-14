@@ -381,6 +381,30 @@ function TraerVeterinarios_2($vConexion)
     return $Usuario;
 }
 
+function TraerIdVeterinarios($vConexion,$vDni)
+{
+    $Usuario = array();
+    $SQL = "SELECT *   
+            FROM veterinario as v, persona as p
+            WHERE             
+            v.DNI=p.DNI
+            AND
+            p.DNI=$vDni
+            ";
+
+    $rs = mysqli_query($vConexion, $SQL);
+    
+    $i=0;
+       while ($data = mysqli_fetch_array($rs)) {
+               $Usuario[$i]['id_veterinario'] = $data['ID_VETERINARIO'];
+               $Usuario[$i]['nombre_veterinario'] = $data['NOMBRE'];
+               $Usuario[$i]['apellido_veterinario'] = $data['APELLIDO'];
+               $i++;
+       }
+
+    return $Usuario;
+}
+
 function TraerHistorialMedico($vCodigo, $vConexion)
 {
     
