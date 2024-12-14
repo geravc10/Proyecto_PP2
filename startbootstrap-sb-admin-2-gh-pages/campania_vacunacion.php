@@ -202,6 +202,8 @@ text-white-50"></i> Generate Report</a>-->
                                                     <button class="btn btn-primary" type="submit" value="registrar" name="BotonRegistrar">Consultar</button>
                                                 </div>
 
+                                                
+
                                             </div>
 
                                             <div class="col-md-12 mt-4">

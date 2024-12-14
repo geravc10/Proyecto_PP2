@@ -36,6 +36,7 @@ if(!empty($_POST['BotonTurno'])){
                 $turnoReservado= ReservarTurnoCast($MiConexion);
 
                 if(!empty($turnoReservado)){
+                    $_SESSION['mensaje']="Turno reservado";
                     header('Location: index.php');
                     exit;
                     $Mensaje="RESERVADO!";
@@ -138,11 +139,9 @@ text-white-50"></i> Generate Report</a>-->
                                                     <label for="nombre" class="form-label">ID Animal</label>
                                                     <input type="number" class="form-control" id="nombre"
                                                         placeholder="ID Animal" name="codigo" required
-                                                        value= "<?php echo $_SESSION['apto_castracion_codigo']; ?>">
+                                                        value= "<?php echo $_SESSION['apto_castracion_codigo']; ?>" readonly>
                                                 </div>
-                                                <div class="text-center mt-4">
-                                                    <button class="btn btn-primary" type="submit" value="registrar" name="BotonRegistrar">Consultar</button>
-                                                </div>
+                                                
                                             </div>
 
                                             <div class="col-md-12 mt-4">

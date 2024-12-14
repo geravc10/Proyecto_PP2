@@ -8,46 +8,32 @@ if (empty($_SESSION['usuario_nombre'])) {
 require_once 'funciones/conexion.php';
 $MiConexion = ConexionBD();
 
+$idTurno=$_SESSION['id_turno_este_animal'];
+$fechaTurno=$_SESSION['fecha_turno_este_animal'];
+$horaTurno=$_SESSION['hora_turno_este_animal'];
+
 require_once 'funciones/funcion_consultas_generales.php';
-$ListaTurnosVacu = TraerTurnosVacunacion($MiConexion,$_SESSION['especie_animal_vacunacion']);
+$ListaTurnosVacu = TraerTurnosCastracion($MiConexion);
 $CantidadTurnosVacu= count($ListaTurnosVacu);
 
 require_once 'funciones/validaciones.php';
 $Mensaje = "";
 $Apto="";
 $puede="";
+$estadoAnimal="";
 
-if(!empty($_POST['BotonTurno'])){
-    $Mensaje= ValidarTurno();
-    if(empty($Mensaje)){
-        
-        if($_POST['pass'] == $_SESSION['usuario_contrasena']){
-            require_once 'funciones/funcion_consultas_generales.php';
-            $ListaTurnosReservados = TraerTurnosReservadosVacu($MiConexion, $_SESSION['apto_vacuna_codigo']);
-            if(empty($ListaTurnosReservados)){ 
+if(!empty($_POST['BotonRegistrar'])){   
+        header('Location: modificar_turno_castracion.php');
+        exit; 
+}
 
-                require_once 'funciones/funcion_consultas_generales.php';
-                $idDuenoAnimal = TraerIdDuenoAnimal($MiConexion, $_SESSION['usuario_dni']);
-                $_POST['id_dueno_animal']=$idDuenoAnimal;                
-                $_POST['id_campana']=$ListaTurnosVacu['0']['id_campana'];
-                
-                
-                require_once 'funciones/funcion_reservar_turnos.php';
-                $turnoReservado= ReservarTurno($MiConexion);
-
-                if(!empty($turnoReservado)){
-                    $_SESSION['mensaje']="Turno Reservado.";
-                    header('Location: index.php');
-                    exit;
-                    
-                }
-
-            }else{
-                $Mensaje="no puede reservar";
-            }
-        }else{
-            $Mensaje="Contraseña incorrecta";
-        }
+if(!empty($_POST['DarDeBaja'])){
+    require_once 'funciones/funcion_modificar_turno.php';
+    $BajaTurno=BajaTurnoCast($MiConexion,$idTurno);
+    if(!empty($BajaTurno)){
+        $_SESSION['mensaje']="Turno dado de baja";
+        header('Location: index.php');
+        exit;
     }
 }
 
@@ -103,7 +89,7 @@ text-white-50"></i> Generate Report</a>-->
                                         <a class="nav-link" href="campania_vacunacion.php">Campaña de Vacunacion</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="campania_castracion.php">Campaña Castracion</a>
+                                        <a class="nav-link" href="campania_castracion_2.php">Campaña Castracion</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="campania_informacion.php">Informacion Municipal</a>
@@ -118,7 +104,7 @@ text-white-50"></i> Generate Report</a>-->
                         <div class="container mt-5">
                             <div class="row">
                                 <div class="col-12">
-                                    <h1 class="text-center">Campaña de Vacunación</h1>
+                                    <h1 class="text-center">Campaña de Castracion</h1>
 
                                     <?php
                                         if (!empty($Mensaje)) { ?>
@@ -131,34 +117,42 @@ text-white-50"></i> Generate Report</a>-->
 
                                     <div class="container mt-5">
                                         <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_campania" method="post">
-                                            <h4 class="text-center mb-4">Consulta si tu animal es apto para esta
-                                                vacunacion:</h4>
+                                            <h4 class="text-center mb-4">Encontramos un turno asignado a tu animal:
+                                            </h4>
 
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col-6">
                                                     <label for="nombre" class="form-label">ID Animal</label>
                                                     <input type="number" class="form-control" id="nombre"
                                                         placeholder="ID Animal" name="codigo" required
-                                                        value= "<?php echo $_SESSION['apto_vacuna_codigo']; ?>" readonly>
+                                                        value= "<?php echo $_SESSION['codigo_animal_para_turnos']; ?>" readonly>
                                                 </div>
                                                 
                                             </div>
 
                                             <div class="col-md-12 mt-4">
-                                                <label for="validationServer05" class="form-label">¿Tu animal esta
-                                                    apto?</label>
+                                                <label for="validationServer05" class="form-label">Tu anima tiene turno:</label>
                                                 <input type="text" class="form-control" id="validationServer05"
                                                     aria-describedby="validationServer05Feedback" placeholder=""
-                                                    readonly name="apto" value= "Sí, es apto. Selecciona un turno.">
+                                                    readonly name="apto" value= "El día: <?php echo $fechaTurno; ?> a la hora: <?php echo $horaTurno; ?>">
                                                 <div id="validationServer05Feedback" class="invalid-feedback">
                                                     Please provide a valid zip.
+                                                </div>
+
+                                                <div class="text-center mt-4">
+                                                    <button class="btn btn-primary" type="submit" value="registrar" name="BotonRegistrar">Modificar Turno</button>
+                                                </div>
+
+                                                <div class="text-center mt-4">
+                                                    <button class="btn btn-primary" type="submit" value="registrar" name="DarDeBaja">Dar de baja el Turno</button>
                                                 </div>
                                             </div>
 
                                         </form>
 
-                                                                             
-                                        <form form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_campania_2" method="post">
+                                        <?php 
+                                        if(!empty($puede)){ ?>
+                                            <form form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_campania_2" method="post">
                                             <div class="col-md-12 mt-5 mb-1 text-center">
                                                 <hr>
                                             </div>
@@ -214,7 +208,7 @@ text-white-50"></i> Generate Report</a>-->
                                                 <button class="btn btn-primary" type="submit" value="turno" name="BotonTurno">Reservar Turno</button>
                                             </div>
                                         </form>
-                                                                
+                                        <?php } ?>
                                         
                                     </div>
                                 </div>

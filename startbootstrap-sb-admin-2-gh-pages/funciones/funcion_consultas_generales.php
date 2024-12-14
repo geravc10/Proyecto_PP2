@@ -592,6 +592,7 @@ function TraerTurnosCastracion($vConexion)
                 c.ESTADO_CAMPANA=1
                 AND
                 t.ESTADO_TURNO=0
+                
                 ";
 
     $rs = mysqli_query($vConexion, $SQL);
@@ -626,7 +627,7 @@ function TraerTurnosReservadosCast($vConexion, $vCodigo)
     $Usuario = array();
     $SQL = "SELECT * 
                 FROM 
-                        turnos_reservados as tr, campana as c
+                        turnos_reservados as tr, campana as c, turnos as t
                 WHERE 
                         c.ESTADO_CAMPANA=1
                 AND
@@ -635,6 +636,10 @@ function TraerTurnosReservadosCast($vConexion, $vCodigo)
                         tr.ID_CAMPANA= c.ID_CAMPANA
                 AND
                         tr.ID_ANIMAL='$vCodigo'
+                AND
+                        tr.ESTADO_TURNO_RESERVADO=1
+                AND
+                        t.ESTADO_TURNO=1
                 ";
 
     $rs = mysqli_query($vConexion, $SQL);
@@ -673,6 +678,10 @@ function TraerTurnosReservadosCastEsteAnimal($vConexion, $vCodigo)
                         tr.ID_TURNO= t.ID_TURNO
                 AND
                         tr.ID_ANIMAL='$vCodigo'
+                AND
+                        tr.ESTADO_TURNO_RESERVADO=1
+                AND
+                        t.ESTADO_TURNO=1
                 
                 ";
 

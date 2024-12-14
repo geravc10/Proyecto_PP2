@@ -70,7 +70,7 @@ if(!empty($_POST['BotonTurno'])){
                     $turnoReservado= ReservarTurno($MiConexion);
 
                     if(!empty($turnoReservado)){
-                        $_SESSION['Mensaje']="Turno modificado con exito!";
+                        $_SESSION['mensaje']="Turno modificado.";
                         header('Location: index.php');
                         exit;
                     }

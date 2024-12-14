@@ -17,10 +17,15 @@ $Mensaje = "";
 $Apto="";
 $puede="";
 $estadoAnimal="";
+
+
 if(!empty($_POST['BotonRegistrar'])){
 
     $Mensaje= ValidarAnimalApto();
     if(empty($Mensaje)){
+        unset($_SESSION['codigo_animal_para_turnos']);
+        $_SESSION['codigo_animal_para_turnos']=$_POST['codigo'];
+
         require_once 'funciones/funcion_consultas_generales.php';
         $datosDuenoAnimal = TraerIdDuenoAnimal($MiConexion, $_SESSION['usuario_dni']);
 
@@ -65,10 +70,13 @@ if(!empty($_POST['BotonRegistrar'])){
             if (empty($Apto)) {
                 if(!empty($ListaTurnosReservados)){                    
                     $t=TraerTurnosReservadosCastEsteAnimal($MiConexion, $_POST['codigo']);
-                    $fecha=$t[0]['fecha_turno'];
-                    $hora= $t[0]['hora_turno'];
-                    $Mensaje = "Tu animal ya tiene un turno asignado. <br> 
-                                El dia: ". $fecha ."<br> A la hora: ".$hora;
+                  
+                    $_SESSION['fecha_turno_este_animal']=$t[0]['fecha_turno'];
+                    $_SESSION['hora_turno_este_animal']= $t[0]['hora_turno'];
+                    $_SESSION['id_turno_este_animal']=$t[0]['id_turno'];
+
+                    header('Location: campania_castracion_4.php');
+                    exit;
                 }else{
                     $Mensaje = "No hay campaña de Castracion disponible para tu animal.";
                 }                
@@ -167,8 +175,7 @@ text-white-50"></i> Generate Report</a>-->
 
                                     <div class="container mt-5">
                                         <form class="row g-3 m-4 my-5 p-3 mx-auto" id="formulario_campania" method="post">
-                                            <h4 class="text-center mb-4">Consulta si tu animal es apto para esta
-                                                Castracion:</h4>
+                                            <h4 class="text-center mb-4">Consulta si tu animal es apto para esta vacunacion o si ya tiene un turno asignado:</h4>
 
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col-6">

@@ -24,6 +24,16 @@ if(!empty($_POST['BotonRegistrar'])){
                 exit;
 }
 
+if(!empty($_POST['DarDeBaja'])){
+    require_once 'funciones/funcion_modificar_turno.php';
+    $BajaTurno=BajaTurnoVacu($MiConexion,$idTurno);
+    if(!empty($BajaTurno)){
+        $_SESSION['mensaje']="Turno dado de baja";
+        header('Location: index.php');
+        exit;
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -125,6 +135,10 @@ text-white-50"></i> Generate Report</a>-->
 
                                                 <div class="text-center mt-4">
                                                     <button class="btn btn-primary" type="submit" value="registrar" name="BotonRegistrar">Modificar Turno</button>
+                                                </div>
+
+                                                <div class="text-center mt-4">
+                                                    <button class="btn btn-primary" type="submit" value="registrar" name="DarDeBaja">Dar de baja Turno</button>
                                                 </div>
                                             </div>
 
