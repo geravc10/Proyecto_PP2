@@ -217,7 +217,7 @@ text-white-50"></i> Generate Report</a>-->
                             name = "descripcion"><?php echo (!empty($_POST['descripcion']) ? $_POST['descripcion']:$_SESSION['animal_Descripcion_Familia']); ?></textarea>
                         </div>
                         <div class="col-12 text-center mt-4">
-                            <button class="btn btn-primary" type="submit" type="submit" value="modificar" name="BotonAnimales">hola</button>
+                            <button class="btn btn-primary" type="submit" type="submit" value="modificar" name="BotonModificar">Modificar</button>
                             <button class="btn btn-primary" type="submit">Cancelo la
                                 modificacion</button>
                         </div>
