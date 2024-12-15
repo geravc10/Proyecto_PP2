@@ -103,7 +103,7 @@ text-white-50"></i> Generate Report</a>-->
                     <h1 class="my-5 text-center fw-bold">Informe Completo</h1>
 
                     <div class="container mt-5 mb-5">
-                    <h4 class="mb-4">Informe de animales de la ciudad:</h4>
+                    <h4 class="mb-4">Informe de Campañas de la ciudad:</h4>
                     <div class="row g-3">
                     
                     <table class="table-vertical mt-4">
