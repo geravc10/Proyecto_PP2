@@ -75,7 +75,8 @@ function DatosAnimal($vConexion,$vCodigo)
         $Usuario['Id_Provincia'] = $data['ID_PROVINCIA']; 
         $Usuario['Provincia'] = $data['NOMBRE_PROVINCIA'];
         $Usuario['Telefono'] = $data['TELEFONO'];
-        $Usuario['Mail'] = $data['CORREO_ELECTRONICO'];         
+        $Usuario['Mail'] = $data['CORREO_ELECTRONICO']; 
+        $Usuario['Red'] = $data['RED_SOCIAL'];         
         $Usuario['Estado_Dueno'] = $data['ESTADO_DUENO_ANIMAL'];
         $Usuario['Nombre_Animal'] = $data['NOMBRE_ANIMAL'];
         $Usuario['Estado_Animal'] = $data['ESTADO_ANIMAL'];
